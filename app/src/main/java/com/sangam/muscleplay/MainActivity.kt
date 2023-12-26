@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         HideStatusBarUtil.hideStatusBar(this@MainActivity)
-        HomeRepository().bmiApiResponse("21","78","176")
 
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())

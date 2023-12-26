@@ -39,7 +39,7 @@ class SplashScreenFragment : Fragment() {
                 } else {
                     findNavController().navigate(R.id.action_splashScreenFragment_to_viewPagerFragment)
                 }
-            }, 1000
+            }, 500
         )
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }

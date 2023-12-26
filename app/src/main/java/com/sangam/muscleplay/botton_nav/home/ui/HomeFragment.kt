@@ -66,12 +66,19 @@ class HomeFragment : Fragment() {
         initListener()
         addImageOnAutoImageSlider()
         getAutoImageSliderImage()
+        observerErrorMessageApiResponse()
         callBmiApi()
+        callBodyFatApi()
+        callDailyCaloriesApi()
+        callIdealWeightApi()
         observerBmiApiResponse()
-
-
-
-
+        observerIdealWeightApiResponse()
+        observerDailyCaloriesApiResponse()
+        observerBodyFatApiResponse()
+        observerBmiApiProgressResponse()
+        observerIdealWeightApiProgressResponse()
+        observerDailyCaloriesApiProgressResponse()
+        observerBodyFatApiProgressResponse()
 
         return root
     }
@@ -158,11 +165,71 @@ class HomeFragment : Fragment() {
     }
 
     private fun callBmiApi() {
-//        homeViewModel.callBmiApi()
+        homeViewModel.callBmiApi("25", "70", "178")
+    }
+
+    private fun callBodyFatApi() {
+        homeViewModel.callBodyFatApi("25", "male", "70", "178", "50", "96", "92")
+    }
+
+    private fun callIdealWeightApi() {
+        homeViewModel.callIdealWeightApi("male", "178")
+    }
+
+    private fun callDailyCaloriesApi() {
+        homeViewModel.callDailyCaloriesApi("25", "male", "178", "70", "level_4")
     }
 
     private fun observerBmiApiResponse() {
         homeViewModel.bmiResponse.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerIdealWeightApiResponse() {
+        homeViewModel.idealWeightResponse.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerDailyCaloriesApiResponse() {
+        homeViewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerBodyFatApiResponse() {
+        homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerBmiApiProgressResponse() {
+        homeViewModel.showProgressBmi.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerIdealWeightApiProgressResponse() {
+        homeViewModel.showProgressIdealWeight.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerDailyCaloriesApiProgressResponse() {
+        homeViewModel.showProgressDalyCalories.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerBodyFatApiProgressResponse() {
+        homeViewModel.showProgressBodyFat.observe(requireActivity(), Observer {
+//            binding.textView.text = it.data?.bmi.toString()
+        })
+    }
+
+    private fun observerErrorMessageApiResponse() {
+        homeViewModel.errorMessage.observe(requireActivity(), Observer {
 //            binding.textView.text = it.data?.bmi.toString()
         })
     }
