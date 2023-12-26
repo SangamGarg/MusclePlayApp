@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "339910902548",
+    "project_id": "muscleplay-4c289",
+    "storage_bucket": "muscleplay-4c289.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339910902548:android:190cc05eddccf8a455f801",
+        "android_client_info": {
+          "package_name": "com.sangam.muscleplay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHXgvotgQp-7WMWg8uy5S1jI5XiGPzVgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

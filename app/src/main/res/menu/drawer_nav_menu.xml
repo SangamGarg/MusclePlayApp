@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/nav_about_us"
+        android:icon="@drawable/baseline_question_mark_24"
+        android:title="About Us" />
+    <item
+        android:id="@+id/nav_refer_and_earn"
+        android:icon="@drawable/baseline_shield_24"
+        android:title="Refer And Earn" />
+    <item
+        android:id="@+id/nav_support"
+        android:icon="@drawable/baseline_contact_support_24"
+        android:title="Support" />
+    <item
+        android:id="@+id/nav_history"
+        android:icon="@drawable/baseline_history_24"
+        android:title="History" />
+</menu>
