@@ -175,29 +175,29 @@
                     android:textAllCaps="false"
                     android:textColor="#2B2A2A" />
 
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                    android:id="@+id/btnFacebookSignIn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/txtsignin"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginVertical="10dp"
-                    android:backgroundTint="@color/white"
-                    android:drawableEnd="@drawable/facebook"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:text="Facebook"
-                    android:textAllCaps="false"
-                    android:textColor="#2B2A2A" />
+                <!--                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+                <!--                    android:id="@+id/btnFacebookSignIn"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_above="@+id/txtsignin"-->
+                <!--                    android:layout_marginHorizontal="15dp"-->
+                <!--                    android:layout_marginVertical="10dp"-->
+                <!--                    android:backgroundTint="@color/white"-->
+                <!--                    android:drawableEnd="@drawable/facebook"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:padding="15dp"-->
+                <!--                    android:text="Facebook"-->
+                <!--                    android:textAllCaps="false"-->
+                <!--                    android:textColor="#2B2A2A" />-->
 
 
                 <TextView
                     android:id="@+id/txtsignin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
+                    android:background="?attr/selectableItemBackground"
                     android:text="Not Registered Yet? Sign Up "
                     android:textColor="#2196F3"
                     android:textStyle="bold" />

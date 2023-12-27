@@ -1,6 +1,5 @@
 package com.sangam.muscleplay
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
@@ -18,15 +17,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
 import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.AppUtils.UserViewModel
+import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
 import com.sangam.muscleplay.SignInAndSignUpActivities.model.UserDataClass
 import com.sangam.muscleplay.botton_nav.home.repository.HomeRepository
 import com.sangam.muscleplay.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
     private val database by lazy {
         Firebase.firestore
     }
@@ -34,18 +31,36 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuth.getInstance()
     }
     private lateinit var userViewModel: UserViewModel
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         HideStatusBarUtil.hideStatusBar(this@MainActivity)
-
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())
         }
 
-        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+//        database.collection("users").document(firebaseAuth.currentUser!!.uid).get()
+//            .addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    val document = task.result
+//                    if (document.exists()) {
+//                        val name = document.getString("name")
+//                        val email = document.getString("email")
+//                        userViewModel.setUserData(name, email)
+//                    }
+//                } else {
+//                    Toast.makeText(
+//                        this,
+//                        "Error getting user data: ${task.exception?.message}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            }
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -58,23 +73,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        database.collection("users").document(firebaseAuth.currentUser!!.uid).get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val document = task.result
-                    if (document.exists()) {
-                        val name = document.getString("name")
-                        val email = document.getString("email")
-                        userViewModel.setUserData(name, email)
-                    }
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Error getting user data: ${task.exception?.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+
     }
 
     override fun onBackPressed() {

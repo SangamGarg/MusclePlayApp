@@ -14,10 +14,11 @@ import com.codebyashish.autoimageslider.Enums.ImageAnimationTypes
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Interfaces.ItemsListener
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.AppUtils.UserViewModel
+import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentHomeBinding
@@ -39,6 +40,9 @@ class HomeFragment : Fragment() {
     private val database by lazy {
         Firebase.firestore
     }
+    private val auth by lazy {
+        FirebaseAuth.getInstance()
+    }
     lateinit var headerViewName: TextView
     lateinit var headerViewEmail: TextView
     private lateinit var userViewModel: UserViewModel
@@ -58,11 +62,14 @@ class HomeFragment : Fragment() {
     ): View {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-//        val userData = userViewModel.userData.value
+        autoImageList.clear()
+        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
+        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
 //        listener = activity
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+         callGetUserData()
+        observeUserData()
         initListener()
         addImageOnAutoImageSlider()
         getAutoImageSliderImage()
@@ -83,7 +90,19 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    fun callGetUserData() {
+        userViewModel.getUserData()
+    }
+
+    fun observeUserData() {
+        userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
+            headerViewName.text = it?.name
+            headerViewEmail.text = it?.email
+        })
+    }
+
     private fun initListener() {
+
 
         binding.openDrawer.setOnClickListener {
             binding.drawerLayout.openDrawer(binding.navView)
@@ -99,41 +118,41 @@ class HomeFragment : Fragment() {
             }
             true
         }
-        database.collection("users").get().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                for (document in task.result) {
-                    val name = document.getString("name")
-                    val email = document.getString("email")
-
-                    userViewModel.setUserData(name, email)
-
-                    headerViewName.text = name
-                    headerViewEmail.text = email
-                }
-            } else {
-                Toast.makeText(
-                    requireActivity(),
-                    "Error getting user data: ${task.exception?.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
         val headerView = binding.navView.getHeaderView(0)
         headerViewName = headerView.findViewById(R.id.nav_drawer_tv_name)
         headerViewEmail = headerView.findViewById(R.id.nav_drawer_tv_email_id)
 
-//        headerViewName.text = userData?.name
-//        headerViewEmail.text = userData?.email
+
 
 
     }
 
+//    private fun fetchUserData() {
+//        val userId = auth.currentUser!!.uid
+//        database.collection("users").orderBy("userId") // Order the documents by the userId field
+//            .whereEqualTo("userId", userId) // Filter to get only the current user's data
+//            .limit(1) // Limit to 1 because we're fetching the current user's data
+//            .get().addOnSuccessListener { documents ->
+//                for (document in documents) {
+//                    val name = document.getString("name") ?: ""
+//                    val email = document.getString("email") ?: ""
+//                    Log.d("NAMEANDEMAIL", "${name}  AND   ${email}   ")
+//                    userViewModel.setUserData(name, email)
+//
+//                    headerViewName.text = name
+//                    headerViewEmail.text = email
+//                }
+//            }.addOnFailureListener { exception ->
+//                Toast.makeText(
+//                    context, "Error fetching user data: ${exception.message}", Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//    }
+
+
     private fun addImageOnAutoImageSlider() {
         // add some images or titles (text) inside the imagesArrayList
-        val a = "https://picsum.photos/id/239/200/300"
-        autoImageList.add(ImageSlidesModel(a, ""))
-        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
-        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
+
 
         // set the added images inside the AutoImageSlider
         binding.autoImageSlider.setImageList(autoImageList, ImageScaleType.FIT)

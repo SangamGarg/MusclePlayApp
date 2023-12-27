@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "339910902548",
+    "firebase_url": "https://muscleplay-4c289-default-rtdb.firebaseio.com",
     "project_id": "muscleplay-4c289",
     "storage_bucket": "muscleplay-4c289.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.sangam.muscleplay"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sangam.muscleplay",
+            "certificate_hash": "bf91b830e0c7905425f21f6b769f3863654ba193"
+          }
+        },
+        {
+          "client_id": "339910902548-p422je7uaogseol5u0550euq4rd4vjv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDHXgvotgQp-7WMWg8uy5S1jI5XiGPzVgs"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339910902548-p422je7uaogseol5u0550euq4rd4vjv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

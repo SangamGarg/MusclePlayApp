@@ -72,7 +72,7 @@ class SignUpActivity : AppCompatActivity() {
 
 
             } else if (password.length < 6) {
-                binding.passET.error = "Enter Password more than 6 Characters"
+                binding.passET.error = "Enter Password Of More Than 6 Characters"
 //                binding.progreessbarSignUp.visibility = View.GONE
                 binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
 
@@ -84,22 +84,19 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-//                        clearData()
-                        val users: UserDataClass =
-                            UserDataClass(name, email, phoneno, auth.currentUser!!.uid)
+                        val userId = auth.currentUser!!.uid
                         val user = hashMapOf(
-                            "name" to users.name!!,
-                            "email" to users.email!!,
-                            "phone" to users.phone!!,
-                            "UserId" to users.uid!!
+                            "name" to name, "email" to email, "phone" to phoneno, "UserId" to userId
                         )
-                        database.collection("users").document(users.name.toString()).set(user)
+
+                        database.collection("users").document(userId).set(user)
                             .addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val intent = Intent(this, SignInActivity::class.java)
                                     startActivity(intent)
-                                    Toast.makeText(this, "Registered Successfully", Toast.LENGTH_SHORT)
-                                        .show()
+                                    Toast.makeText(
+                                        this, "Registered Successfully", Toast.LENGTH_SHORT
+                                    ).show()
                                     finish()
                                 } else {
                                     Toast.makeText(
@@ -111,7 +108,7 @@ class SignUpActivity : AppCompatActivity() {
                             }
                     } else {
                         Toast.makeText(
-                            this, "SignUp Failed ${it.exception?.message}", Toast.LENGTH_SHORT
+                            this, "Failed ${it.exception?.message}", Toast.LENGTH_SHORT
                         ).show()
 //                        binding.progreessbarSignUp.visibility = View.GONE
 
