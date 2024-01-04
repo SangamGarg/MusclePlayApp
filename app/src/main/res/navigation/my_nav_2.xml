@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_2"
+    app:startDestination="@id/genderFragment">
+
+    <fragment
+        android:id="@+id/genderFragment"
+        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.GenderFragment"
+        android:label="fragment_gender"
+        tools:layout="@layout/fragment_gender" >
+        <action
+            android:id="@+id/action_genderFragment_to_ageHeightWeightFragment"
+            app:destination="@id/ageHeightWeightFragment"
+            app:popUpTo="@id/genderFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/ageHeightWeightFragment"
+        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.AgeHeightWeightFragment"
+        android:label="fragment_age_height_weight"
+        tools:layout="@layout/fragment_age_height_weight" >
+        <action
+            android:id="@+id/action_ageHeightWeightFragment_to_waistHipNeckFragment"
+            app:destination="@id/waistHipNeckFragment"
+            app:popUpTo="@id/ageHeightWeightFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/waistHipNeckFragment"
+        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.WaistHipNeckFragment"
+        android:label="fragment_waist_hip_neck"
+        tools:layout="@layout/fragment_waist_hip_neck" >
+        <action
+            android:id="@+id/action_waistHipNeckFragment_to_activityLevelFragment"
+            app:destination="@id/activityLevelFragment"
+            app:popUpTo="@id/waistHipNeckFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="age"
+            app:argType="string" />
+        <argument
+            android:name="height"
+            app:argType="string" />
+        <argument
+            android:name="weight"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/activityLevelFragment"
+        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.ActivityLevelFragment"
+        android:label="fragment_activity_level"
+        tools:layout="@layout/fragment_activity_level" >
+        <argument
+            android:name="waist"
+            app:argType="string" />
+        <argument
+            android:name="hip"
+            app:argType="string" />
+        <argument android:name="neck"
+            app:argType="string" />
+        <argument
+            android:name="age"
+            app:argType="string" />
+        <argument
+            android:name="height"
+            app:argType="string" />
+        <argument
+            android:name="weight"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_activityLevelFragment_to_mainActivity2"
+            app:destination="@id/mainActivity2"
+            app:popUpTo="@id/activityLevelFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="com.sangam.muscleplay.MainActivity"
+        android:label="MainActivity" />
+</navigation>

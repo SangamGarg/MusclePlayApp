@@ -2,10 +2,12 @@ package com.sangam.muscleplay
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -17,6 +19,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
 import com.sangam.muscleplay.AppUtils.IntentUtil
+import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
 import com.sangam.muscleplay.SignInAndSignUpActivities.model.UserDataClass
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
     private lateinit var userViewModel: UserViewModel
     private lateinit var binding: ActivityMainBinding
+    private var dataFilled: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())
         }
+        observeprogress()
+        callGetUserExtraData()
+        observeUserExtraData()
 
 //        database.collection("users").document(firebaseAuth.currentUser!!.uid).get()
 //            .addOnCompleteListener { task ->
@@ -74,6 +81,30 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+    }
+
+    fun callGetUserExtraData() {
+        userViewModel.getUserDataExtra()
+    }
+
+    fun observeUserExtraData() {
+        userViewModel.userDataExtraResponse.observe(this, Observer {
+            dataFilled = it.datafilled
+            if (dataFilled == null) {
+                IntentUtil.startIntent(this, UserDetailsActivity())
+            }else{
+                binding.loading.visibility = View.GONE
+
+            }
+
+        })
+    }
+    fun observeprogress() {
+        userViewModel.showProgressExtra.observe(this, Observer {
+            if (it) {
+                binding.loading.visibility = View.VISIBLE
+            }
+        })
     }
 
     override fun onBackPressed() {

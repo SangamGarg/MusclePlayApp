@@ -13,14 +13,18 @@
         android:theme="@style/Theme.MusclePlay"
         tools:targetApi="31">
         <activity
-            android:name=".UserDetailsActivity"
-            android:exported="false" />
+            android:name=".ExtraDetailsScreen.UserDetailsActivity"
+            android:exported="true">
+
+
+        </activity>
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".onBoardingScreen.OnBoardActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

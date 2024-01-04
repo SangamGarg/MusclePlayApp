@@ -6,12 +6,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,11 +24,18 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
+import com.sangam.muscleplay.AppUtils.IntentUtil
+import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
 import com.sangam.muscleplay.MainActivity
 import com.sangam.muscleplay.R
+import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.databinding.ActivitySignInBinding
 
 class SignInActivity : AppCompatActivity() {
+    private val userViewModel by lazy {
+        ViewModelProvider(this).get(UserViewModel::class.java)
+    }
+    private var dataFilled: Boolean? = null
     private val database by lazy {
         Firebase.firestore
     }
@@ -38,46 +48,60 @@ class SignInActivity : AppCompatActivity() {
                     val name = account?.displayName
                     val email = account?.email
                     val credentials = GoogleAuthProvider.getCredential(account?.idToken, null)
+                    binding.progressBarSignIn.visibility = View.VISIBLE
+
                     firebaseAuth.signInWithCredential(credentials).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            binding.progressBarSignIn.visibility = View.GONE
 
                             val userId = firebaseAuth.currentUser!!.uid
-                            val user = hashMapOf(
-                                "name" to name, "email" to email, "phone" to "", "UserId" to userId
-                            )
-
-                            database.collection("users").document(userId).set(user)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
-
-                                        val intent = Intent(this, MainActivity::class.java)
-                                        startActivity(intent)
-                                        Toast.makeText(
-                                            this, "SignIn Successful", Toast.LENGTH_SHORT
-                                        ).show()
-                                        onBoardingFinished()
-                                        finish()
-
+                            // Check if the document exists
+                            database.collection("users").document(userId).get()
+                                .addOnCompleteListener { documentTask ->
+                                    if (documentTask.isSuccessful) {
+                                        val document = documentTask.result
+                                        if (document != null && document.exists()) {
+                                            intentToNext()
+                                        } else {
+                                            // Document does not exist, create a new one
+                                            val user = hashMapOf(
+                                                "name" to name,
+                                                "email" to email,
+                                                "phone" to "",
+                                                "UserId" to userId
+                                            )
+                                            database.collection("users").document(userId).set(user)
+                                                .addOnCompleteListener { createTask ->
+                                                    if (createTask.isSuccessful) {
+                                                        intentToNext()
+                                                    } else {
+                                                        Toast.makeText(
+                                                            this,
+                                                            "Error ${createTask.exception?.message}",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+                                                }
+                                        }
                                     } else {
                                         Toast.makeText(
                                             this,
-                                            "Error ${it.exception?.message}",
+                                            "Error ${documentTask.exception?.message}",
                                             Toast.LENGTH_SHORT
                                         ).show()
-
                                     }
                                 }
-
-
                         } else {
                             Toast.makeText(
                                 this, "Error ${it.exception?.message}", Toast.LENGTH_SHORT
                             ).show()
+                            binding.progressBarSignIn.visibility = View.GONE
                         }
                     }
                 }
             } else {
                 Toast.makeText(this@SignInActivity, "Failed", Toast.LENGTH_SHORT).show()
+                binding.progressBarSignIn.visibility = View.GONE
             }
         }
 
@@ -101,6 +125,10 @@ class SignInActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         checkLogoutIntent = intent.getBooleanExtra("FromLogout", false)
+
+//        callGetUserExtraData()
+//        observeUserExtraData()
+
         binding.TextForgotPass.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val view = layoutInflater.inflate(R.layout.forgot_password_dialog, null)
@@ -137,12 +165,12 @@ class SignInActivity : AppCompatActivity() {
         binding.btnSignIn.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val password = binding.passET.text.toString()
-            // binding.progreessbarSignIn.visibility = View.VISIBLE
+            binding.progressBarSignIn.visibility = View.VISIBLE
 
             if (email.trim().isEmpty() || password.trim().isEmpty()) {
                 if (email.trim().isEmpty()) binding.emailEt.error = "Empty Field"
                 if (password.trim().isEmpty()) binding.passET.error = "Empty Field"
-                // binding.progreessbarSignIn.visibility = View.GONE
+                binding.progressBarSignIn.visibility = View.GONE
                 binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
 
             } else if (!email.matches(emailpattern.toRegex()) || password.length < 6) {
@@ -150,21 +178,17 @@ class SignInActivity : AppCompatActivity() {
                     "Enter Valid Email"
                 if (password.length < 6) binding.passET.error =
                     "Enter Password More than 6 characters"
-                //     binding.progreessbarSignIn.visibility = View.GONE
+                binding.progressBarSignIn.visibility = View.GONE
                 binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
 
             } else {
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
-                        onBoardingFinished()
-                        finish()
+                        intentToNext()
                     } else {
                         Toast.makeText(this, "Error ${it.exception?.message}", Toast.LENGTH_SHORT)
                             .show()
-                        //       binding.progreessbarSignIn.visibility = View.GONE
+                        binding.progressBarSignIn.visibility = View.GONE
                     }
                 }
             }
@@ -175,12 +199,22 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
+    private fun intentToNext() {
+        val intent = Intent(this, UserDetailsActivity::class.java)
+        startActivity(intent)
+        Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
+        onBoardingFinished()
+        finish()
+    }
+
+
     private fun onBoardingFinished() {
         val sharedPref = getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putBoolean("Finished", true)
         editor.apply()
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

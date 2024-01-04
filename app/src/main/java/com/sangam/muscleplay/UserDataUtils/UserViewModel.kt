@@ -21,7 +21,7 @@ class UserViewModel : ViewModel() {
         this.errorMessage = repository.errorMessage
         this.showProgress = repository.showProgress
         this.userDataExtraResponse = repository.userDataExtraResponse
-        this.showProgress = repository.showProgressExtra
+        this.showProgressExtra = repository.showProgressExtra
     }
 
 //    fun setUserData(name: String?, email: String?) {
@@ -32,8 +32,8 @@ class UserViewModel : ViewModel() {
         repository.getUserData()
     }
 
-//    fun getUserDataExtra() {
-//        repository.getUserDataExtra()
-//    }
+    fun getUserDataExtra() {
+        repository.getUserDataExtra()
+    }
 
 }

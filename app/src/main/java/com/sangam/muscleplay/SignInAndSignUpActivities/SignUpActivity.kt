@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -40,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
             val name = binding.nameET.text.toString()
             val phoneno = binding.phoneEt.text.toString()
 
-//            binding.progreessbarSignUp.visibility = View.VISIBLE
+            binding.progressBarSignUp.visibility = View.VISIBLE
             binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
             binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = true
 
@@ -60,25 +61,28 @@ class SignUpActivity : AppCompatActivity() {
                     binding.confirmPassEt.error = "Empty Field"
                 }
                 Toast.makeText(this, "Enter Valid Details", Toast.LENGTH_SHORT).show()
-//                binding.progreessbarSignUp.visibility = View.GONE
+                binding.progressBarSignUp.visibility = View.GONE
 
             } else if (!email.matches(emailpattern.toRegex())) {
                 binding.emailEt.error = "Enter Valid Email"
-//                binding.progreessbarSignUp.visibility = View.GONE
+                binding.progressBarSignUp.visibility = View.GONE
+
 
             } else if (phoneno.length != 10) {
                 binding.phoneEt.error = "Enter Valid Phone No"
-//                binding.progreessbarSignUp.visibility = View.GONE
+                binding.progressBarSignUp.visibility = View.GONE
 
 
             } else if (password.length < 6) {
                 binding.passET.error = "Enter Password Of More Than 6 Characters"
-//                binding.progreessbarSignUp.visibility = View.GONE
+                binding.progressBarSignUp.visibility = View.GONE
+
                 binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
 
             } else if (password != confirmpassword) {
                 binding.confirmPassEt.error = "Password is Not Matching"
-//                binding.progreessbarSignUp.visibility = View.GONE
+                binding.progressBarSignUp.visibility = View.GONE
+
                 binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
                 binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = false
             } else {
@@ -102,7 +106,7 @@ class SignUpActivity : AppCompatActivity() {
                                     Toast.makeText(
                                         this, "Error ${it.exception?.message}", Toast.LENGTH_SHORT
                                     ).show()
-//                                binding.progreessbarSignUp.visibility = View.GONE
+                                    binding.progressBarSignUp.visibility = View.GONE
 
                                 }
                             }
@@ -110,7 +114,8 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(
                             this, "Failed ${it.exception?.message}", Toast.LENGTH_SHORT
                         ).show()
-//                        binding.progreessbarSignUp.visibility = View.GONE
+                        binding.progressBarSignUp.visibility = View.GONE
+
 
                     }
                 }

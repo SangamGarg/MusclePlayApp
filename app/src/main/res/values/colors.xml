@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#F41F1F</color>
     <color name="app_main_color">#f0897a</color>
+    <color name="gray">#CEF8F7F7</color>
 </resources>

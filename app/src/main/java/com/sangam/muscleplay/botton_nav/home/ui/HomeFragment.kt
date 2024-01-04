@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
+import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
@@ -29,13 +31,17 @@ import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private lateinit var binding: FragmentHomeBinding
     lateinit var homeViewModel: HomeViewModel
 
-    private lateinit var age: String
-    private lateinit var gender: String
-    private lateinit var weight: String
-    private lateinit var height: String
+    private var age: String? = null
+    private var gender: String? = null
+    private var weight: String? = null
+    private var height: String? = null
+    private var hip: String? = null
+    private var waist: String? = null
+    private var neck: String? = null
+    private var activity_level: String? = null
 
     private val database by lazy {
         Firebase.firestore
@@ -52,10 +58,11 @@ class HomeFragment : Fragment() {
     }
     var url: String? = null
     var url1: String? = null
+    private var dataFilled: Boolean? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -66,38 +73,62 @@ class HomeFragment : Fragment() {
         autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
         autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
 //        listener = activity
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-         callGetUserData()
+
+        callGetUserData()
+        callGetUserExtraData()
         observeUserData()
+        observeUserExtraData()
         initListener()
         addImageOnAutoImageSlider()
         getAutoImageSliderImage()
         observerErrorMessageApiResponse()
-        callBmiApi()
-        callBodyFatApi()
-        callDailyCaloriesApi()
-        callIdealWeightApi()
         observerBmiApiResponse()
         observerIdealWeightApiResponse()
         observerDailyCaloriesApiResponse()
         observerBodyFatApiResponse()
-        observerBmiApiProgressResponse()
-        observerIdealWeightApiProgressResponse()
-        observerDailyCaloriesApiProgressResponse()
-        observerBodyFatApiProgressResponse()
+        observerProgressResponse()
+
 
         return root
     }
 
+
     fun callGetUserData() {
         userViewModel.getUserData()
+    }
+
+    fun callGetUserExtraData() {
+        userViewModel.getUserDataExtra()
     }
 
     fun observeUserData() {
         userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
             headerViewName.text = it?.name
             headerViewEmail.text = it?.email
+        })
+    }
+
+    fun observeUserExtraData() {
+        userViewModel.userDataExtraResponse.observe(viewLifecycleOwner, Observer {
+            Log.d("USEREXTRADETAIL", it.toString())
+            dataFilled = it.datafilled
+            age = it.age.toString()
+            gender = it.gender.toString()
+            height = it.height.toString()
+            weight = it.weight.toString()
+            waist = it.waist.toString()
+            neck = it.neck.toString()
+            hip = it.hip.toString()
+            activity_level = it.activity_level.toString()
+//            if (dataFilled == null) {
+//                IntentUtil.startIntent(requireActivity(), UserDetailsActivity())
+//            }
+            callBmiApi()
+            callBodyFatApi()
+            callDailyCaloriesApi()
+            callIdealWeightApi()
         })
     }
 
@@ -121,8 +152,6 @@ class HomeFragment : Fragment() {
         val headerView = binding.navView.getHeaderView(0)
         headerViewName = headerView.findViewById(R.id.nav_drawer_tv_name)
         headerViewEmail = headerView.findViewById(R.id.nav_drawer_tv_email_id)
-
-
 
 
     }
@@ -184,72 +213,109 @@ class HomeFragment : Fragment() {
     }
 
     private fun callBmiApi() {
-        homeViewModel.callBmiApi("25", "70", "178")
+        homeViewModel.callBmiApi(age, weight, height)
     }
 
     private fun callBodyFatApi() {
-        homeViewModel.callBodyFatApi("25", "male", "70", "178", "50", "96", "92")
+        homeViewModel.callBodyFatApi(age, gender, weight, height, neck, waist, hip)
     }
 
     private fun callIdealWeightApi() {
-        homeViewModel.callIdealWeightApi("male", "178")
+        homeViewModel.callIdealWeightApi(gender, height)
     }
 
     private fun callDailyCaloriesApi() {
-        homeViewModel.callDailyCaloriesApi("25", "male", "178", "70", "level_4")
+        homeViewModel.callDailyCaloriesApi(age, gender, height, weight, activity_level)
     }
 
     private fun observerBmiApiResponse() {
         homeViewModel.bmiResponse.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            binding.tvBmi.text = it.data?.bmi.toString()
         })
     }
 
     private fun observerIdealWeightApiResponse() {
         homeViewModel.idealWeightResponse.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            binding.tvIdealWeight.text = it.data?.hamwi.toString()
         })
     }
 
     private fun observerDailyCaloriesApiResponse() {
         homeViewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            binding.tvDailyCalories.text = it.data?.BMR.toString()
         })
     }
 
     private fun observerBodyFatApiResponse() {
         homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            binding.tvBodyFatPercentage.text = it.data?.bodyFatBMIMethod.toString()
         })
     }
 
-    private fun observerBmiApiProgressResponse() {
+    private fun observerProgressResponse() {
+        userViewModel.showProgress.observe(requireActivity(), Observer {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
+        })
+
+        userViewModel.showProgressExtra.observe(requireActivity(), Observer {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
+        })
+
+
         homeViewModel.showProgressBmi.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
         })
-    }
-
-    private fun observerIdealWeightApiProgressResponse() {
         homeViewModel.showProgressIdealWeight.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
         })
-    }
 
-    private fun observerDailyCaloriesApiProgressResponse() {
         homeViewModel.showProgressDalyCalories.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
         })
-    }
-
-    private fun observerBodyFatApiProgressResponse() {
         homeViewModel.showProgressBodyFat.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progreessBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progreessBar.visibility = View.GONE
+            }
         })
     }
 
     private fun observerErrorMessageApiResponse() {
         homeViewModel.errorMessage.observe(requireActivity(), Observer {
-//            binding.textView.text = it.data?.bmi.toString()
+            ToastUtil.makeToast(requireContext(), it)
         })
     }
 
@@ -260,6 +326,5 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }
