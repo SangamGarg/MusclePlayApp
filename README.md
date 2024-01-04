@@ -1,2 +1,2 @@
-Currently This App Is In Building Process...Keep Connected
-For any info regarding email at :- sangamgarg17@gmail.com
+Currently This App Is In Building Process...Keep Connected...
+For any info. email at :- sangamgarg17@gmail.com
