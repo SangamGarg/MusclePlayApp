@@ -23,9 +23,9 @@
         android:id="@+id/tvGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/coustard"
+        android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
-        android:text="What Is Your Gender?"
+        android:text="What Is Your Gender ?"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +36,7 @@
         android:id="@+id/tvGenderWhy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
         android:text="To Make Sure You Get the Best Results"
         android:textColor="@color/black"
@@ -63,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
-            android:fontFamily="@font/coustard"
+            android:fontFamily="@font/crimson_pro_medium"
+
             android:gravity="center"
             android:padding="10dp"
             android:text="Next"
@@ -111,10 +113,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="@color/white"
-                    android:fontFamily="@font/coustard"
+                    android:fontFamily="@font/comic_neue_light"
                     android:paddingHorizontal="7dp"
                     android:text="Male"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
 
                 <RadioButton
@@ -123,9 +126,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="@color/white"
-                    android:fontFamily="@font/coustard"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:paddingHorizontal="7dp"
+
                     android:text="Female"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
 
             </RadioGroup>

@@ -40,9 +40,9 @@
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coustard"
+                android:fontFamily="@font/crimson_pro_medium"
                 android:gravity="center"
-                android:text="What Is Your Age?"
+                android:text="What Is Your Age ?"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:text="To Make Sure You Get the Best Results"
                 android:textColor="@color/black"
                 android:textSize="13sp"
@@ -81,7 +83,8 @@
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Min: 1"
                 android:textColor="@color/app_main_color"
@@ -93,7 +96,8 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Max: 80"
                 android:textColor="@color/app_main_color"
@@ -106,6 +110,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/textView18"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -117,9 +123,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/coustard"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
-                android:text="What Is Your Height? (in cm)"
+                android:text="What Is Your Height ? (in cm)"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,6 +137,8 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="To Make Sure You Get the Best Results"
                 android:textColor="@color/black"
@@ -159,7 +168,8 @@
                 android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Min: 130 cm"
                 android:textColor="@color/app_main_color"
@@ -171,7 +181,8 @@
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Max: 230 cm"
                 android:textColor="@color/app_main_color"
@@ -185,6 +196,8 @@
                 android:layout_height="wrap_content"
                 android:text="130"
                 android:textColor="@color/black"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 app:layout_constraintBottom_toTopOf="@+id/textView22"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -194,9 +207,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/coustard"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
-                android:text="What Is Your Weight? (in Kg)"
+                android:text="What Is Your Weight ? (in Kg)"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -211,6 +225,8 @@
                 android:text="To Make Sure You Get the Best Results"
                 android:textColor="@color/black"
                 android:textSize="13sp"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -234,7 +250,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Min: 40 kg"
                 android:textColor="@color/app_main_color"
@@ -246,7 +263,8 @@
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/almendra_sc"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:text="Max: 160 kg"
                 android:textColor="@color/app_main_color"
@@ -260,6 +278,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="40"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/textView26"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -287,7 +307,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:fontFamily="@font/coustard"
+                android:fontFamily="@font/crimson_pro_medium"
+
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Next"
