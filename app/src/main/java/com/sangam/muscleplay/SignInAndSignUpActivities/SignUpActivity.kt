@@ -53,11 +53,11 @@ class SignUpActivity : AppCompatActivity() {
                 if (name.isEmpty()) binding.nameET.error = "Empty Field"
                 if (phoneno.isEmpty()) binding.phoneEt.error = "Empty Field"
                 if (password.isEmpty()) {
-                    binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
+                    binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
                     binding.passET.error = "Empty Field"
                 }
                 if (confirmpassword.isEmpty()) {
-                    binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = false
+                    binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = true
                     binding.confirmPassEt.error = "Empty Field"
                 }
                 Toast.makeText(this, "Enter Valid Details", Toast.LENGTH_SHORT).show()
@@ -77,14 +77,14 @@ class SignUpActivity : AppCompatActivity() {
                 binding.passET.error = "Enter Password Of More Than 6 Characters"
                 binding.progressBarSignUp.visibility = View.GONE
 
-                binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
+                binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
 
             } else if (password != confirmpassword) {
                 binding.confirmPassEt.error = "Password is Not Matching"
                 binding.progressBarSignUp.visibility = View.GONE
 
-                binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
-                binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = false
+                binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
+                binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = true
             } else {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (it.isSuccessful) {

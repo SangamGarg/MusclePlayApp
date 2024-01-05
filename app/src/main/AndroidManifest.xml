@@ -42,9 +42,11 @@
             android:exported="false" />
         <activity
             android:name=".SignInAndSignUpActivities.SignUpActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".SignInAndSignUpActivities.SignInActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".drawer_nav.drawer_nav_about_us.AboutUsActivity"

@@ -100,7 +100,6 @@ class SignInActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this@SignInActivity, "Failed", Toast.LENGTH_SHORT).show()
                 binding.progressBarSignIn.visibility = View.GONE
             }
         }
@@ -171,7 +170,7 @@ class SignInActivity : AppCompatActivity() {
                 if (email.trim().isEmpty()) binding.emailEt.error = "Empty Field"
                 if (password.trim().isEmpty()) binding.passET.error = "Empty Field"
                 binding.progressBarSignIn.visibility = View.GONE
-                binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
+                binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
 
             } else if (!email.matches(emailpattern.toRegex()) || password.length < 6) {
                 if (!email.matches(emailpattern.toRegex())) binding.emailEt.error =
@@ -179,7 +178,7 @@ class SignInActivity : AppCompatActivity() {
                 if (password.length < 6) binding.passET.error =
                     "Enter Password More than 6 characters"
                 binding.progressBarSignIn.visibility = View.GONE
-                binding.passwordLayout.isPasswordVisibilityToggleEnabled = false
+                binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
 
             } else {
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
@@ -203,18 +202,17 @@ class SignInActivity : AppCompatActivity() {
         val intent = Intent(this, UserDetailsActivity::class.java)
         startActivity(intent)
         Toast.makeText(this, "SignIn Successful", Toast.LENGTH_SHORT).show()
-        onBoardingFinished()
+        onBoardingDone()
         finish()
     }
 
-
-    private fun onBoardingFinished() {
-        val sharedPref = getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putBoolean("Finished", true)
-        editor.apply()
+    private fun onBoardingDone() {
+        val sharePref = getSharedPreferences("OnBoard", Context.MODE_PRIVATE)
+        sharePref.edit().apply {
+            putBoolean("Done", true)
+            apply()
+        }
     }
-
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -222,6 +220,5 @@ class SignInActivity : AppCompatActivity() {
             finishAffinity()
         }
     }
-
 
 }

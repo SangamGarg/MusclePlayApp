@@ -28,7 +28,7 @@ class SplashScreenFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                if (onBoardingCheck()) {
+                if (onBoardCheck()) {
                     if (firebaseAuth.currentUser != null) {
                         findNavController().navigate(R.id.action_splashScreenFragment_to_mainActivity)
 
@@ -44,8 +44,8 @@ class SplashScreenFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }
 
-    private fun onBoardingCheck(): Boolean {
-        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        return sharedPref.getBoolean("Finished", false)
+    private fun onBoardCheck(): Boolean {
+        val sharedPref = requireContext().getSharedPreferences("OnBoard", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Done", false)
     }
 }
