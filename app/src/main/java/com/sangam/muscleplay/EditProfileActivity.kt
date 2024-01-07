@@ -191,7 +191,10 @@ class EditProfileActivity : AppCompatActivity() {
 
             binding.EtName.setText(it?.name ?: "")
             binding.EtPhone.setText(it?.phone ?: "")
-
+            if (it?.phone.isNullOrEmpty()) {
+                binding.EtLayoutPhone.isHelperTextEnabled = true
+                binding.EtLayoutPhone.helperText = "Required*"
+            }
         })
     }
 

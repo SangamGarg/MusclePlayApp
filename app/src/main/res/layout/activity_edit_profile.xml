@@ -97,6 +97,7 @@
                     android:background="@drawable/stroke_rounder_app_color"
                     android:gravity="top"
                     android:inputType="textPersonName"
+                    android:maxLength="100"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -123,6 +124,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
                 app:boxStrokeWidth="0dp"
+                app:helperTextTextColor="@color/red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPhone">

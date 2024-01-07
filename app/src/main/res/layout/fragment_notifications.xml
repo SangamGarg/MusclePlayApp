@@ -250,6 +250,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linearLayout7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="6dp"
@@ -273,6 +274,38 @@
                         android:fontFamily="@font/crimson_pro_medium"
                         android:padding="10dp"
                         android:text="Logout"
+                        android:textColor="@color/gray2"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWithdraw" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="6dp"
+                    android:elevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                    <TextView
+                        android:id="@+id/tvDeleteAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:drawableStart="@drawable/baseline_delete_24"
+                        android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+                        android:drawablePadding="30dp"
+                        android:drawableTint="@color/gray2"
+                        android:elevation="40dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:padding="10dp"
+                        android:text="Delete My Account"
                         android:textColor="@color/gray2"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"

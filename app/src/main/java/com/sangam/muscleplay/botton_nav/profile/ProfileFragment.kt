@@ -2,6 +2,7 @@ package com.sangam.muscleplay.botton_nav.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,9 @@ class ProfileFragment : Fragment() {
         binding.tvChangePassword.setOnClickListener {
             changePassword()
         }
+        binding.tvDeleteAccount.setOnClickListener {
+            deleteAlertDialog()
+        }
 
 
         binding.tvEditProfile.setOnClickListener {
@@ -74,6 +78,45 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), SignInActivity::class.java)
             intent.putExtra("FromLogout", true)
             startActivity(intent)
+        }
+    }
+
+    private fun deleteAlertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setCancelable(false)
+        alertDialog.setTitle("Delete Account")
+        alertDialog.setMessage("Are You Sure?")
+
+
+        alertDialog.setPositiveButton("yes") { _, _ ->
+            deleteAccount()
+        }
+        alertDialog.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.create().show()
+
+    }
+
+    //This is the function to delete the user account
+    private fun deleteAccount() {
+        val user = firebaseAuth.currentUser
+        user?.delete()?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Toast.makeText(
+                    requireContext(), "Account Deleted Successfully", Toast.LENGTH_SHORT
+                ).show()
+                val intent = Intent(requireContext(), SignInActivity::class.java)
+                startActivity(intent)
+            } else {
+                Log.d("DeleteAccount", it.exception.toString())
+                Toast.makeText(
+                    requireContext(),
+                    "Error: ${it.exception?.message.toString()} ",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
         }
     }
 
