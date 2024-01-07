@@ -14,6 +14,15 @@
         android:icon="@drawable/baseline_contact_support_24"
         android:title="Support" />
     <item
+        android:id="@+id/nav_rate_us"
+        android:icon="@drawable/baseline_star_rate_24"
+        android:title="Rate Us" />
+    <item
+        android:id="@+id/nav_feedback"
+        android:icon="@drawable/baseline_feedback_24"
+        android:title="Feedback" />
+
+    <item
         android:id="@+id/nav_history"
         android:icon="@drawable/baseline_history_24"
         android:title="History" />

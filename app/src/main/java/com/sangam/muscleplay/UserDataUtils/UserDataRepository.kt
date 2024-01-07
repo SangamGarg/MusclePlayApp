@@ -27,7 +27,8 @@ class UserDataRepository {
                     if (document.exists()) {
                         val name = document.getString("name")
                         val email = document.getString("email")
-                        val data = UserDataNameAndEmail(name, email)
+                        val phone = document.getString("phone")
+                        val data = UserDataNameAndEmail(name, email, phone )
                         userDataResponse.postValue(data)
                     }
                 } else {

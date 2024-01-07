@@ -1,5 +1,8 @@
 package com.sangam.muscleplay.botton_nav.home.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +28,7 @@ import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentHomeBinding
 import com.sangam.muscleplay.drawer_nav.drawer_nav_about_us.AboutUsActivity
+import com.sangam.muscleplay.drawer_nav.drawer_nav_feedback.FeedbackActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_history.HistoryActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
@@ -143,6 +147,9 @@ class HomeFragment : Fragment() {
                 R.id.nav_about_us -> IntentUtil.startIntent(requireActivity(), AboutUsActivity())
                 R.id.nav_support -> IntentUtil.startIntent(requireActivity(), SupportActivity())
                 R.id.nav_history -> IntentUtil.startIntent(requireActivity(), HistoryActivity())
+                R.id.nav_feedback -> IntentUtil.startIntent(requireActivity(), FeedbackActivity())
+                R.id.nav_rate_us -> ToastUtil.makeToast(requireContext(), "Soon..When Uploaded")
+                //openPlayStoreForRating()
                 R.id.nav_refer_and_earn -> IntentUtil.startIntent(
                     requireActivity(), ReferAndEarnActivity()
                 )
@@ -155,6 +162,24 @@ class HomeFragment : Fragment() {
 
 
     }
+
+    private fun openPlayStoreForRating() {
+        val uri = Uri.parse("market://details?id=com.sangam.quonote")
+        val playStoreIntent = Intent(Intent.ACTION_VIEW, uri)
+        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        try {
+            startActivity(playStoreIntent)
+        } catch (e: ActivityNotFoundException) {
+            // If Play Store app is not available, open the link in the browser
+            val webIntent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=com.sangam.quonote")
+            )
+            startActivity(webIntent)
+        }
+    }
+
 
 //    private fun fetchUserData() {
 //        val userId = auth.currentUser!!.uid

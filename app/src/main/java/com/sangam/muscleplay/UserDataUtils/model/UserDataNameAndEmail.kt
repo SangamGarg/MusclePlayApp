@@ -1,6 +1,6 @@
 package com.sangam.muscleplay.UserDataUtils.model
 
-data class UserDataNameAndEmail(val name: String?, val email: String?)
+data class UserDataNameAndEmail(val name: String?, val email: String?, val phone: String?)
 data class UserDataExtra(
     val datafilled: Boolean?,
     val age: String?,

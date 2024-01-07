@@ -99,7 +99,9 @@ class SignUpActivity : AppCompatActivity() {
                                     val intent = Intent(this, SignInActivity::class.java)
                                     startActivity(intent)
                                     Toast.makeText(
-                                        this, "Registered Successfully", Toast.LENGTH_SHORT
+                                        this,
+                                        "Registered Successfully: Please SignIn To Continue",
+                                        Toast.LENGTH_SHORT
                                     ).show()
                                     finish()
                                 } else {

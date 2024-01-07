@@ -13,18 +13,17 @@
         android:theme="@style/Theme.MusclePlay"
         tools:targetApi="31">
         <activity
+            android:name=".drawer_nav.drawer_nav_feedback.FeedbackActivity"
+            android:exported="false" />
+        <activity
             android:name=".ExtraDetailsScreen.UserDetailsActivity"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".onBoardingScreen.OnBoardActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,12 +41,12 @@
             android:exported="false" />
         <activity
             android:name=".SignInAndSignUpActivities.SignUpActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SignInAndSignUpActivities.SignInActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".drawer_nav.drawer_nav_about_us.AboutUsActivity"
             android:exported="false" />
