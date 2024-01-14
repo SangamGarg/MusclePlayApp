@@ -1,6 +1,5 @@
-package com.sangam.muscleplay.ExtraDetailsScreen.screens
+package com.sangam.muscleplay.UserExtraDetailsScreen.screens
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +27,7 @@ class ActivityLevelFragment : Fragment() {
     }
 
     lateinit var activityLevel: String
+    lateinit var goal: String
     var datafilled: Boolean? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -63,6 +63,37 @@ class ActivityLevelFragment : Fragment() {
             }
         }
 
+
+        val spinner2 = view.findViewById<Spinner>(R.id.spinnerGoals)
+        ArrayAdapter.createFromResource(
+            requireContext(), R.array.spinner_array_goal, R.layout.custom_spinner_layout
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+            spinner2.adapter = adapter
+        }
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                when (selectedItem) {
+                    "Extreme Weight Gain (1 kg)" -> goal = "Extreme WG"
+                    "Normal Weight Gain (0.50 kg)" -> goal = "Normal WG"
+                    "Mild Weight Gain (0.25 kg)" -> goal = "Mild WG"
+                    "Extreme Weight Loss (1 kg)" -> goal = "Extreme WL"
+                    "Normal Weight Loss (0.50 kg)" -> goal = "Normal WL"
+                    "Mild Weight Loss (0.25 kg)" -> goal = "Mild WL"
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(requireContext(), "Nothing Selected", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+
         // Inflate the layout for this fragment
         val gender = requireArguments().getString("gender").toString()
         val age = requireArguments().getString("age").toString()
@@ -75,18 +106,9 @@ class ActivityLevelFragment : Fragment() {
         view.findViewById<TextView>(R.id.tvActivityFinish).setOnClickListener {
             datafilled = true
             val userId = auth.currentUser?.uid ?: ""
-            val userDataExtra =
-                UserDataExtra(
-                    datafilled,
-                    age,
-                    gender,
-                    height,
-                    weight,
-                    hip,
-                    neck,
-                    waist,
-                    activityLevel
-                )
+            val userDataExtra = UserDataExtra(
+                datafilled, age, gender, height, weight, hip, neck, waist, activityLevel, goal
+            )
 
             storeUserExtraDetails(userId, userDataExtra)
             findNavController().navigate(R.id.action_activityLevelFragment_to_mainActivity2)
@@ -116,7 +138,8 @@ class ActivityLevelFragment : Fragment() {
             "hip" to hip,
             "neck" to neck,
             "waist" to waist,
-            "activity_level" to activity_level
+            "activity_level" to activity_level,
+            "goal" to goal
         )
     }
 }

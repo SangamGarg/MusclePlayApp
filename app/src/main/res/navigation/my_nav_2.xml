@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/genderFragment"
-        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.GenderFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.GenderFragment"
         android:label="fragment_gender"
         tools:layout="@layout/fragment_gender" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/ageHeightWeightFragment"
-        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.AgeHeightWeightFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.AgeHeightWeightFragment"
         android:label="fragment_age_height_weight"
         tools:layout="@layout/fragment_age_height_weight" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/waistHipNeckFragment"
-        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.WaistHipNeckFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.WaistHipNeckFragment"
         android:label="fragment_waist_hip_neck"
         tools:layout="@layout/fragment_waist_hip_neck" >
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/activityLevelFragment"
-        android:name="com.sangam.muscleplay.ExtraDetailsScreen.screens.ActivityLevelFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.ActivityLevelFragment"
         android:label="fragment_activity_level"
         tools:layout="@layout/fragment_activity_level" >
         <argument

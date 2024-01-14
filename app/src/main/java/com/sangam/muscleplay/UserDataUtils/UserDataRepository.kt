@@ -28,7 +28,7 @@ class UserDataRepository {
                         val name = document.getString("name")
                         val email = document.getString("email")
                         val phone = document.getString("phone")
-                        val data = UserDataNameAndEmail(name, email, phone )
+                        val data = UserDataNameAndEmail(name, email, phone)
                         userDataResponse.postValue(data)
                     }
                 } else {
@@ -57,9 +57,10 @@ class UserDataRepository {
                         val neck = document.getString("neck")
                         val waist = document.getString("waist")
                         val activity_level = document.getString("activity_level")
+                        val goal = document.getString("goal")
                         val data = UserDataExtra(
                             dataFilled,
-                            age, gender, height, weight, hip, neck, waist, activity_level
+                            age, gender, height, weight, hip, neck, waist, activity_level, goal
                         )
                         userDataExtraResponse.postValue(data)
                     }

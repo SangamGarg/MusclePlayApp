@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -35,26 +36,28 @@ class AboutUsActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Loading...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
+        binding.progreessBar.visibility = View.VISIBLE
+
+//        val progressDialog = ProgressDialog(this)
+//        progressDialog.setMessage("Loading...")
+//        progressDialog.setCancelable(false)
+//        progressDialog.show()
 
         databaseReference = database.getReference("AboutUs").child("text")
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d("ABOUT_US", snapshot.toString())
-                progressDialog.dismiss()
+                binding.progreessBar.visibility = View.GONE
 
                 if (snapshot.exists()) {
                     val data = snapshot.getValue(String::class.java)
                     binding.tvAboutUs.text = data
-                    progressDialog.dismiss()
+                    binding.progreessBar.visibility = View.GONE
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                progressDialog.dismiss()
+                binding.progreessBar.visibility = View.GONE
                 ToastUtil.makeToast(this@AboutUsActivity, error.message)
             }
 

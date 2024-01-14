@@ -4,54 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".botton_nav.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background_profile">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/background_profile"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/circles" />
 
-        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rotation="180"
+            android:scaleType="fitXY"
+            android:src="@drawable/circles" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="@font/comic_neue_light"
             android:text="Profile"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/nav_drawer_iv_profile"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+            app:layout_constraintEnd_toStartOf="@+id/ivProfile"
+            app:layout_constraintTop_toTopOf="@+id/ivProfile" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/nav_drawer_iv_profile"
+            android:id="@+id/ivProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:elevation="16dp"
-            android:outlineAmbientShadowColor="@color/red"
-            android:outlineSpotShadowColor="@color/red"
+            android:layout_marginTop="50dp"
+            android:elevation="30dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
             android:src="@drawable/profile"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0.1dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cardView" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfileEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:elevation="30dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            android:src="@drawable/baseline_edit_24"
+
+            android:tint="@color/red"
+            app:civ_border_color="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+            app:layout_constraintStart_toEndOf="@+id/ivProfile" />
+
 
         <View
             android:layout_width="wrap_content"
@@ -68,16 +88,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="20dp"
             android:background="@color/white"
             android:elevation="15dp"
-            android:outlineAmbientShadowColor="@color/red"
-            android:outlineSpotShadowColor="@color/red"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
             app:cardCornerRadius="7dp"
-            app:cardElevation="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+            app:cardElevation="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+            app:layout_constraintTop_toBottomOf="@+id/ivProfile">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -92,12 +112,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/crimson_pro_medium"
                     android:text="Name"
                     android:textColor="@color/gray2"
 
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,39 +133,56 @@
                     android:text="Email"
 
                     android:textColor="@color/gray2"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/circleImageView"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/profile"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="0.1dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                    app:layout_constraintEnd_toStartOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-                <TextView
-                    android:id="@+id/textView3"
+                <include
+                    android:id="@+id/includeAge"
+                    layout="@layout/profile_data_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="4dp"
-
-                    android:fontFamily="@font/crimson_pro_medium"
-                    android:text="Available coins"
-                    android:textColor="@color/gray2"
-                    android:textSize="15sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toStartOf="@+id/includeWeight"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+                <include
+                    android:id="@+id/includeWeight"
+                    layout="@layout/profile_data_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toStartOf="@+id/includeHeight"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/includeAge"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+                <include
+                    android:id="@+id/includeHeight"
+                    layout="@layout/profile_data_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toStartOf="@+id/includeAvailableCoins"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/includeWeight"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+                <include
+                    android:id="@+id/includeAvailableCoins"
+                    layout="@layout/profile_data_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/includeHeight"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
 
                 <LinearLayout
                     android:id="@+id/linearLayout4"
@@ -155,7 +192,7 @@
                     android:elevation="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+                    app:layout_constraintTop_toBottomOf="@+id/includeHeight">
 
                     <TextView
                         android:id="@+id/tvEditProfile"

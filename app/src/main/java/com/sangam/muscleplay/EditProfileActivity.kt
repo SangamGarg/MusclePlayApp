@@ -34,6 +34,7 @@ class EditProfileActivity : AppCompatActivity() {
     private var waist: String? = null
     private var neck: String? = null
     private var activityLevel: String? = null
+    private var goal: String? = null
     private val userViewModel by lazy {
         ViewModelProvider(this).get(UserViewModel::class.java)
     }
@@ -70,9 +71,9 @@ class EditProfileActivity : AppCompatActivity() {
             val waist = binding.includeWaist.EtValue.text.toString()
             val hip = binding.includeHip.EtValue.text.toString()
             val neck = binding.includeNeck.EtValue.text.toString()
-            if (age.trim().isEmpty() || name.trim()
-                    .isEmpty() || weight.trim().isEmpty() || height.trim().isEmpty() || waist.trim()
-                    .isEmpty() || hip.trim().isEmpty() || neck.trim().isEmpty()
+            if (age.trim().isEmpty() || name.trim().isEmpty() || weight.trim()
+                    .isEmpty() || height.trim().isEmpty() || waist.trim().isEmpty() || hip.trim()
+                    .isEmpty() || neck.trim().isEmpty()
             ) {
                 ToastUtil.makeToast(this@EditProfileActivity, "Empty Field")
                 if (name.isEmpty()) binding.EtName.error = "Empty Field"
@@ -117,7 +118,8 @@ class EditProfileActivity : AppCompatActivity() {
                         hip,
                         neck,
                         waist,
-                        activityLevel
+                        activityLevel,
+                        goal
                     )
                     storeUserExtraDetails(userId, userDataExtra)
 
@@ -174,7 +176,8 @@ class EditProfileActivity : AppCompatActivity() {
             "hip" to hip,
             "neck" to neck,
             "waist" to waist,
-            "activity_level" to activity_level
+            "activity_level" to activity_level,
+            "goal" to goal
         )
     }
 
@@ -209,6 +212,7 @@ class EditProfileActivity : AppCompatActivity() {
             neck = it.neck.toString()
             hip = it.hip.toString()
             activityLevel = it.activity_level.toString()
+            goal = it.goal.toString()
             initListener()
 
         })
@@ -284,6 +288,46 @@ class EditProfileActivity : AppCompatActivity() {
             "level_5" -> spinner.setSelection(4)
             "level_6" -> spinner.setSelection(5)
             else -> spinner.setSelection(0) // Default to the first item if the activityLevel doesn't match any of the predefined values
+        }
+
+        val spinner2 = binding.spinnerGoal
+        ArrayAdapter.createFromResource(
+            this, R.array.spinner_array_goal, R.layout.custom_spinner_layout
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+            spinner2.adapter = adapter
+        }
+        spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                when (selectedItem) {
+                    "Extreme Weight Gain (1 kg)" -> goal = "Extreme WG"
+                    "Normal Weight Gain (0.50 kg)" -> goal = "Normal WG"
+                    "Mild Weight Gain (0.25 kg)" -> goal = "Mild WG"
+                    "Extreme Weight Loss (1 kg)" -> goal = "Extreme WL"
+                    "Normal Weight Loss (0.50 kg)" -> goal = "Normal WL"
+                    "Mild Weight Loss (0.25 kg)" -> goal = "Mild WL"
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(this@EditProfileActivity, "Nothing Selected", Toast.LENGTH_SHORT)
+                    .show()
+
+            }
+
+        }
+        when (goal) {
+            "Extreme WG" -> spinner2.setSelection(0) // Assuming "Sedentary: little or no exercise" is the first item in the array
+            "Normal WG" -> spinner2.setSelection(1)
+            "Mild WG" -> spinner2.setSelection(2)
+            "Extreme WL" -> spinner2.setSelection(3)
+            "Normal WL" -> spinner2.setSelection(4)
+            "Mild WL" -> spinner2.setSelection(5)
+            else -> spinner2.setSelection(0) // Default to the first item if the activityLevel doesn't match any of the predefined values
         }
 
         binding.includeAge.apply {

@@ -1,10 +1,7 @@
 package com.sangam.muscleplay
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -19,11 +16,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
 import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
+import com.sangam.muscleplay.UserExtraDetailsScreen.UserDetailsActivity
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
-import com.sangam.muscleplay.SignInAndSignUpActivities.model.UserDataClass
-import com.sangam.muscleplay.botton_nav.home.repository.HomeRepository
 import com.sangam.muscleplay.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

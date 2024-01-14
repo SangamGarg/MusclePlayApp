@@ -1,4 +1,4 @@
-package com.sangam.muscleplay.ExtraDetailsScreen
+package com.sangam.muscleplay.UserExtraDetailsScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

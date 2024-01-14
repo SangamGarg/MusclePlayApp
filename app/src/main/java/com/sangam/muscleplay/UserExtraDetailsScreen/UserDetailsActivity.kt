@@ -1,4 +1,4 @@
-package com.sangam.muscleplay.ExtraDetailsScreen
+package com.sangam.muscleplay.UserExtraDetailsScreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
 import com.sangam.muscleplay.AppUtils.IntentUtil
 import com.sangam.muscleplay.MainActivity
-import com.sangam.muscleplay.R
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.databinding.ActivityUserDetailsBinding
 

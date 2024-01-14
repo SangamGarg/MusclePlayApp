@@ -22,7 +22,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
-import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
+import com.sangam.muscleplay.Calculators.AllCalculatorsActivity
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
     private var waist: String? = null
     private var neck: String? = null
     private var activity_level: String? = null
+    private var goal: String? = null
 
     private val database by lazy {
         Firebase.firestore
@@ -126,6 +127,15 @@ class HomeFragment : Fragment() {
             neck = it.neck.toString()
             hip = it.hip.toString()
             activity_level = it.activity_level.toString()
+            goal = it.goal.toString()
+
+            if (gender == "male") {
+                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.male)
+            } else if (gender == "female") {
+                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.female)
+            }
+
+
 //            if (dataFilled == null) {
 //                IntentUtil.startIntent(requireActivity(), UserDetailsActivity())
 //            }
@@ -137,7 +147,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initListener() {
+        binding.fabCalculator.setOnClickListener {
 
+            IntentUtil.startIntent(requireActivity(), AllCalculatorsActivity())
+        }
 
         binding.openDrawer.setOnClickListener {
             binding.drawerLayout.openDrawer(binding.navView)
@@ -150,6 +163,8 @@ class HomeFragment : Fragment() {
                 R.id.nav_feedback -> IntentUtil.startIntent(requireActivity(), FeedbackActivity())
                 R.id.nav_rate_us -> ToastUtil.makeToast(requireContext(), "Soon..When Uploaded")
                 //openPlayStoreForRating()
+                R.id.nav_ai_chat_bot -> ToastUtil.makeToast(requireContext(), "Soon..")
+                R.id.nav_check_my_pose -> ToastUtil.makeToast(requireContext(), "Soon..")
                 R.id.nav_refer_and_earn -> IntentUtil.startIntent(
                     requireActivity(), ReferAndEarnActivity()
                 )
@@ -267,9 +282,29 @@ class HomeFragment : Fragment() {
 
     private fun observerDailyCaloriesApiResponse() {
         homeViewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
-            binding.tvDailyCalories.text = it.data?.BMR.toString()
+            when (goal) {
+                "Extreme WG" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.extremeWeightGain?.calory.toString()
+
+                "Normal WG" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.weightGain?.calory.toString()
+
+                "Mild WG" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.mildWeightGain?.calory.toString()
+
+                "Extreme WL" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.extremeWeightLoss?.calory.toString()
+
+                "Normal WL" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.weightLoss?.calory.toString()
+
+                "Mild WL" -> binding.tvDailyCalories.text =
+                    it.data?.goals?.mildWeightLoss?.calory.toString()
+
+            }
         })
     }
+
 
     private fun observerBodyFatApiResponse() {
         homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {

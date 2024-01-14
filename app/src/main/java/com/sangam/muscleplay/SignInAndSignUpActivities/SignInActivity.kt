@@ -6,14 +6,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -24,9 +22,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.ExtraDetailsScreen.UserDetailsActivity
-import com.sangam.muscleplay.MainActivity
+import com.sangam.muscleplay.UserExtraDetailsScreen.UserDetailsActivity
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.databinding.ActivitySignInBinding
@@ -207,9 +203,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun onBoardingDone() {
-        val sharePref = getSharedPreferences("OnBoard", Context.MODE_PRIVATE)
+        val sharePref = getSharedPreferences("OnBoards", Context.MODE_PRIVATE)
         sharePref.edit().apply {
-            putBoolean("Done", true)
+            putBoolean("Doned", true)
             apply()
         }
     }

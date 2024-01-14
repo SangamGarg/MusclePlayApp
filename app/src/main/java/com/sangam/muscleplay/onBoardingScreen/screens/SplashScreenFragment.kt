@@ -45,7 +45,7 @@ class SplashScreenFragment : Fragment() {
     }
 
     private fun onBoardCheck(): Boolean {
-        val sharedPref = requireContext().getSharedPreferences("OnBoard", Context.MODE_PRIVATE)
-        return sharedPref.getBoolean("Done", false)
+        val sharedPref = requireContext().getSharedPreferences("OnBoards", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean("Doned", false)
     }
 }

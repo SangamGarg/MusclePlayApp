@@ -10,5 +10,6 @@ data class UserDataExtra(
     val hip: String?,
     val neck: String?,
     val waist: String?,
-    val activity_level: String?
+    val activity_level: String?,
+    val goal: String?
 )

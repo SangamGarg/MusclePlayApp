@@ -8,6 +8,18 @@
         <item>Intense exercise 6–7 times/week</item>
         <item>Very intense exercise daily, or physical job</item>
     </string-array>
+
+    <string-array name="spinner_array_goal">
+        <item>Extreme Weight Gain (1 kg)</item>
+        <item>Normal Weight Gain (0.50 kg)</item>
+        <item>Mild Weight Gain (0.25 kg)</item>
+        <item>Extreme Weight Loss (1 kg)</item>
+        <item>Normal Weight Loss (0.50 kg)</item>
+        <item>Mild Weight Loss (0.25 kg)</item>
+
+    </string-array>
+
+
 </resources>
 
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:padding="15dp"
-    tools:context=".ExtraDetailsScreen.screens.ActivityLevelFragment">
+    tools:context=".UserExtraDetailsScreen.screens.ActivityLevelFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,8 +43,8 @@
             android:id="@+id/tvGenderWhy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:fontFamily="@font/crimson_pro_medium"
+            android:gravity="center"
 
             android:text="To Make Sure You Get the Best Results"
             android:textColor="@color/black"
@@ -65,13 +65,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvGenderWhy" />
 
+        <TextView
+            android:id="@+id/tvGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="50dp"
+            android:fontFamily="@font/crimson_pro_medium"
+            android:gravity="center"
+            android:text="What Is Your Goal ?"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerActivityLevel" />
+
+        <TextView
+            android:id="@+id/tvGoalWhy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/crimson_pro_medium"
+            android:gravity="center"
+            android:text="To Make Sure You Get the Best Results"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGoal" />
+
+        <Spinner
+            android:id="@+id/spinnerGoals"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="50dp"
+            android:background="@drawable/background_stroke_rounded"
+            android:entries="@array/spinner_array_goal"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGoalWhy" />
+
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="200dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/button_background_1"
             android:elevation="10dp"
             android:outlineAmbientShadowColor="@color/red"
@@ -79,7 +118,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerActivityLevel">
+            app:layout_constraintTop_toBottomOf="@+id/spinnerGoals">
 
             <TextView
                 android:id="@+id/tvActivityFinish"

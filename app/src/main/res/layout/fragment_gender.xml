@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:padding="15dp"
-    tools:context=".ExtraDetailsScreen.screens.GenderFragment">
+    tools:context=".UserExtraDetailsScreen.screens.GenderFragment">
 
     <ImageView
         android:id="@+id/imageView2"

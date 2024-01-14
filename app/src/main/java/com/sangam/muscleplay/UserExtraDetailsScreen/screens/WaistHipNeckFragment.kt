@@ -1,4 +1,4 @@
-package com.sangam.muscleplay.ExtraDetailsScreen.screens
+package com.sangam.muscleplay.UserExtraDetailsScreen.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

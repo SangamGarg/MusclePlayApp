@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
+import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.EditProfileActivity
 import com.sangam.muscleplay.R
@@ -50,6 +51,7 @@ class ProfileFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         observeUserData()
+        observeUserExtraData()
         initListener()
 
         return root
@@ -57,13 +59,33 @@ class ProfileFragment : Fragment() {
 
     private fun initListener() {
 
+        binding.includeAge.apply {
+            ivImage.setBackgroundResource(R.drawable.age)
+            tvName.text = "Age"
+        }
+        binding.includeAvailableCoins.apply {
+            ivImage.setBackgroundResource(R.drawable.coin)
+            tvName.text = "Coins"
+            tvValue.text = "0"
+        }
+        binding.includeHeight.apply {
+            ivImage.setBackgroundResource(R.drawable.height)
+            tvName.text = "Height"
+        }
+        binding.includeWeight.apply {
+            ivImage.setBackgroundResource(R.drawable.weight)
+            tvName.text = "Weight"
+        }
+
         binding.tvChangePassword.setOnClickListener {
             changePassword()
         }
         binding.tvDeleteAccount.setOnClickListener {
             deleteAlertDialog()
         }
-
+        binding.tvWithdraw.setOnClickListener {
+            ToastUtil.makeToast(requireContext(), "Soon....")
+        }
 
         binding.tvEditProfile.setOnClickListener {
             IntentUtil.startIntent(requireContext(), EditProfileActivity())
@@ -106,6 +128,10 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(
                     requireContext(), "Account Deleted Successfully", Toast.LENGTH_SHORT
                 ).show()
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken("339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com")
+                    .requestEmail().build()
+                GoogleSignIn.getClient(requireContext(), gso).signOut()
                 val intent = Intent(requireContext(), SignInActivity::class.java)
                 startActivity(intent)
             } else {
@@ -187,6 +213,15 @@ class ProfileFragment : Fragment() {
         userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
             binding.tvName.text = it?.name
             binding.tvEmail.text = it?.email
+
+        })
+    }
+
+    fun observeUserExtraData() {
+        userViewModel.userDataExtraResponse.observe(viewLifecycleOwner, Observer {
+            binding.includeHeight.tvValue.text = it?.height
+            binding.includeAge.tvValue.text = it?.age
+            binding.includeWeight.tvValue.text = it?.weight
 
         })
     }
