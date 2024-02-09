@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/progreessBar"
             android:layout_width="match_parent"
@@ -415,23 +416,26 @@
                             android:textColor="@color/black"
                             android:textSize="20sp">
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/onboard3image" />
+<!--                            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                                android:id="@+id/viewFlipperImage1"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:scaleType="fitXY"-->
+<!--                                android:src="@drawable/onboard3image" />-->
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/onboard1image" />
+<!--                            <ImageView-->
+<!--                                android:id="@+id/viewFlipperImage2"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:scaleType="fitXY"-->
+<!--                                android:src="@drawable/onboard1image" />-->
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/onboard2image" />
+<!--                            <ImageView-->
+<!--                                android:id="@+id/viewFlipperImage3"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:scaleType="fitXY"-->
+<!--                                android:src="@drawable/onboard2image" />-->
 
 
                         </ViewFlipper>

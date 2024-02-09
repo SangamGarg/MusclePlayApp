@@ -1,6 +1,8 @@
 package com.sangam.muscleplay
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -42,9 +45,7 @@ class MainActivity : AppCompatActivity() {
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())
         }
-        observeprogress()
-        callGetUserExtraData()
-        observeUserExtraData()
+
 
 //        database.collection("users").document(firebaseAuth.currentUser!!.uid).get()
 //            .addOnCompleteListener { task ->
@@ -75,8 +76,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        observeprogress()
+        callGetUserExtraData()
+        observeUserExtraData()
 
     }
+
 
     fun callGetUserExtraData() {
         userViewModel.getUserDataExtra()
@@ -87,13 +92,14 @@ class MainActivity : AppCompatActivity() {
             dataFilled = it.datafilled
             if (dataFilled == null) {
                 IntentUtil.startIntent(this, UserDetailsActivity())
-            }else{
+            } else {
                 binding.loading.visibility = View.GONE
 
             }
 
         })
     }
+
     fun observeprogress() {
         userViewModel.showProgressExtra.observe(this, Observer {
             if (it) {

@@ -2,33 +2,76 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splashScreenFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".onBoardingScreen.screens.SplashScreenFragment">
 
-   <ImageView
-       android:layout_width="0dp"
-       android:layout_height="wrap_content"
-       android:src="@drawable/muscleplayicon"
-       app:layout_constraintDimensionRatio="1:1.5"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/imageViewInternet"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/nointernet"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-   <TextView
-       android:id="@+id/textView13"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginBottom="20dp"
-       android:fontFamily="@font/comic_neue_light"
-       android:text="Made By Sangam ❤️"
-       android:textColor="#575656"
-       android:textStyle="bold"
-       android:textSize="20sp"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/textViewInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/comic_neue_light"
+        android:gravity="center"
+        android:text="Please Check Your Internet Connection And Try Again"
+        android:textColor="@color/gray2"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewInternet" />
+
+    <TextView
+        android:id="@+id/textViewOpenSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/crimson_pro_medium"
+        android:gravity="center"
+        android:text="Open Setting"
+        android:textColor="#3F51B5"
+        android:textSize="20sp"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInternet" />
+
+    <ImageView
+        android:id="@+id/splashImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/muscleplayicon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/comic_neue_light"
+        android:text="Made By Sangam ❤️"
+        android:textColor="#575656"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

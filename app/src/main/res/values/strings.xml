@@ -9,4 +9,6 @@
     <string name="default_web_client_id">339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="onboard2text">Experience next-level fitness: AI-guided workouts, real-time pose detection, nutritional insights, and rewards for every milestone. Your personalized path to peak health</string>
+    <string name="number_picker_formatter">%02d\n</string>
+    <string name="roboto_light">Roboto-Light.ttf</string>
 </resources>

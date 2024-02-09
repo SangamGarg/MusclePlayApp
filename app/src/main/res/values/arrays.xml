@@ -19,6 +19,16 @@
 
     </string-array>
 
+    <string-array name="spinner_length_measurements">
+        <item>centimeters (cm)</item>
+        <item>meters (m)</item>
+        <item>feet (ft)</item>
+    </string-array>
+
+    <string-array name="spinner_weight_measurements">
+        <item>kilograms (kg)</item>
+        <item>pound (lbs)</item>
+    </string-array>
 
 </resources>
 

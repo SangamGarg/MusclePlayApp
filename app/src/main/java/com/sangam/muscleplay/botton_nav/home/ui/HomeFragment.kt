@@ -8,16 +8,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.codebyashish.autoimageslider.AutoImageSlider
 import com.codebyashish.autoimageslider.Enums.ImageAnimationTypes
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Interfaces.ItemsListener
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
@@ -54,6 +63,10 @@ class HomeFragment : Fragment() {
     private val auth by lazy {
         FirebaseAuth.getInstance()
     }
+    private val realTimeDatabase by lazy {
+        FirebaseDatabase.getInstance()
+    }
+    lateinit var databaseReference: DatabaseReference
     lateinit var headerViewName: TextView
     lateinit var headerViewEmail: TextView
     private lateinit var userViewModel: UserViewModel
@@ -61,8 +74,7 @@ class HomeFragment : Fragment() {
     private val autoImageList by lazy {
         ArrayList<ImageSlidesModel>()
     }
-    var url: String? = null
-    var url1: String? = null
+
     private var dataFilled: Boolean? = null
 
     // This property is only valid between onCreateView and
@@ -74,9 +86,8 @@ class HomeFragment : Fragment() {
     ): View {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-        autoImageList.clear()
-        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
-        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
+//        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
+//        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
 //        listener = activity
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -86,8 +97,9 @@ class HomeFragment : Fragment() {
         observeUserData()
         observeUserExtraData()
         initListener()
-        addImageOnAutoImageSlider()
         getAutoImageSliderImage()
+        getViewFlipperImage()
+
         observerErrorMessageApiResponse()
         observerBmiApiResponse()
         observerIdealWeightApiResponse()
@@ -147,6 +159,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initListener() {
+
         binding.fabCalculator.setOnClickListener {
 
             IntentUtil.startIntent(requireActivity(), AllCalculatorsActivity())
@@ -218,7 +231,7 @@ class HomeFragment : Fragment() {
 //            }
 //    }
 
-
+    //
     private fun addImageOnAutoImageSlider() {
         // add some images or titles (text) inside the imagesArrayList
 
@@ -233,24 +246,36 @@ class HomeFragment : Fragment() {
         binding.autoImageSlider.onItemClickListener(listener)
     }
 
+    //
     private fun getAutoImageSliderImage() {
-        database.collection("imageSliderImage").get().addOnCompleteListener {
-            if (it.isSuccessful) {
-                for (document in it.result) {
-                    url = document.getString("url").toString()
-                    url1 = document.getString("url1").toString()
-                    Log.d("imageSlider", url1!!)
-                    Log.d("imageSlider", url!!)
-                }
-            } else {
-                Toast.makeText(
-                    requireActivity(),
-                    "Error getting user data: ${it.exception?.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+        userViewModel.getImageSliderImages()
+        userViewModel.imageSliderResponse.observe(viewLifecycleOwner, Observer {
+            Log.d("AutoImageSlider", it.toString())
+            autoImageList.clear()
+            for (image in it) {
+                Log.d("AutoImageSlidersss", image)
+                autoImageList.add(ImageSlidesModel(image, ""))
             }
-        }
+            addImageOnAutoImageSlider()
+        })
     }
+
+    private fun getViewFlipperImage() {
+        userViewModel.getViewFlipperImages()
+        userViewModel.viewFlipperResponse.observe(viewLifecycleOwner, Observer {
+            for (image in it) {
+                val imageView = AppCompatImageView(requireContext())
+                imageView.scaleType = ImageView.ScaleType.FIT_XY
+
+                Glide.with(requireContext()).load(image)
+                    .placeholder(com.google.android.material.R.drawable.mtrl_ic_error)
+                    .into(imageView)
+
+                binding.viewFlipper.addView(imageView)
+            }
+        })
+    }
+
 
     private fun callBmiApi() {
         homeViewModel.callBmiApi(age, weight, height)

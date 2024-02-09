@@ -33,6 +33,7 @@ class SignUpActivity : AppCompatActivity() {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
+        focusChangeListeners()
 
         binding.btnSignUp.setOnClickListener {
             val email = binding.emailEt.text.toString()
@@ -44,15 +45,24 @@ class SignUpActivity : AppCompatActivity() {
             binding.progressBarSignUp.visibility = View.VISIBLE
             binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
             binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = true
+            var noIsInt = true
 
+            try {
+                phoneno.toInt()
+            } catch (e: NumberFormatException) {
+                binding.phoneEt.error = "Enter Valid Phone No (Only Digits)"
+                noIsInt = false
+            }
 
             if (email.trim().isEmpty() or password.trim().isEmpty() || confirmpassword.trim()
                     .isEmpty() || name.trim().isEmpty() || phoneno.trim().isEmpty()
             ) {
-                if (email.isEmpty()) binding.emailEt.error = "Empty Field"
-                if (name.isEmpty()) binding.nameET.error = "Empty Field"
-                if (phoneno.isEmpty()) binding.phoneEt.error = "Empty Field"
-                if (password.isEmpty()) {
+
+
+                if (email.trim().isEmpty()) binding.emailEt.error = "Empty Field"
+                if (name.trim().isEmpty()) binding.nameET.error = "Empty Field"
+                if (phoneno.trim().isEmpty()) binding.phoneEt.error = "Empty Field"
+                if (password.trim().isEmpty()) {
                     binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
                     binding.passET.error = "Empty Field"
                 }
@@ -61,6 +71,9 @@ class SignUpActivity : AppCompatActivity() {
                     binding.confirmPassEt.error = "Empty Field"
                 }
                 Toast.makeText(this, "Enter Valid Details", Toast.LENGTH_SHORT).show()
+                binding.progressBarSignUp.visibility = View.GONE
+
+            } else if (noIsInt == false) {
                 binding.progressBarSignUp.visibility = View.GONE
 
             } else if (!email.matches(emailpattern.toRegex())) {
@@ -124,6 +137,31 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun focusChangeListeners() {
+
+
+        binding.phoneEt.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                if (!binding.phoneEt.text.toString().trim()
+                        .isEmpty() && binding.phoneEt.text.toString().length < 10
+                ) {
+                    binding.phoneEt.error = "Enter Valid Phone No"
+                }
+            }
+        }
+        binding.emailEt.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                if (!binding.emailEt.text.toString().trim()
+                        .isEmpty() && !binding.emailEt.text.toString()
+                        .matches(emailpattern.toRegex())
+                ) {
+                    binding.emailEt.error = "Enter Valid Email"
+                }
+            }
+        }
+    }
+
 
     private fun clearData() {
         val sharedPreferences = getSharedPreferences("sharedpreference", Context.MODE_PRIVATE)

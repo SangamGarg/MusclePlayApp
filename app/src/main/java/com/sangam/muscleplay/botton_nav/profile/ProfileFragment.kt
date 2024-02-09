@@ -1,6 +1,11 @@
 package com.sangam.muscleplay.botton_nav.profile
 
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,30 +13,81 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.sangam.muscleplay.AppUtils.IntentUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.EditProfileActivity
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
+import com.sangam.muscleplay.UserDataUtils.model.UserDataExtra
+import com.sangam.muscleplay.UserDataUtils.model.UserDataNameAndEmail
 import com.sangam.muscleplay.databinding.FragmentNotificationsBinding
 import com.sangam.muscleplay.databinding.PasswordUpdateDialogBinding
+import java.io.File
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
+    private var uri: Uri? = null
+    lateinit var imageUri: Uri
+    private var storageRef = Firebase.storage
+    lateinit var databaseReference: DatabaseReference
+    var userName: String? = null
+
+    private val contract =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                binding.tvDone.visibility = View.VISIBLE
+                binding.ivProfile.setImageURI(imageUri)
+                uri = imageUri
+
+            } else {
+                binding.tvDone.visibility = View.VISIBLE
+                binding.ivProfile.setImageURI(uri)
+                uri = null
+            }
+        }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private val requestForPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                contract.launch(imageUri)
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA)) {
+                    showRationaleDialog()
+                } else {
+                    val message =
+                        "You've denied camera permission twice. To enable it, open app settings."
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -42,13 +98,25 @@ class ProfileFragment : Fragment() {
     private val database by lazy {
         Firebase.firestore
     }
+    lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
     private lateinit var userViewModel: UserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        storageRef = FirebaseStorage.getInstance()
         val notificationsViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                binding.tvDone.visibility = View.VISIBLE
+                binding.ivProfile.setImageURI(uri)
+                this.uri = uri
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
+        }
+        imageUri = createImageUri()!!
         val root: View = binding.root
         observeUserData()
         observeUserExtraData()
@@ -57,7 +125,38 @@ class ProfileFragment : Fragment() {
         return root
     }
 
+    private fun showRationaleDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Camera Permission")
+            .setMessage("This app requires camera permission to take profile photos. If you deny this time you have to manually go to app setting to allow permission.")
+            .setPositiveButton("Ok") { _, _ ->
+                requestForPermission.launch(android.Manifest.permission.CAMERA)
+            }
+        builder.create().show()
+    }
+
+    private fun checkPermission(): Boolean {
+        val permission = android.Manifest.permission.CAMERA
+        return ContextCompat.checkSelfPermission(
+            requireContext(), permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun createImageUri(): Uri? {
+        val image = File(requireContext().filesDir, "profile_photos.png")
+        return FileProvider.getUriForFile(
+            requireContext(), "com.sangam.muscleplay.fileProvider", image
+        )
+    }
+
     private fun initListener() {
+
+        binding.tvDone.setOnClickListener {
+            uploadImage()
+        }
+        binding.ivProfileEdit.setOnClickListener {
+            chooseImage()
+        }
 
         binding.includeAge.apply {
             ivImage.setBackgroundResource(R.drawable.age)
@@ -101,6 +200,87 @@ class ProfileFragment : Fragment() {
             intent.putExtra("FromLogout", true)
             startActivity(intent)
         }
+    }
+
+    private fun uploadImage() {
+        if (uri == null) {
+            Toast.makeText(requireContext(), "Please choose an image first", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+
+        val progressDialog = ProgressDialog(requireContext())
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage("Uploading")
+        progressDialog.show()
+
+        val imageRef = storageRef.reference.child("images")
+            .child("${System.currentTimeMillis()} ${firebaseAuth.currentUser!!.uid}")
+        imageRef.putFile(uri!!).addOnSuccessListener { task ->
+            task.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
+                val mapImage = mapOf(
+                    "profileImageUrl" to uri.toString()
+                )
+                val userId = firebaseAuth.currentUser?.uid ?: ""
+
+                database.collection("users").document(userId).update(mapImage)
+                    .addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(), "Profile uploaded successfully", Toast.LENGTH_SHORT
+                        ).show()
+                        userViewModel.getUserData()
+                        binding.tvDone.visibility = View.GONE
+                        progressDialog.dismiss()
+
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(), "Failed to upload profile", Toast.LENGTH_SHORT
+                        ).show()
+                        binding.tvDone.visibility = View.GONE
+                        progressDialog.dismiss()
+
+                    }
+            }?.addOnFailureListener {
+                Toast.makeText(
+                    requireContext(), "Error: ${it.message}", Toast.LENGTH_SHORT
+                ).show()
+                binding.tvDone.visibility = View.GONE
+                progressDialog.dismiss()
+
+            }
+        }.addOnFailureListener {
+            Toast.makeText(
+                requireContext(), "Error: ${it.message}", Toast.LENGTH_SHORT
+            ).show()
+            binding.tvDone.visibility = View.GONE
+            progressDialog.dismiss()
+        }
+    }
+
+
+    private fun chooseImage() {
+        val dialog = Dialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.dialog_choose_profile_image, null)
+        dialog.setContentView(view)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+        val gallery = view.findViewById<TextView>(R.id.chooseGallery)
+        gallery.setOnClickListener {
+            dialog.dismiss()
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
+        }
+        val camera = view.findViewById<TextView>(R.id.chooseCamera)
+        camera.setOnClickListener {
+            dialog.dismiss()
+            if (checkPermission()) {
+                contract.launch(imageUri)
+            } else {
+                requestForPermission.launch(android.Manifest.permission.CAMERA)
+            }
+
+        }
+
     }
 
     private fun deleteAlertDialog() {
@@ -213,7 +393,11 @@ class ProfileFragment : Fragment() {
         userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
             binding.tvName.text = it?.name
             binding.tvEmail.text = it?.email
-
+            userName = it?.name
+            if (it?.profileImageUrl != null) {
+                Glide.with(requireContext()).load(it.profileImageUrl)
+                    .placeholder(R.drawable.baseline_person_24).into(binding.ivProfile)
+            }
         })
     }
 
@@ -222,7 +406,6 @@ class ProfileFragment : Fragment() {
             binding.includeHeight.tvValue.text = it?.height
             binding.includeAge.tvValue.text = it?.age
             binding.includeWeight.tvValue.text = it?.weight
-
         })
     }
 

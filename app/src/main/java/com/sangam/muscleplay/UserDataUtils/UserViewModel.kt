@@ -13,6 +13,8 @@ class UserViewModel : ViewModel() {
     var userDataResponse = MutableLiveData<UserDataNameAndEmail>()
     var showProgressExtra = MutableLiveData<Boolean>()
     var userDataExtraResponse = MutableLiveData<UserDataExtra>()
+    var imageSliderResponse = MutableLiveData<ArrayList<String>>()
+    var viewFlipperResponse = MutableLiveData<ArrayList<String>>()
     private val repository = UserDataRepository()
 
     init {
@@ -22,6 +24,8 @@ class UserViewModel : ViewModel() {
         this.showProgress = repository.showProgress
         this.userDataExtraResponse = repository.userDataExtraResponse
         this.showProgressExtra = repository.showProgressExtra
+        this.imageSliderResponse = repository.imageSliderResponse
+        this.viewFlipperResponse = repository.viewFlipperResponse
     }
 
 //    fun setUserData(name: String?, email: String?) {
@@ -34,6 +38,13 @@ class UserViewModel : ViewModel() {
 
     fun getUserDataExtra() {
         repository.getUserDataExtra()
+    }
+
+    fun getImageSliderImages() {
+        repository.getImageSliderImage()
+    }
+    fun getViewFlipperImages() {
+        repository.getViewFlipperImage()
     }
 
 }

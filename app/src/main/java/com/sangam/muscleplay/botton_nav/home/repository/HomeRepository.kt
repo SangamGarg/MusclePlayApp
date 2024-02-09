@@ -46,7 +46,7 @@ class HomeRepository {
 
             override fun onFailure(call: Call<BmiResponseModel>, t: Throwable) {
                 showProgressBmi.postValue(false)
-                errorMessage.postValue("BMI: Server error please try after sometime")
+                errorMessage.postValue("Server error please try after sometime")
             }
 
         })
@@ -75,7 +75,7 @@ class HomeRepository {
 
             override fun onFailure(call: Call<IdealWeightResponseModel>, t: Throwable) {
                 showProgressIdealWeight.postValue(false)
-                errorMessage.postValue("Ideal Weight: Server error please try after sometime")
+                errorMessage.postValue("Server error please try after sometime")
             }
 
         })
@@ -111,7 +111,7 @@ class HomeRepository {
                 Log.d("BMIRESPONSE", t.message.toString())
 
                 showProgressDalyCalories.postValue(false)
-                errorMessage.postValue("DailyCalories: Server error please try after sometime")
+                errorMessage.postValue("Server error please try after sometime")
             }
 
         })
@@ -147,7 +147,7 @@ class HomeRepository {
 
             override fun onFailure(call: Call<BodyFatPercentageResponseModel>, t: Throwable) {
                 showProgressBodyFat.postValue(false)
-                errorMessage.postValue("BodyFatPer: Server error please try after sometime")
+                errorMessage.postValue("Server error please try after sometime")
             }
 
         })

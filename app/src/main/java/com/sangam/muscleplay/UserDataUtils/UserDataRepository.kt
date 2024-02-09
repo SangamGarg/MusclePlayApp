@@ -14,6 +14,8 @@ class UserDataRepository {
     var userDataResponse = MutableLiveData<UserDataNameAndEmail>()
     val showProgressExtra = MutableLiveData<Boolean>()
     var userDataExtraResponse = MutableLiveData<UserDataExtra>()
+    var imageSliderResponse = MutableLiveData<ArrayList<String>>()
+    var viewFlipperResponse = MutableLiveData<ArrayList<String>>()
 
     fun getUserData() {
         showProgress.postValue(true)
@@ -28,7 +30,8 @@ class UserDataRepository {
                         val name = document.getString("name")
                         val email = document.getString("email")
                         val phone = document.getString("phone")
-                        val data = UserDataNameAndEmail(name, email, phone)
+                        val imageUrl = document.getString("profileImageUrl")
+                        val data = UserDataNameAndEmail(name, email, phone, imageUrl)
                         userDataResponse.postValue(data)
                     }
                 } else {
@@ -60,7 +63,15 @@ class UserDataRepository {
                         val goal = document.getString("goal")
                         val data = UserDataExtra(
                             dataFilled,
-                            age, gender, height, weight, hip, neck, waist, activity_level, goal
+                            age,
+                            gender,
+                            height,
+                            weight,
+                            hip,
+                            neck,
+                            waist,
+                            activity_level,
+                            goal
                         )
                         userDataExtraResponse.postValue(data)
                     }
@@ -70,4 +81,62 @@ class UserDataRepository {
                 }
             }
     }
+
+    fun getImageSliderImage() {
+        val database = Firebase.firestore
+        val imagesList = ArrayList<String>()
+
+        database.collection("ImageSliderImages").document("images").get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showProgress.postValue(false)
+                    val document = task.result
+                    if (document != null && document.exists()) {
+                        val data = document.data
+                        if (data != null) {
+                            for ((key, value) in data) {
+                                if (value is String) {
+                                    imagesList.add(value)
+                                }
+                            }
+                            imageSliderResponse.postValue(imagesList)
+                        }
+                    } else {
+                        errorMessage.postValue("No such document")
+                    }
+                } else {
+                    showProgress.postValue(false)
+                    errorMessage.postValue("Error getting Images: ${task.exception?.message}")
+                }
+            }
+    }
+    fun getViewFlipperImage() {
+        val database = Firebase.firestore
+        val imagesList = ArrayList<String>()
+
+        database.collection("ViewFlipperImages").document("images").get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showProgress.postValue(false)
+                    val document = task.result
+                    if (document != null && document.exists()) {
+                        val data = document.data
+                        if (data != null) {
+                            for ((key, value) in data) {
+                                if (value is String) {
+                                    imagesList.add(value)
+                                }
+                            }
+                            viewFlipperResponse.postValue(imagesList)
+                        }
+                    } else {
+                        errorMessage.postValue("No such document")
+                    }
+                } else {
+                    showProgress.postValue(false)
+                    errorMessage.postValue("Error getting Images: ${task.exception?.message}")
+                }
+            }
+    }
+
 }

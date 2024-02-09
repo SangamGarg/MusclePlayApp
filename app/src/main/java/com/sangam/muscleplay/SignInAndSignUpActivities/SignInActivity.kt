@@ -2,6 +2,7 @@ package com.sangam.muscleplay.SignInAndSignUpActivities
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -125,10 +126,11 @@ class SignInActivity : AppCompatActivity() {
 //        observeUserExtraData()
 
         binding.TextForgotPass.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
+            val builder = Dialog(this)
             val view = layoutInflater.inflate(R.layout.forgot_password_dialog, null)
-            builder.setView(view)
-            builder.create().show()
+            builder.setContentView(view)
+            builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            builder.show()
             builder.setCancelable(true)
             val UserEmail = view.findViewById<EditText>(R.id.ETResetEmail)
             val button = view.findViewById<Button>(R.id.btnForgotPass)
@@ -142,11 +144,11 @@ class SignInActivity : AppCompatActivity() {
                     firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener {
                         if (it.isSuccessful) {
                             Toast.makeText(this, "Email Sent", Toast.LENGTH_SHORT).show()
-                            builder.create().dismiss()
+                            builder.dismiss()
                         } else {
                             Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT)
                                 .show()
-                            builder.create().dismiss()
+                            builder.dismiss()
 
                         }
                     }
@@ -203,9 +205,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun onBoardingDone() {
-        val sharePref = getSharedPreferences("OnBoards", Context.MODE_PRIVATE)
+        val sharePref = getSharedPreferences("OnBoardScreen", Context.MODE_PRIVATE)
         sharePref.edit().apply {
-            putBoolean("Doned", true)
+            putBoolean("Done", true)
             apply()
         }
     }
