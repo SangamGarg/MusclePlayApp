@@ -190,15 +190,7 @@ class ProfileFragment : Fragment() {
             IntentUtil.startIntent(requireContext(), EditProfileActivity())
         }
         binding.tvLogout.setOnClickListener {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com")
-                .requestEmail().build()
-            GoogleSignIn.getClient(requireContext(), gso).signOut()
-            firebaseAuth.signOut()
-            Toast.makeText(requireContext(), "Logged Out Successful", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireContext(), SignInActivity::class.java)
-            intent.putExtra("FromLogout", true)
-            startActivity(intent)
+            logoutAlertDialog()
         }
     }
 
@@ -280,12 +272,39 @@ class ProfileFragment : Fragment() {
             }
 
         }
-
     }
+    private fun logoutAlertDialog() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setCancelable(true)
+        alertDialog.setTitle("Logout")
+        alertDialog.setMessage("Are You Sure?")
+
+
+        alertDialog.setPositiveButton("yes") { _, _ ->
+            logoutFunction()
+        }
+        alertDialog.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.create().show()
+    }
+
+    private fun logoutFunction() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com")
+            .requestEmail().build()
+        GoogleSignIn.getClient(requireContext(), gso).signOut()
+        firebaseAuth.signOut()
+        Toast.makeText(requireContext(), "Logged Out Successful", Toast.LENGTH_SHORT).show()
+        val intent = Intent(requireContext(), SignInActivity::class.java)
+        intent.putExtra("FromLogout", true)
+        startActivity(intent)
+    }
+
 
     private fun deleteAlertDialog() {
         val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setCancelable(false)
+        alertDialog.setCancelable(true)
         alertDialog.setTitle("Delete Account")
         alertDialog.setMessage("Are You Sure?")
 

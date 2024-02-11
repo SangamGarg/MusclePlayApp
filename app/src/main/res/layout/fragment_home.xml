@@ -12,36 +12,139 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/progreessBar"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:background="@color/white"
-            android:elevation="50dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:elevation="200dp"
+            android:visibility="gone">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:elevation="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/load"
-                app:lottie_speed="1.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="30dp"
+                    android:outlineAmbientShadowColor="@color/app_main_color"
+                    android:outlineSpotShadowColor="@color/app_main_color"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/gray2" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="30dp"
+                    android:outlineAmbientShadowColor="@color/app_main_color"
+                    android:outlineSpotShadowColor="@color/app_main_color"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/gray2" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="30dp"
+                    android:outlineAmbientShadowColor="@color/app_main_color"
+                    android:outlineSpotShadowColor="@color/app_main_color"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/gray2" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="30dp"
+                    android:outlineAmbientShadowColor="@color/app_main_color"
+                    android:outlineSpotShadowColor="@color/app_main_color"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:background="@color/gray2" />
+                </androidx.cardview.widget.CardView>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--            android:id="@+id/progreessBar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:background="@color/white"-->
+        <!--            android:elevation="50dp"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--            <com.airbnb.lottie.LottieAnimationView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="100dp"-->
+        <!--                android:layout_centerHorizontal="true"-->
+        <!--                android:elevation="10dp"-->
+        <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--                app:layout_constraintEnd_toEndOf="parent"-->
+        <!--                app:layout_constraintStart_toStartOf="parent"-->
+        <!--                app:layout_constraintTop_toTopOf="parent"-->
+        <!--                app:lottie_autoPlay="true"-->
+        <!--                app:lottie_loop="true"-->
+        <!--                app:lottie_rawRes="@raw/load"-->
+        <!--                app:lottie_speed="1.5" />-->
+
+
+        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
         <androidx.core.widget.NestedScrollView
@@ -416,26 +519,26 @@
                             android:textColor="@color/black"
                             android:textSize="20sp">
 
-<!--                            <androidx.appcompat.widget.AppCompatImageView-->
-<!--                                android:id="@+id/viewFlipperImage1"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:scaleType="fitXY"-->
-<!--                                android:src="@drawable/onboard3image" />-->
+                            <!--                            <androidx.appcompat.widget.AppCompatImageView-->
+                            <!--                                android:id="@+id/viewFlipperImage1"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:scaleType="fitXY"-->
+                            <!--                                android:src="@drawable/onboard3image" />-->
 
-<!--                            <ImageView-->
-<!--                                android:id="@+id/viewFlipperImage2"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:scaleType="fitXY"-->
-<!--                                android:src="@drawable/onboard1image" />-->
+                            <!--                            <ImageView-->
+                            <!--                                android:id="@+id/viewFlipperImage2"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:scaleType="fitXY"-->
+                            <!--                                android:src="@drawable/onboard1image" />-->
 
-<!--                            <ImageView-->
-<!--                                android:id="@+id/viewFlipperImage3"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:scaleType="fitXY"-->
-<!--                                android:src="@drawable/onboard2image" />-->
+                            <!--                            <ImageView-->
+                            <!--                                android:id="@+id/viewFlipperImage3"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:scaleType="fitXY"-->
+                            <!--                                android:src="@drawable/onboard2image" />-->
 
 
                         </ViewFlipper>

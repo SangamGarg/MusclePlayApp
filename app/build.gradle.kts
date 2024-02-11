@@ -83,4 +83,7 @@ dependencies {
     //ImageCrop
     implementation("com.vanniktech:android-image-cropper:4.5.0")
 
+    //ShimmerEffect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
 }

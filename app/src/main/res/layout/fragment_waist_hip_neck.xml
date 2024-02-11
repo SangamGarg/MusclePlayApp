@@ -52,13 +52,14 @@
 
             <TextView
                 android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
                 android:fontFamily="@font/crimson_pro_medium"
                 android:gravity="center"
 
-                android:text="To Make Sure You Get the Best Results"
-                android:textColor="@color/black"
+                android:text="Your waist size will help us calculate important body stats to help you reach your goals faster"
+                android:textColor="@color/gray2"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,13 +137,13 @@
 
             <TextView
                 android:id="@+id/textView21"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
                 android:fontFamily="@font/crimson_pro_medium"
                 android:gravity="center"
-
-                android:text="To Make Sure You Get the Best Results"
-                android:textColor="@color/black"
+                android:text="Your neck size will help us calculate important body stats to help you reach your goals faster"
+                android:textColor="@color/gray2"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -220,13 +221,14 @@
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
                 android:fontFamily="@font/crimson_pro_medium"
                 android:gravity="center"
 
-                android:text="To Make Sure You Get the Best Results"
-                android:textColor="@color/black"
+                android:text="Your hip size will help us calculate important body stats to help you reach your goals faster"
+                android:textColor="@color/gray2"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

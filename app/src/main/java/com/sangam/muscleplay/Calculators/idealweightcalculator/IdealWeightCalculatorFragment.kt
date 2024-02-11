@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sangam.muscleplay.AppUtils.AppArrays
+import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
@@ -78,7 +79,9 @@ class IdealWeightCalculatorFragment : Fragment() {
         }
 
         binding.calculateIdealWeightButton.setOnClickListener {
-            val height = convertUnit()
+            val height = AppConvertUnitsUtil.convertUnitHeight(
+                selectedItem, numberPickerArray, binding.numberPicker
+            )
 //            ToastUtil.makeToast(requireContext(), height)
 
             if (flag == 3) {
@@ -137,32 +140,6 @@ class IdealWeightCalculatorFragment : Fragment() {
 
             }
         }
-    }
-
-    private fun convertUnit(): String {
-        var value: String = ""
-        when (selectedItem) {
-            "centimeters (cm)" -> {
-                value = numberPickerArray[binding.numberPicker.value]
-
-            }
-
-            "meters (m)" -> {
-                value =
-                    ((numberPickerArray[binding.numberPicker.value].toFloat() * 100).toInt()).toString()
-
-            }
-
-            "feet (ft)" -> {
-
-                val number = numberPickerArray[binding.numberPicker.value].split(",")
-                val integerPart = number[0].toInt()
-                val fractionalPart = number.getOrElse(1) { "0" }.toInt()
-                value = ((integerPart * 30.48) + (fractionalPart * 2.54)).toString()
-
-            }
-        }
-        return value
     }
 
     private fun observeWeightUnit() {

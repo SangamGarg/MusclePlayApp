@@ -105,7 +105,9 @@ class SignInActivity : AppCompatActivity() {
     private val firebaseAuth by lazy {
         FirebaseAuth.getInstance()
     }
-    private val emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private val emailpattern =
+        "[a-zA-Z0-9._%+-]+@(gmail\\.com|yahoo\\.com|outlook\\.com|hotmail\\.com|icloud\\.com|aol\\.com|protonmail\\.com|zoho\\.com|mail\\.com|gmx\\.com|yandex\\.com)"
+
 
     private var checkLogoutIntent: Boolean? = null
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -124,7 +126,7 @@ class SignInActivity : AppCompatActivity() {
 
 //        callGetUserExtraData()
 //        observeUserExtraData()
-
+        focusChangeListeners()
         binding.TextForgotPass.setOnClickListener {
             val builder = Dialog(this)
             val view = layoutInflater.inflate(R.layout.forgot_password_dialog, null)
@@ -193,6 +195,20 @@ class SignInActivity : AppCompatActivity() {
         binding.btnGoogleSignIn.setOnClickListener {
             val signInClient = googleSignInClient.signInIntent
             launcher.launch(signInClient)
+        }
+    }
+
+    private fun focusChangeListeners() {
+
+        binding.emailEt.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                if (!binding.emailEt.text.toString().trim()
+                        .isEmpty() && !binding.emailEt.text.toString()
+                        .matches(emailpattern.toRegex())
+                ) {
+                    binding.emailEt.error = "Enter Valid Email"
+                }
+            }
         }
     }
 

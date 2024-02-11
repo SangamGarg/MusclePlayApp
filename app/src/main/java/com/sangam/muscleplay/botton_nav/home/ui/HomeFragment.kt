@@ -341,20 +341,26 @@ class HomeFragment : Fragment() {
         userViewModel.showProgress.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
             }
         })
 
         userViewModel.showProgressExtra.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
+
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
+
             }
         })
 
@@ -362,38 +368,55 @@ class HomeFragment : Fragment() {
         homeViewModel.showProgressBmi.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
+
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
+
             }
         })
         homeViewModel.showProgressIdealWeight.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+
+                binding.shimmerLayout.startShimmer()
+
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
+
             }
         })
 
         homeViewModel.showProgressDalyCalories.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
+
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
+
             }
         })
         homeViewModel.showProgressBodyFat.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.VISIBLE
+                binding.shimmerLayout.startShimmer()
+
             } else {
                 binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.GONE
+                binding.shimmerLayout.stopShimmer()
+
             }
         })
     }

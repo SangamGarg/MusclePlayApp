@@ -22,7 +22,10 @@ class SignUpActivity : AppCompatActivity() {
     private val auth by lazy {
         FirebaseAuth.getInstance()
     }
-    private val emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+    private val emailpattern =
+        "[a-zA-Z0-9._%+-]+@(gmail\\.com|yahoo\\.com|outlook\\.com|hotmail\\.com|icloud\\.com|aol\\.com|protonmail\\.com|zoho\\.com|mail\\.com|gmx\\.com|yandex\\.com)"
+
+    private val namePattern = "^[a-zA-Z]+$"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -45,14 +48,6 @@ class SignUpActivity : AppCompatActivity() {
             binding.progressBarSignUp.visibility = View.VISIBLE
             binding.passwordLayout.isPasswordVisibilityToggleEnabled = true
             binding.confirmPasswordLayout.isPasswordVisibilityToggleEnabled = true
-            var noIsInt = true
-
-            try {
-                phoneno.toInt()
-            } catch (e: NumberFormatException) {
-                binding.phoneEt.error = "Enter Valid Phone No (Only Digits)"
-                noIsInt = false
-            }
 
             if (email.trim().isEmpty() or password.trim().isEmpty() || confirmpassword.trim()
                     .isEmpty() || name.trim().isEmpty() || phoneno.trim().isEmpty()
@@ -73,14 +68,23 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Enter Valid Details", Toast.LENGTH_SHORT).show()
                 binding.progressBarSignUp.visibility = View.GONE
 
-            } else if (noIsInt == false) {
+            } else if (!phoneno.all {
+                    it.isDigit()
+                }) {
+                binding.phoneEt.error = "Enter Valid Phone No (Only Digits)"
                 binding.progressBarSignUp.visibility = View.GONE
 
             } else if (!email.matches(emailpattern.toRegex())) {
                 binding.emailEt.error = "Enter Valid Email"
                 binding.progressBarSignUp.visibility = View.GONE
 
+            } else if (name.length < 6) {
+                binding.phoneEt.error = "Enter Minimum 6 Characters"
+                binding.progressBarSignUp.visibility = View.GONE
 
+            } else if (!name.matches(namePattern.toRegex())) {
+                binding.phoneEt.error = "Enter Valid Name (Only Alphabets)"
+                binding.progressBarSignUp.visibility = View.GONE
             } else if (phoneno.length != 10) {
                 binding.phoneEt.error = "Enter Valid Phone No"
                 binding.progressBarSignUp.visibility = View.GONE
@@ -140,6 +144,19 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun focusChangeListeners() {
 
+        binding.nameET.setOnFocusChangeListener { view, b ->
+            if (!b) {
+                if (!binding.nameET.text.toString().trim()
+                        .isEmpty() && binding.nameET.text.toString().length < 6
+                ) {
+                    binding.nameET.error = "Please Enter Minimum 6 Characters"
+                } else if (!binding.nameET.text.toString().trim()
+                        .isEmpty() && !binding.nameET.text!!.matches(namePattern.toRegex())
+                ) {
+                    binding.nameET.error = "Enter Valid Name (Only Alphabets)"
+                }
+            }
+        }
 
         binding.phoneEt.setOnFocusChangeListener { view, b ->
             if (!b) {
