@@ -72,7 +72,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private val requestForPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {

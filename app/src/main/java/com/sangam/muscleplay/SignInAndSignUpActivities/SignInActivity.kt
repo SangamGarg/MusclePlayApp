@@ -111,6 +111,9 @@ class SignInActivity : AppCompatActivity() {
 
     private var checkLogoutIntent: Boolean? = null
     private lateinit var googleSignInClient: GoogleSignInClient
+    private var email: String? = null
+    private var password: String? = null
+    private var isIntent: Boolean? = false
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,7 +126,9 @@ class SignInActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         checkLogoutIntent = intent.getBooleanExtra("FromLogout", false)
-
+        email = intent.getStringExtra("Email")
+        password = intent.getStringExtra("Password")
+        isIntent = intent.getBooleanExtra("isIntent", false)
 //        callGetUserExtraData()
 //        observeUserExtraData()
         focusChangeListeners()
@@ -160,6 +165,11 @@ class SignInActivity : AppCompatActivity() {
         binding.txtsignin.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+            finish()
+        }
+        if (isIntent == true) {
+            binding.emailEt.setText(email)
+            binding.passET.setText(password)
         }
         binding.btnSignIn.setOnClickListener {
             val email = binding.emailEt.text.toString()
@@ -219,9 +229,8 @@ class SignInActivity : AppCompatActivity() {
         onBoardingDone()
         finish()
     }
-
     private fun onBoardingDone() {
-        val sharePref = getSharedPreferences("OnBoardScreen", Context.MODE_PRIVATE)
+        val sharePref = getSharedPreferences("OnBoardScreenShow", Context.MODE_PRIVATE)
         sharePref.edit().apply {
             putBoolean("Done", true)
             apply()

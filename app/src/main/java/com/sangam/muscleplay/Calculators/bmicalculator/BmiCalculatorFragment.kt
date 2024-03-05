@@ -16,8 +16,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sangam.muscleplay.AppUtils.AppArrays
 import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
-import com.sangam.muscleplay.Calculators.bmicalculator.bottomsheetfragment.BmiBottomSheetFragment
-import com.sangam.muscleplay.Calculators.idealweightcalculator.IdealWeightCalculatorViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentBmiBinding
@@ -55,7 +53,7 @@ class BmiCalculatorFragment : Fragment() {
         setText()
         observeWeightUnit()
         observeHeightUnit()
-        observePorgress()
+        observeProgress()
         observerErrorMessageApiResponse()
         observerBmiApiResponse()
 
@@ -260,8 +258,8 @@ class BmiCalculatorFragment : Fragment() {
 
     private fun observerBmiApiResponse() {
         viewModel.bmiResponse.observe(requireActivity(), Observer {
-            bmi = "${it.data?.bmi.toString()}"
-            health = "${it.data?.health.toString()}"
+            bmi = it.data?.bmi.toString()
+            health = it.data?.health.toString()
             showBottomDialog()
         })
     }
@@ -270,7 +268,7 @@ class BmiCalculatorFragment : Fragment() {
         viewModel.callBmiApi(age, weight, height)
     }
 
-    private fun observePorgress() {
+    private fun observeProgress() {
         viewModel.showProgressBmi.observe(requireActivity(), Observer {
             if (it) {
                 binding.progressBar.visibility = View.VISIBLE

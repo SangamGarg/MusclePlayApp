@@ -51,12 +51,12 @@
         tools:layout="@layout/fragment_dailycalories_calculator" />
     <fragment
         android:id="@+id/burnedCaloriesFromActivityFragment"
-        android:name="com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.BurnedCaloriesFromActivityFragment"
+        android:name="com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment"
         android:label="fragment_burned_calories_from_activity"
         tools:layout="@layout/fragment_burned_calories_from_activity" />
     <fragment
         android:id="@+id/caloriesInFoodCalculatorFragment"
-        android:name="com.sangam.muscleplay.Calculators.caloryinfoodcalculator.CaloriesInFoodCalculatorFragment"
+        android:name="com.sangam.muscleplay.Calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment"
         android:label="fragment_calories_in_food_calculator"
         tools:layout="@layout/fragment_calories_in_food_calculator" />
 </navigation>

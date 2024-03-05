@@ -39,6 +39,7 @@ class EditProfileActivity : AppCompatActivity() {
         ViewModelProvider(this).get(UserViewModel::class.java)
     }
 
+    private val namePattern = "^[a-zA-Z]+$"
 
     private val emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -61,7 +62,6 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun initListener2() {
 
-
         binding.tvEditProfileConfirm.setOnClickListener {
             val name = binding.EtName.text.toString()
             val phone = binding.EtPhone.text.toString()
@@ -76,7 +76,7 @@ class EditProfileActivity : AppCompatActivity() {
                     .isEmpty() || neck.trim().isEmpty()
             ) {
                 ToastUtil.makeToast(this@EditProfileActivity, "Empty Field")
-                if (name.isEmpty()) binding.EtName.error = "Empty Field"
+                if (name.trim().isEmpty()) binding.EtName.error = "Empty Field"
                 if (phone.isEmpty()) binding.EtPhone.error = "Empty Field"
                 if (age.isEmpty()) binding.includeAge.EtValue.error = "Empty Field"
                 if (weight.isEmpty()) binding.includeWeight.EtValue.error = "Empty Field"
@@ -88,6 +88,18 @@ class EditProfileActivity : AppCompatActivity() {
             } else if (phone.isNotEmpty() && phone.length != 10) {
                 binding.EtPhone.error = "Enter Valid Phone No"
 
+            } else if (!phone.all {
+                    it.isDigit()
+                }) {
+                binding.EtPhone.error = "Enter Valid Phone No (Only Digits)"
+
+            } else if (!name.matches(namePattern.toRegex())) {
+                binding.EtName.error = "Enter Valid Name (Only Alphabets)"
+            } else if (name.trim().length < 6) {
+                binding.EtName.error = "Enter Minimum 6 Characters"
+
+            } else if (name.trim().length > 20) {
+                binding.EtName.error = "Please Enter Less Than 20 Characters"
             } else if (age.toInt() < 1 || age.toInt() > 80) {
                 binding.includeAge.EtValue.error = "Please Enter In Given Range"
             } else if (height.toInt() < 130 || height.toInt() > 230) {

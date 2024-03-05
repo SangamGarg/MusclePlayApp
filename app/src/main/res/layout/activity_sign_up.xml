@@ -238,11 +238,12 @@
 
                 <TextView
                     android:id="@+id/txtsignup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="?attr/selectableItemBackground"
-                    android:text="Already Have An Account , Sign In !"
+                    android:gravity="center"
+                    android:text="Already Have An Account?\n Sign In !"
                     android:textColor="#2196F3"
                     android:textStyle="bold" />
 

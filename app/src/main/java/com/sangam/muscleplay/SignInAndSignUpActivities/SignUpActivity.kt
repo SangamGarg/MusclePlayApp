@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
+import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.SignInAndSignUpActivities.model.UserDataClass
 import com.sangam.muscleplay.databinding.ActivitySignUpBinding
 
@@ -35,6 +36,7 @@ class SignUpActivity : AppCompatActivity() {
         binding.txtsignup.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
+            finish()
         }
         focusChangeListeners()
 
@@ -79,11 +81,14 @@ class SignUpActivity : AppCompatActivity() {
                 binding.progressBarSignUp.visibility = View.GONE
 
             } else if (name.length < 6) {
-                binding.phoneEt.error = "Enter Minimum 6 Characters"
+                binding.nameET.error = "Enter Minimum 6 Characters"
                 binding.progressBarSignUp.visibility = View.GONE
 
+            } else if (name.length > 20) {
+                binding.nameET.error = "Please Enter Less Than 20 Characters"
+                binding.progressBarSignUp.visibility = View.GONE
             } else if (!name.matches(namePattern.toRegex())) {
-                binding.phoneEt.error = "Enter Valid Name (Only Alphabets)"
+                binding.nameET.error = "Enter Valid Name (Only Alphabets No Space)"
                 binding.progressBarSignUp.visibility = View.GONE
             } else if (phoneno.length != 10) {
                 binding.phoneEt.error = "Enter Valid Phone No"
@@ -114,16 +119,17 @@ class SignUpActivity : AppCompatActivity() {
                             .addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val intent = Intent(this, SignInActivity::class.java)
+                                    intent.putExtra("Email", email)
+                                    intent.putExtra("Password", password)
+                                    intent.putExtra("isIntent", true)
                                     startActivity(intent)
-                                    Toast.makeText(
-                                        this,
-                                        "Registered Successfully: Please SignIn To Continue",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    ToastUtil.makeToast(
+                                        this, "Registered Successfully: Please SignIn To Continue"
+                                    )
                                     finish()
                                 } else {
                                     Toast.makeText(
-                                        this, "Error ${it.exception?.message}", Toast.LENGTH_SHORT
+                                        this, "Error: ${it.exception?.message}", Toast.LENGTH_SHORT
                                     ).show()
                                     binding.progressBarSignUp.visibility = View.GONE
 
@@ -147,13 +153,18 @@ class SignUpActivity : AppCompatActivity() {
         binding.nameET.setOnFocusChangeListener { view, b ->
             if (!b) {
                 if (!binding.nameET.text.toString().trim()
-                        .isEmpty() && binding.nameET.text.toString().length < 6
+                        .isEmpty() && binding.nameET.text.toString().length < 6 || binding.nameET.text.toString().length > 20
                 ) {
                     binding.nameET.error = "Please Enter Minimum 6 Characters"
                 } else if (!binding.nameET.text.toString().trim()
+                        .isEmpty() && binding.nameET.text.toString().length > 20
+                ) {
+                    binding.nameET.error = "Please Enter Less Than 20 Characters"
+
+                } else if (!binding.nameET.text.toString().trim()
                         .isEmpty() && !binding.nameET.text!!.matches(namePattern.toRegex())
                 ) {
-                    binding.nameET.error = "Enter Valid Name (Only Alphabets)"
+                    binding.nameET.error = "Enter Valid Name (Only Alphabets No Space)"
                 }
             }
         }

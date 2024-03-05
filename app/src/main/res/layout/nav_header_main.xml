@@ -14,7 +14,8 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_drawer_iv_profile"
         android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:src="@drawable/profile"
         app:civ_border_color="#FF000000"

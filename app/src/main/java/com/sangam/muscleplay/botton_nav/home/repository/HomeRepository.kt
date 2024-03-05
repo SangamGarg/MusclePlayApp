@@ -2,6 +2,7 @@ package com.sangam.muscleplay.botton_nav.home.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.muscleplay.AppUtils.AppUrls
 import com.example.muscleplay.Retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.botton_nav.home.model.BmiResponseModel
@@ -27,8 +28,7 @@ class HomeRepository {
 
     fun bmiApiResponse(age: String?, weight: String?, height: String?) {
         showProgressBmi.value = true
-        val client = RetrofitUtilClass.getRetrofit("https://fitness-calculator.p.rapidapi.com/")
-            .create(HomeService::class.java)
+        val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         var call = client?.callBmiApi(age, weight, height)
         call?.enqueue(object : Callback<BmiResponseModel> {
             override fun onResponse(
@@ -56,8 +56,7 @@ class HomeRepository {
 
     fun idealWeightApiResponse(gender: String?, height: String?) {
         showProgressIdealWeight.value = true
-        val client = RetrofitUtilClass.getRetrofit("https://fitness-calculator.p.rapidapi.com/")
-            .create(HomeService::class.java)
+        val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         var call = client?.callIdealWeightApi(gender, height)
         call?.enqueue(object : Callback<IdealWeightResponseModel> {
             override fun onResponse(
@@ -86,8 +85,7 @@ class HomeRepository {
         age: String?, gender: String?, height: String?, weight: String?, activity_level: String?
     ) {
         showProgressDalyCalories.value = true
-        val client = RetrofitUtilClass.getRetrofit("https://fitness-calculator.p.rapidapi.com/")
-            .create(HomeService::class.java)
+        val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         var call =
             client?.callDailyCalorieRequirementsApi(age, gender, height, weight, activity_level)
         call?.enqueue(object : Callback<DailyCalorieRequirementsResponseModel> {
@@ -127,8 +125,7 @@ class HomeRepository {
         hip: String?
     ) {
         showProgressBodyFat.value = true
-        val client = RetrofitUtilClass.getRetrofit("https://fitness-calculator.p.rapidapi.com/")
-            .create(HomeService::class.java)
+        val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         var call = client?.callBodyFatPercentageApi(age, gender, weight, height, neck, waist, hip)
         call?.enqueue(object : Callback<BodyFatPercentageResponseModel> {
             override fun onResponse(

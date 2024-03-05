@@ -10,23 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.codebyashish.autoimageslider.AutoImageSlider
 import com.codebyashish.autoimageslider.Enums.ImageAnimationTypes
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Interfaces.ItemsListener
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.IntentUtil
@@ -39,8 +34,11 @@ import com.sangam.muscleplay.databinding.FragmentHomeBinding
 import com.sangam.muscleplay.drawer_nav.drawer_nav_about_us.AboutUsActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_feedback.FeedbackActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_history.HistoryActivity
+import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.ui.AiChatBotActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
+import com.sangam.muscleplay.recipes.ui.RecipesActivity
+import de.hdodenhof.circleimageview.CircleImageView
 
 class HomeFragment : Fragment() {
 
@@ -69,6 +67,7 @@ class HomeFragment : Fragment() {
     lateinit var databaseReference: DatabaseReference
     lateinit var headerViewName: TextView
     lateinit var headerViewEmail: TextView
+    lateinit var headerViewImageProfile: CircleImageView
     private lateinit var userViewModel: UserViewModel
     private var listener: ItemsListener? = null
     private val autoImageList by lazy {
@@ -99,7 +98,6 @@ class HomeFragment : Fragment() {
         initListener()
         getAutoImageSliderImage()
         getViewFlipperImage()
-
         observerErrorMessageApiResponse()
         observerBmiApiResponse()
         observerIdealWeightApiResponse()
@@ -108,9 +106,24 @@ class HomeFragment : Fragment() {
         observerProgressResponse()
 
 
+
         return root
     }
 
+    private fun categoryInitListener() {
+        binding.includeYoga.apply {
+            ivCategoryImage.setImageResource(R.drawable.yoga)
+            tvCategoryName.text = "Yoga"
+        }
+        binding.includeWarmUp.apply {
+            ivCategoryImage.setImageResource(R.drawable.warmup)
+            tvCategoryName.text = "WarmUp"
+        }
+        binding.includeStrength.apply {
+            ivCategoryImage.setImageResource(R.drawable.strength)
+            tvCategoryName.text = "Strength"
+        }
+    }
 
     fun callGetUserData() {
         userViewModel.getUserData()
@@ -124,6 +137,14 @@ class HomeFragment : Fragment() {
         userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
             headerViewName.text = it?.name
             headerViewEmail.text = it?.email
+            binding.tvUserName.text = it?.name
+
+            if (it?.profileImageUrl != null) {
+                Glide.with(requireContext()).load(it.profileImageUrl)
+                    .placeholder(R.drawable.baseline_person_24).into(headerViewImageProfile)
+                Glide.with(requireContext()).load(it.profileImageUrl)
+                    .placeholder(R.drawable.baseline_person_24).into(binding.ivProfileHome)
+            }
         })
     }
 
@@ -141,11 +162,11 @@ class HomeFragment : Fragment() {
             activity_level = it.activity_level.toString()
             goal = it.goal.toString()
 
-            if (gender == "male") {
-                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.male)
-            } else if (gender == "female") {
-                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.female)
-            }
+//            if (gender == "male") {
+//                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.male)
+//            } else if (gender == "female") {
+//                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.female)
+//            }
 
 
 //            if (dataFilled == null) {
@@ -155,10 +176,19 @@ class HomeFragment : Fragment() {
             callBodyFatApi()
             callDailyCaloriesApi()
             callIdealWeightApi()
+            binding.swiperefresh.isRefreshing = false
         })
     }
 
     private fun initListener() {
+        binding.viewFlipper.setOnClickListener {
+            IntentUtil.startIntent(requireContext(), RecipesActivity())
+        }
+        categoryInitListener()
+        binding.swiperefresh.setOnRefreshListener {
+            callGetUserData()
+            callGetUserExtraData()
+        }
 
         binding.fabCalculator.setOnClickListener {
 
@@ -176,7 +206,10 @@ class HomeFragment : Fragment() {
                 R.id.nav_feedback -> IntentUtil.startIntent(requireActivity(), FeedbackActivity())
                 R.id.nav_rate_us -> ToastUtil.makeToast(requireContext(), "Soon..When Uploaded")
                 //openPlayStoreForRating()
-                R.id.nav_ai_chat_bot -> ToastUtil.makeToast(requireContext(), "Soon..")
+                R.id.nav_ai_chat_bot -> IntentUtil.startIntent(
+                    requireActivity(), AiChatBotActivity()
+                )
+
                 R.id.nav_check_my_pose -> ToastUtil.makeToast(requireContext(), "Soon..")
                 R.id.nav_refer_and_earn -> IntentUtil.startIntent(
                     requireActivity(), ReferAndEarnActivity()
@@ -187,6 +220,7 @@ class HomeFragment : Fragment() {
         val headerView = binding.navView.getHeaderView(0)
         headerViewName = headerView.findViewById(R.id.nav_drawer_tv_name)
         headerViewEmail = headerView.findViewById(R.id.nav_drawer_tv_email_id)
+        headerViewImageProfile = headerView.findViewById(R.id.nav_drawer_iv_profile)
 
 
     }
@@ -301,7 +335,7 @@ class HomeFragment : Fragment() {
 
     private fun observerIdealWeightApiResponse() {
         homeViewModel.idealWeightResponse.observe(requireActivity(), Observer {
-            binding.tvIdealWeight.text = it.data?.hamwi.toString()
+            binding.tvIdealWeight.text = "${it.data?.hamwi.toString()} kg"
         })
     }
 
@@ -341,10 +375,12 @@ class HomeFragment : Fragment() {
         userViewModel.showProgress.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.startShimmer()
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
             }
@@ -353,11 +389,13 @@ class HomeFragment : Fragment() {
         userViewModel.showProgressExtra.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.startShimmer()
 
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
 
@@ -368,11 +406,13 @@ class HomeFragment : Fragment() {
         homeViewModel.showProgressBmi.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.startShimmer()
 
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
 
@@ -381,12 +421,14 @@ class HomeFragment : Fragment() {
         homeViewModel.showProgressIdealWeight.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
 
                 binding.shimmerLayout.startShimmer()
 
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
 
@@ -396,11 +438,13 @@ class HomeFragment : Fragment() {
         homeViewModel.showProgressDalyCalories.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.startShimmer()
 
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
 
@@ -409,11 +453,13 @@ class HomeFragment : Fragment() {
         homeViewModel.showProgressBodyFat.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE
+                binding.constraintLayout.visibility = View.GONE
                 binding.shimmerLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.startShimmer()
 
             } else {
                 binding.mainView.visibility = View.VISIBLE
+                binding.constraintLayout.visibility = View.VISIBLE
                 binding.shimmerLayout.visibility = View.GONE
                 binding.shimmerLayout.stopShimmer()
 

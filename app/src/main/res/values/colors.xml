@@ -11,4 +11,5 @@
     <color name="app_main_color">#f0897a</color>
     <color name="gray">#CEF8F7F7</color>
     <color name="gray2">#777676</color>
+    <color name="gray3_home">#41CDCACA</color>
 </resources>
