@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -140,7 +141,7 @@ class SignInActivity : AppCompatActivity() {
             builder.show()
             builder.setCancelable(true)
             val UserEmail = view.findViewById<EditText>(R.id.ETResetEmail)
-            val button = view.findViewById<Button>(R.id.btnForgotPass)
+            val button = view.findViewById<TextView>(R.id.btnForgotPass)
             button.setOnClickListener {
                 val email = UserEmail.text.toString()
                 if (email.trim().isEmpty()) {
@@ -229,6 +230,7 @@ class SignInActivity : AppCompatActivity() {
         onBoardingDone()
         finish()
     }
+
     private fun onBoardingDone() {
         val sharePref = getSharedPreferences("OnBoardScreenShow", Context.MODE_PRIVATE)
         sharePref.edit().apply {

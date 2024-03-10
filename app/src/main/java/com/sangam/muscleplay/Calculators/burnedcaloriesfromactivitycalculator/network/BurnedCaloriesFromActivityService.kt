@@ -1,7 +1,6 @@
 package com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.network
 
-import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.model.BurnedCaloriesFromActivityModel
-import com.sangam.muscleplay.Calculators.caloryinfoodcalculator.model.CaloriesInFoodResponseModel
+import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.model.BurnedCaloriesFromActivityResponseModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -12,5 +11,5 @@ interface BurnedCaloriesFromActivityService {
     @GET("caloriesburned")
     fun callBurnedCaloriesFromActivityApi(
         @Query("activity") activity: String?,
-    ): Call<BurnedCaloriesFromActivityModel>
+    ): Call<BurnedCaloriesFromActivityResponseModel>
 }

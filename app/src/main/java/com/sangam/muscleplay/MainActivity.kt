@@ -43,18 +43,6 @@ class MainActivity : AppCompatActivity() {
     private var dataFilled: Boolean? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private val requestForPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) {
-                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-            } else {
-                if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
-                    showRationaleDialog()
-                }
-            }
-        }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,10 +53,6 @@ class MainActivity : AppCompatActivity() {
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())
         }
-        if (!checkPermission()) {
-            requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-        }
-
 
 //        database.collection("users").document(firebaseAuth.currentUser!!.uid).get()
 //            .addOnCompleteListener { task ->
@@ -102,26 +86,6 @@ class MainActivity : AppCompatActivity() {
         observeprogress()
         callGetUserExtraData()
         observeUserExtraData()
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun showRationaleDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setTitle("Notification Permission")
-            .setMessage("This app requires notification permission to keep you updated. If you deny this time you have to manually go to app setting to allow permission.")
-            .setPositiveButton("Ok") { _, _ ->
-                requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-            }
-        builder.create().show()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun checkPermission(): Boolean {
-        val permission = android.Manifest.permission.POST_NOTIFICATIONS
-        return ContextCompat.checkSelfPermission(
-            this, permission
-        ) == PackageManager.PERMISSION_GRANTED
     }
 
     fun callGetUserExtraData() {

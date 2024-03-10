@@ -5,58 +5,202 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.slider.Slider
+import com.sangam.muscleplay.AppUtils.AppArrays
+import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
+import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
+import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
+import com.sangam.muscleplay.databinding.FragmentAgeHeightWeightBinding
 
 class AgeHeightWeightFragment : Fragment() {
-    private var ageValue: Int = 1
-    private var heightValue: Int = 130
-    private var weightValue: Int = 40
+    private val binding by lazy {
+        FragmentAgeHeightWeightBinding.inflate(layoutInflater)
+    }
+    private var numberPickerArrayWeight = emptyArray<String>()
+    private var numberPickerArrayHeight = emptyArray<String>()
+    lateinit var viewModel: ExtraDetailViewModel
+    lateinit var selectedItemHeight: String
+    lateinit var selectedItemWeight: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_age_height_weight, container, false)
-        val gender = requireArguments().getString("gender").toString()
-        setupSliderListeners(view)
+        viewModel = ViewModelProvider(this)[ExtraDetailViewModel::class.java]
 
-        view.findViewById<TextView>(R.id.tvAgeNext).setOnClickListener {
-            findNavController().navigate(
-                R.id.action_ageHeightWeightFragment_to_waistHipNeckFragment,
+//        setupSliderListeners(view)
+
+
+        initListener()
+        observeHeightUnit()
+        observeWeightUnit()
+
+        setText()
+        return binding.root
+    }
+
+    private fun initListener() {
+        val gender = requireArguments().getString("gender").toString()
+
+        binding.tvAgeNext.setOnClickListener {
+            val height = AppConvertUnitsUtil.convertUnitHeight(
+                selectedItemHeight, numberPickerArrayHeight, binding.numberPickerHeight
+            )
+            val weight = AppConvertUnitsUtil.convertUnitWeight(
+                selectedItemWeight, numberPickerArrayWeight, binding.numberPickerWeight
+            )
+            val age = binding.tvAgeLive.text.toString()
+
+            findNavController().navigate(R.id.action_ageHeightWeightFragment_to_waistHipNeckFragment,
                 Bundle().apply {
-                    putString("age", ageValue.toString())
-                    putString("height", heightValue.toString())
-                    putString("weight", weightValue.toString())
+                    putString("age", age)
+                    putString("height", height)
+                    putString("weight", weight)
                     putString("gender", gender)
                 })
         }
-        return view
+
+        binding.decrement.setOnClickListener {
+            if (viewModel.age == 1) {
+                ToastUtil.makeToast(requireContext(), "Maximum Value Achieved")
+            } else {
+                viewModel.decrement()
+                setText()
+            }
+        }
+        binding.increment.setOnClickListener {
+            if (viewModel.age == 80) {
+                ToastUtil.makeToast(requireContext(), "Maximum Value Achieved")
+            } else {
+                viewModel.increment()
+                setText()
+            }
+        }
+
+        spinnerHeight()
+        spinnerWeight()
+
+
     }
 
 
-    private fun setupSliderListeners(view: View) {
-        val ageSlider = view.findViewById<Slider>(R.id.sliderAge)
-        val heightSlider = view.findViewById<Slider>(R.id.sliderHeight)
-        val weightSlider = view.findViewById<Slider>(R.id.sliderWeight)
-
-        ageSlider.addOnChangeListener { slider, value, fromUser ->
-            ageValue = value.toInt()
-            view.findViewById<TextView>(R.id.tvAgeLive).text = ageValue.toString()
+    private fun spinnerWeight() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_weight_measurements,
+            R.layout.custom_spinner_layout
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+            binding.spinnerWeight.adapter = adapter
         }
+        binding.spinnerWeight.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                selectedItemWeight = parent?.getItemAtPosition(position).toString()
+                when (selectedItemWeight) {
+                    "kilograms (kg)" -> {
+                        viewModel.changeToKilograms()
+                        binding.numberPickerWeight.minValue = 0
+                        binding.numberPickerWeight.maxValue = AppArrays.numbersArrayKg.size - 1
+                        binding.numberPickerWeight.displayedValues = AppArrays.numbersArrayKg
+                        numberPickerArrayWeight = AppArrays.numbersArrayKg
 
-        heightSlider.addOnChangeListener { slider, value, fromUser ->
-            heightValue = value.toInt()
-            view.findViewById<TextView>(R.id.tvHeightLive).text = heightValue.toString()
+                    }
 
-        }
+                    "pound (lbs)" -> {
+                        viewModel.changeToPounds()
+                        binding.numberPickerWeight.minValue = 0
+                        binding.numberPickerWeight.maxValue = AppArrays.numbersArrayPounds.size - 1
+                        binding.numberPickerWeight.displayedValues = AppArrays.numbersArrayPounds
+                        numberPickerArrayWeight = AppArrays.numbersArrayPounds
 
-        weightSlider.addOnChangeListener { slider, value, fromUser ->
-            weightValue = value.toInt()
-            view.findViewById<TextView>(R.id.tvWeightLive).text = weightValue.toString()
+                    }
+                }
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(requireContext(), "Nothing Selected", Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
+
+    private fun spinnerHeight() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_length_measurements,
+            R.layout.custom_spinner_layout
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
+            binding.spinnerHeight.adapter = adapter
+        }
+        binding.spinnerHeight.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+            ) {
+                selectedItemHeight = parent?.getItemAtPosition(position).toString()
+                when (selectedItemHeight) {
+                    "centimeters (cm)" -> {
+                        viewModel.changeToCentimeters()
+
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayCm.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayCm
+                        numberPickerArrayHeight = AppArrays.numbersArrayCm
+                    }
+
+                    "meters (m)" -> {
+                        viewModel.changeTometers()
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayMeter.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayMeter
+                        numberPickerArrayHeight = AppArrays.numbersArrayMeter
+
+                    }
+
+                    "feet (ft)" -> {
+                        viewModel.changeToFeets()
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayFeet.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayFeet
+                        numberPickerArrayHeight = AppArrays.numbersArrayFeet
+
+                    }
+
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(requireContext(), "Nothing Selected", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+    private fun observeWeightUnit() {
+        viewModel.measureWeight.observe(viewLifecycleOwner, Observer {
+            binding.tvUnitsWeight.text = it
+        })
+    }
+
+    private fun observeHeightUnit() {
+        viewModel.measureHeight.observe(viewLifecycleOwner, Observer {
+            binding.tvUnitsHeight.text = it
+        })
+    }
+    fun setText() {
+        binding.tvAgeLive.text = viewModel.age.toString()
+    }
+
 
 }

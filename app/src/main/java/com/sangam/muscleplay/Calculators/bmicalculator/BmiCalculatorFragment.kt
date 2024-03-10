@@ -31,16 +31,12 @@ class BmiCalculatorFragment : Fragment() {
     private var numberPickerArrayWeight = emptyArray<String>()
     private var numberPickerArrayHeight = emptyArray<String>()
     lateinit var viewModel: HomeViewModel
-    lateinit var height: String
-    lateinit var bmi: String
-    lateinit var health: String
-    lateinit var weight: String
-    lateinit var gender: String
-    lateinit var age: String
-    private var flag = 3
     lateinit var selectedItemHeight: String
     lateinit var selectedItemWeight: String
-
+    lateinit var gender: String
+    private var flag = 3
+    lateinit var bmi: String
+    lateinit var health: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {

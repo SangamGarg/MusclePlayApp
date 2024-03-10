@@ -9,9 +9,9 @@ data class BodyFatPercentageResponseModel(
 )
 
 data class BodyFatPercentageData(
-    @SerializedName("Body Fat (BMI method)") val bodyFatBMIMethod: Double? = null,
-    @SerializedName("Body Fat (U.S. Navy Method)") val bodyFatUSNavyMethod: Double? = null,
+    @SerializedName("Body Fat (BMI method)") val bodyFatBMIMethod: String? = null,
+    @SerializedName("Body Fat (U.S. Navy Method)") val bodyFatUSNavyMethod: String? = null,
     @SerializedName("Body Fat Category") val bodyFatCategory: String? = null,
-    @SerializedName("Body Fat Mass") val bodyFatMass: Double? = null,
-    @SerializedName("Lean Body Mass") val leanBodyMass: Double? = null
+    @SerializedName("Body Fat Mass") val bodyFatMass: String? = null,
+    @SerializedName("Lean Body Mass") val leanBodyMass: String? = null
 )

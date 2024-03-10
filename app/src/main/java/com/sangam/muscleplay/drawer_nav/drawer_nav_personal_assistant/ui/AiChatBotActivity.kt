@@ -59,7 +59,7 @@ class AiChatBotActivity : AppCompatActivity() {
                 binding.rvShowChat.smoothScrollToPosition(list.size - 1)
                 callAIChatBotApi(
                     autho, "application/json", AiChatBotRequestBodyModel(
-                        250, "gpt-3.5-turbo-instruct", "What is Apple", 0.7
+                        250, "gpt-3.5-turbo-instruct", question, 0.7
                     )
                 )
             }

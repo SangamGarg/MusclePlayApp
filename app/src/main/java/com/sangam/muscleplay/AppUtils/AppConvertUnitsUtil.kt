@@ -26,7 +26,7 @@ object AppConvertUnitsUtil {
                 val number = numberPickerArrayHeight[numberPickerHeight.value].split(",")
                 val integerPart = number[0].toInt()
                 val fractionalPart = number.getOrElse(1) { "0" }.toInt()
-                value = ((integerPart * 30.48) + (fractionalPart * 2.54)).toString()
+                value = String.format("%.2f", ((integerPart * 30.48) + (fractionalPart * 2.54)))
 
             }
         }

@@ -24,12 +24,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
             app:cardCornerRadius="30dp"
-            app:cardElevation="10dp"
+            app:cardElevation="8dp"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
             app:cardUseCompatPadding="true">
 
 
@@ -143,6 +145,7 @@
                     android:layout_above="@+id/txtsignin"
                     android:layout_gravity="center"
                     android:layout_marginVertical="20dp"
+                    app:rippleColor="@color/purple_200"
                     android:backgroundTint="@color/white"
                     android:fontFamily="@font/comic_neue_light"
                     android:gravity="center"
@@ -174,6 +177,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginVertical="10dp"
                     android:backgroundTint="@color/white"
+                    app:rippleColor="@color/purple_200"
                     android:drawableEnd="@drawable/google"
                     android:gravity="center"
                     android:padding="15dp"
@@ -211,7 +215,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.core.widget.NestedScrollView>
 

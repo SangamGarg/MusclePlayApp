@@ -13,282 +13,347 @@
         android:background="@color/gray"
         android:padding="15dp">
 
+        <TextView
+            android:id="@+id/tvPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/crimson_pro_medium"
+            android:gravity="center"
+            android:text="3 / 4"
+            android:textColor="@color/black"
+
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="35dp"
             android:src="@drawable/thinking"
-            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintDimensionRatio="4:2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ll"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            android:layout_marginTop="15dp"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
-
-                android:gravity="center"
-                android:text="What Is Waist Size ? (in cm)"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView16"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:gravity="center"
+                android:background="@color/white"
+                android:padding="10dp">
 
-                android:text="Your waist size will help us calculate important body stats to help you reach your goals faster"
-                android:textColor="@color/gray2"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                <TextView
+                    android:id="@+id/tvWaist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Select Your Waist Size"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderWaist"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:stepSize="1.0"
-                android:value="40"
-                android:valueFrom="40"
-                android:valueTo="130"
-                app:haloColor="@color/app_main_color"
-                app:layout_constraintEnd_toStartOf="@+id/tvWaistLive"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"
-                app:thumbColor="@color/app_main_color"
-                app:tickColor="@color/app_main_color"
-                app:trackColor="@color/app_main_color" />
+                <TextView
+                    android:id="@+id/tvWaistWhy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:gravity="center"
+                    android:text="Your waist size will help us calculate important body stats to help you reach your goals faster"
+                    android:textColor="@color/gray2"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWaist" />
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:rotation="90"
+                    android:src="@drawable/baseline_arrow_drop_down_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/numberPickerWaist"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/numberPickerWaist" />
 
-                android:gravity="center"
-                android:text="Min: 40 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderWaist" />
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/numberPickerWaist"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toTopOf="@+id/spinnerWaist"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWaistWhy"
+                    app:np_dividerColor="@color/gray2"
+                    app:np_dividerThickness="0.8dp"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_orientation="vertical"
+                    app:np_selectedTextColor="@color/purple_200"
+                    app:np_selectedTextSize="30dp"
+                    app:np_textColor="@color/gray2"
+                    app:np_textSize="18dp"
+                    app:np_value="17"
+                    app:np_wrapSelectorWheel="false" />
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <TextView
+                    android:id="@+id/tvUnitsWaist"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:text="cm"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                    app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-                android:gravity="center"
-                android:text="Max: 130 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderWaist" />
+                <Spinner
+                    android:id="@+id/spinnerWaist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_stroke_rounded"
+                    android:entries="@array/spinner_length_measurements"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tvWaistLive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:text="40"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/textView18"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView6">
 
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/crimson_pro_medium"
-
-                android:gravity="center"
-                android:text="What Is Your Neck Size ? (in cm)"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-            <TextView
-                android:id="@+id/textView21"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:gravity="center"
-                android:text="Your neck size will help us calculate important body stats to help you reach your goals faster"
-                android:textColor="@color/gray2"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                android:background="@color/white"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/tvHip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Select Your Hip Size"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvHipWhy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:gravity="center"
+                    android:text="Your hip size will help us calculate important body stats to help you reach your goals faster"
+                    android:textColor="@color/gray2"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHip" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:rotation="90"
+                    android:src="@drawable/baseline_arrow_drop_down_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/numberPickerHip"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/numberPickerHip" />
 
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderNeck"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:stepSize="1.0"
-                android:value="20"
-                android:valueFrom="20"
-                android:valueTo="80"
-                app:haloColor="@color/app_main_color"
-                app:layout_constraintEnd_toStartOf="@+id/tvNeckLive"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21"
-                app:thumbColor="@color/app_main_color"
-                app:tickColor="@color/app_main_color"
-                app:trackColor="@color/app_main_color" />
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/numberPickerHip"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toTopOf="@+id/spinnerHip"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHipWhy"
+                    app:np_dividerColor="@color/gray2"
+                    app:np_dividerThickness="0.8dp"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_orientation="vertical"
+                    app:np_selectedTextColor="@color/purple_200"
+                    app:np_selectedTextSize="30dp"
+                    app:np_textColor="@color/gray2"
+                    app:np_textSize="18dp"
+                    app:np_value="17"
+                    app:np_wrapSelectorWheel="false" />
 
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <TextView
+                    android:id="@+id/tvUnitsHip"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:text="cm"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                    app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
-                android:gravity="center"
-                android:text="Min: 20 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderNeck" />
 
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <Spinner
+                    android:id="@+id/spinnerHip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_stroke_rounded"
+                    android:entries="@array/spinner_length_measurements"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                android:gravity="center"
-                android:text="Max: 80 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderNeck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvNeckLive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:text="130"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView7">
 
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/textView22"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/crimson_pro_medium"
-
-                android:gravity="center"
-                android:text="What Is Your Hip Size ? (in cm)"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-            <TextView
-                android:id="@+id/textView25"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:gravity="center"
+                android:background="@color/white"
+                android:padding="10dp">
 
-                android:text="Your hip size will help us calculate important body stats to help you reach your goals faster"
-                android:textColor="@color/gray2"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                <TextView
+                    android:id="@+id/tvNeck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Select Your Neck Size"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderHip"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:stepSize="1.0"
-                android:value="40"
-                android:valueFrom="40"
-                android:valueTo="130"
-                app:haloColor="@color/app_main_color"
-                app:layout_constraintEnd_toStartOf="@+id/tvHipLive"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView25"
-                app:thumbColor="@color/app_main_color"
-                app:tickColor="@color/app_main_color"
-                app:trackColor="@color/app_main_color" />
+                <TextView
+                    android:id="@+id/tvNeckWhy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:gravity="center"
+                    android:text="Your neck size will help us calculate important body stats to help you reach your goals faster"
+                    android:textColor="@color/gray2"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNeck" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:rotation="90"
+                    android:src="@drawable/baseline_arrow_drop_down_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/numberPickerNeck"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/numberPickerNeck" />
 
-                android:gravity="center"
-                android:text="Min: 40 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderHip" />
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:id="@+id/numberPickerNeck"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toTopOf="@id/spinnerNeck"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNeckWhy"
+                    app:np_dividerColor="@color/gray2"
+                    app:np_dividerThickness="0.8dp"
+                    app:np_formatter="@string/number_picker_formatter"
+                    app:np_orientation="vertical"
+                    app:np_selectedTextColor="@color/purple_200"
+                    app:np_selectedTextSize="30dp"
+                    app:np_textColor="@color/gray2"
+                    app:np_textSize="18dp"
+                    app:np_value="17"
+                    app:np_wrapSelectorWheel="false" />
 
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
+                <TextView
+                    android:id="@+id/tvUnitsNeck"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:text="cm"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                    app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
-                android:gravity="center"
-                android:text="Max: 130 cm"
-                android:textColor="@color/app_main_color"
-                android:textSize="15sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderHip" />
 
+                <Spinner
+                    android:id="@+id/spinnerNeck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_stroke_rounded"
+                    android:entries="@array/spinner_length_measurements"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tvHipLive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/crimson_pro_medium"
-                android:text="40"
-
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/textView26"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
 
         <LinearLayout
@@ -298,13 +363,13 @@
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="50dp"
             android:background="@drawable/button_background_1"
-            android:elevation="20dp"
-            android:outlineAmbientShadowColor="@color/red"
-            android:outlineSpotShadowColor="@color/red"
+            android:elevation="10dp"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll">
+            app:layout_constraintTop_toBottomOf="@id/cardView8">
 
             <TextView
                 android:id="@+id/tvWaistNext"
@@ -317,7 +382,7 @@
                 android:padding="10dp"
                 android:text="Next"
                 android:textAllCaps="false"
-                android:textColor="#B3FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

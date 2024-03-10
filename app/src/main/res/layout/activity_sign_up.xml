@@ -26,12 +26,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
             app:cardCornerRadius="30dp"
-            app:cardElevation="10dp"
+            app:cardElevation="6dp"
             app:cardUseCompatPadding="true">
 
 
@@ -234,7 +236,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:rippleColor="@color/purple_200" />
 
                 <TextView
                     android:id="@+id/txtsignup"
@@ -249,7 +252,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.core.widget.NestedScrollView>
 

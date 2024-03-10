@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,135 +8,159 @@
     android:padding="15dp"
     tools:context=".UserExtraDetailsScreen.screens.ActivityLevelFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/gray"
-        android:padding="15dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/thinking"
-            app:layout_constraintDimensionRatio="3:2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/crimson_pro_medium"
-
-            android:gravity="center"
-            android:text="What Is Your Activity Level ?"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/tvGenderWhy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:fontFamily="@font/crimson_pro_medium"
-            android:gravity="center"
-
-            android:text="To Make Sure You Get the Best Results"
-            android:textColor="@color/gray2"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGender" />
-
-        <Spinner
-            android:id="@+id/spinnerActivityLevel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="50dp"
-            android:background="@drawable/background_stroke_rounded"
-            android:entries="@array/spinner_array_activity_level"
-            android:padding="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGenderWhy" />
-
-        <TextView
-            android:id="@+id/tvGoal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="50dp"
-            android:fontFamily="@font/crimson_pro_medium"
-            android:gravity="center"
-            android:text="What Is Your Goal ?"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerActivityLevel" />
-
-        <TextView
-            android:id="@+id/tvGoalWhy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:fontFamily="@font/crimson_pro_medium"
-            android:gravity="center"
-            android:text="This will help us determine your goal, and monitor your progress overtime"
-            android:textColor="@color/gray2"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGoal" />
-
-        <Spinner
-            android:id="@+id/spinnerGoals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="50dp"
-            android:background="@drawable/background_stroke_rounded"
-            android:entries="@array/spinner_array_goal"
-            android:padding="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvGoalWhy" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/button_background_1"
-            android:elevation="10dp"
-            android:outlineAmbientShadowColor="@color/red"
-            android:outlineSpotShadowColor="@color/red"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerGoals">
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:padding="15dp">
 
             <TextView
-                android:id="@+id/tvActivityFinish"
-                android:layout_width="match_parent"
+                android:id="@+id/tvPage"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
+                android:layout_marginEnd="15dp"
                 android:fontFamily="@font/crimson_pro_medium"
                 android:gravity="center"
-                android:padding="10dp"
-                android:text="Finish"
-                android:textAllCaps="false"
-                android:textColor="#B3FFFFFF"
+                android:text="4 / 4"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/thinking"
+                app:layout_constraintDimensionRatio="4:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.core.widget.NestedScrollView>
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:gravity="center"
+                android:text="What Is Your Activity Level ?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <TextView
+                android:id="@+id/tvGenderWhy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/comic_neue_light"
+                android:gravity="center"
+                android:text="To Make Sure You Get the Best Results"
+                android:textColor="@color/gray2"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+            <Spinner
+                android:id="@+id/spinnerActivityLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/background_stroke_rounded"
+                android:entries="@array/spinner_array_activity_level"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGenderWhy" />
+
+            <TextView
+                android:id="@+id/tvGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:gravity="center"
+                android:text="What Is Your Goal ?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerActivityLevel" />
+
+            <TextView
+                android:id="@+id/tvGoalWhy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/comic_neue_light"
+                android:gravity="center"
+                android:text="This will help us determine your goal, and monitor your progress overtime"
+                android:textColor="@color/gray2"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGoal" />
+
+            <Spinner
+                android:id="@+id/spinnerGoals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/background_stroke_rounded"
+                android:entries="@array/spinner_array_goal"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGoalWhy" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerGoals">
+
+                <TextView
+                    android:id="@+id/tvActivityFinish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Finish"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

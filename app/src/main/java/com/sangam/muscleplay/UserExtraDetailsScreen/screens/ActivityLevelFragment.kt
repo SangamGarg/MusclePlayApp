@@ -16,8 +16,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.UserDataUtils.model.UserDataExtra
+import com.sangam.muscleplay.databinding.FragmentActivityLevelBinding
 
 class ActivityLevelFragment : Fragment() {
+    private val binding by lazy {
+        FragmentActivityLevelBinding.inflate(layoutInflater)
+    }
 
     private val database by lazy {
         Firebase.firestore
@@ -31,40 +35,42 @@ class ActivityLevelFragment : Fragment() {
     var datafilled: Boolean? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val view = inflater.inflate(R.layout.fragment_activity_level, container, false)
-        val spinner = view.findViewById<Spinner>(R.id.spinnerActivityLevel)
         ArrayAdapter.createFromResource(
             requireContext(), R.array.spinner_array_activity_level, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
-            spinner.adapter = adapter
+            binding.spinnerActivityLevel.adapter = adapter
         }
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?, view: View?, position: Int, id: Long
-            ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                when (selectedItem) {
-                    "Sedentary: little or no exercise" -> activityLevel = "level_1"
-                    "Exercise 1–3 times/week" -> activityLevel = "level_2"
-                    "Exercise 4–5 times/week" -> activityLevel = "level_3"
-                    "Daily exercise or intense exercise 3–4 times/week" -> activityLevel = "level_4"
-                    "Intense exercise 6–7 times/week" -> activityLevel = "level_5"
-                    "Very intense exercise daily, or physical job" -> activityLevel = "level_6"
+        binding.spinnerActivityLevel.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
+                    val selectedItem = parent?.getItemAtPosition(position).toString()
+                    when (selectedItem) {
+                        "Sedentary: little or no exercise" -> activityLevel = "level_1"
+                        "Exercise 1–3 times/week" -> activityLevel = "level_2"
+                        "Exercise 4–5 times/week" -> activityLevel = "level_3"
+                        "Daily exercise or intense exercise 3–4 times/week" -> activityLevel =
+                            "level_4"
+
+                        "Intense exercise 6–7 times/week" -> activityLevel = "level_5"
+                        "Very intense exercise daily, or physical job" -> activityLevel = "level_6"
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    Toast.makeText(requireContext(), "Nothing Selected", Toast.LENGTH_SHORT).show()
+
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(requireContext(), "Nothing Selected", Toast.LENGTH_SHORT).show()
 
-            }
-        }
-
-
-        val spinner2 = view.findViewById<Spinner>(R.id.spinnerGoals)
+        val spinner2 = binding.spinnerGoals
         ArrayAdapter.createFromResource(
             requireContext(), R.array.spinner_array_goal, R.layout.custom_spinner_layout
         ).also { adapter ->
@@ -103,7 +109,7 @@ class ActivityLevelFragment : Fragment() {
         val waist = requireArguments().getString("waist").toString()
         val neck = requireArguments().getString("neck").toString()
 
-        view.findViewById<TextView>(R.id.tvActivityFinish).setOnClickListener {
+        binding.tvActivityFinish.setOnClickListener {
             datafilled = true
             val userId = auth.currentUser?.uid ?: ""
             val userDataExtra = UserDataExtra(
@@ -114,7 +120,7 @@ class ActivityLevelFragment : Fragment() {
             findNavController().navigate(R.id.action_activityLevelFragment_to_mainActivity2)
 
         }
-        return view
+        return binding.root
     }
 
     private fun storeUserExtraDetails(userId: String, userDataExtra: UserDataExtra) {

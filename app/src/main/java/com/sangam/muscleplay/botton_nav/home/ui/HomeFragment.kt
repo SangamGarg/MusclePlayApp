@@ -2,7 +2,9 @@ package com.sangam.muscleplay.botton_nav.home.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +44,7 @@ import com.sangam.muscleplay.drawer_nav.drawer_nav_history.HistoryActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.ui.AiChatBotActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
-import com.sangam.muscleplay.recipes.ui.RecipesActivity
+import com.sangam.muscleplay.stepCounter.StepCounterActivity
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HomeFragment : Fragment() {
@@ -79,6 +86,19 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private val requestForPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                Toast.makeText(
+                    requireContext(), "Notification Permission Granted", Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+                    showRationaleDialog()
+                }
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -90,7 +110,6 @@ class HomeFragment : Fragment() {
 //        listener = activity
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         callGetUserData()
         callGetUserExtraData()
         observeUserData()
@@ -105,9 +124,30 @@ class HomeFragment : Fragment() {
         observerBodyFatApiResponse()
         observerProgressResponse()
 
-
-
+        @RequiresApi(Build.VERSION_CODES.TIRAMISU) if (!checkPermission()) {
+            requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
         return root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+
+    private fun showRationaleDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Notification Permission").setMessage(
+            "This app requires notification permission to keep you updated. " + "If you deny this time you have to manually go to app setting to allow permission."
+        ).setPositiveButton("Ok") { _, _ ->
+            requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+        builder.create().show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun checkPermission(): Boolean {
+        val permission = android.Manifest.permission.POST_NOTIFICATIONS
+        return ContextCompat.checkSelfPermission(
+            requireContext(), permission
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun categoryInitListener() {
@@ -172,17 +212,19 @@ class HomeFragment : Fragment() {
 //            if (dataFilled == null) {
 //                IntentUtil.startIntent(requireActivity(), UserDetailsActivity())
 //            }
-            callBmiApi()
-            callBodyFatApi()
-            callDailyCaloriesApi()
-            callIdealWeightApi()
+            if (dataFilled == true) {
+                callBmiApi()
+                callBodyFatApi()
+                callDailyCaloriesApi()
+                callIdealWeightApi()
+            }
             binding.swiperefresh.isRefreshing = false
         })
     }
 
     private fun initListener() {
         binding.viewFlipper.setOnClickListener {
-            IntentUtil.startIntent(requireContext(), RecipesActivity())
+            IntentUtil.startIntent(requireContext(), StepCounterActivity())
         }
         categoryInitListener()
         binding.swiperefresh.setOnRefreshListener {

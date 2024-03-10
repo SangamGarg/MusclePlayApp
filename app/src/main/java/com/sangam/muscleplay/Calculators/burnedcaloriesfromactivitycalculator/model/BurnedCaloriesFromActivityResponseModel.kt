@@ -2,7 +2,7 @@ package com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.m
 
 import com.google.gson.annotations.SerializedName
 
-class BurnedCaloriesFromActivityModel : ArrayList<BurnedCaloriesFromActivityModelItem>()
+class BurnedCaloriesFromActivityResponseModel : ArrayList<BurnedCaloriesFromActivityModelItem>()
 data class BurnedCaloriesFromActivityModelItem(
     @SerializedName("calories_per_hour") val calories_per_hour: String? = null,
     @SerializedName("duration_minutes") val duration_minutes: String? = null,

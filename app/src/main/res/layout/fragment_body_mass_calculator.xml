@@ -1,14 +1,576 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Calculators.bodymasscalculator.BodyMassCalculatorFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="30dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/comic_neue_light"
+                android:gravity="start"
+                android:text="Body Mass Calculator"
+                android:textColor="@color/red"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/cardViewFemale"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/male" />
+
+                    <TextView
+                        android:id="@+id/tvMale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Male" />
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cardViewMale"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutFemale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/female" />
+
+                    <TextView
+                        android:id="@+id/tvFemale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Female" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewMale">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerHeight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvUnitsHeight"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/red"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerHeight"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerHeight"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerHeight" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stroke_rounder_app_color"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView6">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerWeight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvUnitsWeight"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/red"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="Kg"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerWeight"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerWeight"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerWeight" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stroke_rounder_app_color"
+                        android:entries="@array/spinner_weight_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/increment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/baseline_add_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/app_main_color" />
+
+                    <ImageView
+                        android:id="@+id/decrement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="20dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/baseline_remove_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/app_main_color" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Age"
+                        android:textColor="@color/red"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tvAgeLive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="130"
+                        android:textColor="@color/black"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView8">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerWaist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvUnitsWaist"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/red"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsWaist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerWaist"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerWaist"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerWaist" />
+
+                    <Spinner
+                        android:id="@+id/spinnerWaist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stroke_rounder_app_color"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerHip"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvUnitsHip"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/red"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsHip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerHip"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerHip"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerHip" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerHip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stroke_rounder_app_color"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerNeck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tvUnitsNeck"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/red"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/black"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsNeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerNeck"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerNeck"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerNeck" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerNeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stroke_rounder_app_color"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/red"
+                android:outlineSpotShadowColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card8">
+
+                <TextView
+                    android:id="@+id/calculateBosyMassButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Calculate"
+                    android:textAllCaps="false"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,9 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:src="@drawable/thinking"
-        app:layout_constraintDimensionRatio="3:2"
+        app:layout_constraintDimensionRatio="4:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,26 +36,42 @@
         android:id="@+id/tvGenderWhy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:fontFamily="@font/crimson_pro_medium"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/comic_neue_light"
         android:gravity="center"
         android:text="Your gender will help us calculate important body stats and make sure you get the best results"
         android:textColor="@color/gray2"
         android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+    <TextView
+        android:id="@+id/tvPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:fontFamily="@font/crimson_pro_medium"
+        android:gravity="center"
+        android:text="1 / 4"
+
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/button_background_1"
-        android:elevation="20dp"
-        android:outlineAmbientShadowColor="@color/red"
-        android:outlineSpotShadowColor="@color/red"
+        android:elevation="10dp"
+        android:outlineAmbientShadowColor="@color/purple_200"
+        android:outlineSpotShadowColor="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -66,12 +82,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/crimson_pro_medium"
-
             android:gravity="center"
             android:padding="10dp"
             android:text="Next"
             android:textAllCaps="false"
-            android:textColor="#B3FFFFFF"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -86,59 +101,119 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGenderWhy">
 
+        <View
+            android:id="@+id/tickFemale"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/baseline_check_circle_24"
+            android:backgroundTint="@color/purple_200"
+            android:elevation="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewFemale"
+            app:layout_constraintTop_toTopOf="@+id/cardViewFemale" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="match_parent"
+        <View
+            android:id="@+id/tickMale"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/baseline_check_circle_24"
+            android:backgroundTint="@color/purple_200"
+            android:elevation="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/cardViewMale"
+            app:layout_constraintTop_toTopOf="@+id/cardViewMale" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewMale"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:outlineAmbientShadowColor="@color/app_main_color"
-            android:outlineSpotShadowColor="@color/app_main_color"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cardViewFemale"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:id="@+id/linearlayoutMale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/male" />
+
+                <TextView
+                    android:id="@+id/tvMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Male"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:outlineAmbientShadowColor="@color/purple_200"
+            android:outlineSpotShadowColor="@color/purple_200"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cardViewMale"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="1dp">
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
+            <LinearLayout
+                android:id="@+id/linearlayoutFemale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <RadioButton
-                    android:id="@+id/radioButtonMale"
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/female" />
+
+                <TextView
+                    android:id="@+id/tvFemale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:background="@color/white"
-                    android:fontFamily="@font/comic_neue_light"
-                    android:paddingHorizontal="7dp"
-                    android:text="Male"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-
-                <RadioButton
-                    android:id="@+id/radioButtonFemale"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:background="@color/white"
-                    android:fontFamily="@font/comic_neue_light"
-                    android:paddingHorizontal="7dp"
-
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
                     android:text="Female"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-
-            </RadioGroup>
-
-
-        </androidx.cardview.widget.CardView>
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
