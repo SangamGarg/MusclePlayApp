@@ -31,6 +31,7 @@
         android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
         android:background="@color/white"
         tools:layout_editor_absoluteY="20dp">
 
@@ -65,6 +66,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/imageView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/support"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
                 <TextView
                     android:id="@+id/tvSupportText"
                     android:layout_width="match_parent"
@@ -79,7 +89,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

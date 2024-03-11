@@ -30,7 +30,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,7 @@
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/crimson_pro_medium"
                         android:gravity="center"
-                        android:text="About Us"
+                        android:text="About Muscle Play"
                         android:textColor="@color/red"
                         android:textSize="30sp"
                         android:textStyle="bold"
@@ -100,7 +100,7 @@
                 android:fontFamily="@font/comic_neue_light"
                 android:gravity="center"
                 android:text="Join Us On Our Social Handles"
-                android:textColor="@color/red"
+                android:textColor="@color/gray2"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/cardView13" />

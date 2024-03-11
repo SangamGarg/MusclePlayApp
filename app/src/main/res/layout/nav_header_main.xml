@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/circles"
+    android:backgroundTint="@color/red"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -15,34 +18,40 @@
         android:id="@+id/nav_drawer_iv_profile"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_marginTop="25dp"
         android:src="@drawable/profile"
         app:civ_border_color="#FF000000"
-        app:civ_border_width="1dp" />
+        app:civ_border_width="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nav_drawer_tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="30dp"
         android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
         android:text="Name"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/nav_drawer_iv_profile"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/nav_drawer_tv_email_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
         android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
         android:text="Email Id"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:textStyle="bold" />
-</LinearLayout>
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/nav_drawer_tv_name"
+        tools:layout_editor_absoluteX="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

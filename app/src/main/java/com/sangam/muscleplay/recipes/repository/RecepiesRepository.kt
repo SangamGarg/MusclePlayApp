@@ -18,7 +18,7 @@ class RecepiesRepository {
         query: String?
     ) {
         showProgress.value = true
-        val client = RetrofitUtilClass.getRetrofit(AppUrls.CALORIESINFOOOD)
+        val client = RetrofitUtilClass.getRetrofit(AppUrls.RECIPE)
             .create(RecipesNetworkService::class.java)
         val call = client.callRecepiesApi(query)
         call.enqueue(object : Callback<RecipesResponseModel> {

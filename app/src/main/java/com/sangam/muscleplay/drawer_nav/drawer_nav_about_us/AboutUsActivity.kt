@@ -91,7 +91,9 @@ class AboutUsActivity : AppCompatActivity() {
 
                 if (snapshot.exists()) {
                     val data = snapshot.getValue(String::class.java)
-                    binding.tvAboutUs.text = data
+                    val formattedData =
+                        System.getProperty("line.separator")?.let { data?.replace("?", it) }
+                    binding.tvAboutUs.text = formattedData
                     binding.progreessBar.visibility = View.GONE
                 }
             }

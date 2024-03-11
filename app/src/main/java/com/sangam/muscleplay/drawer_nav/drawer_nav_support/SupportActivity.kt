@@ -48,11 +48,11 @@ class SupportActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d("SUPPORT", snapshot.toString())
                 binding.progreessBar.visibility = View.GONE
-
-
                 if (snapshot.exists()) {
                     val data = snapshot.getValue(String::class.java)
-                    binding.tvSupportText.text = data
+                    val formattedData =
+                        System.getProperty("line.separator")?.let { data?.replace("?", it) }
+                    binding.tvSupportText.text = formattedData
                     binding.progreessBar.visibility = View.GONE
 
                 }

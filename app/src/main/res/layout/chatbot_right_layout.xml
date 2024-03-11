@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnconti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,29 +16,28 @@
             android:id="@+id/show_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="7dp"
-            android:layout_toLeftOf="@+id/sendbtn"
             android:background="@drawable/botbg"
-            android:paddingLeft="7dp"
-            android:paddingTop="10dp"
-            android:paddingRight="7dp"
-            android:paddingBottom="10dp"
+            android:fontFamily="@font/poppins"
+            android:paddingHorizontal="7dp"
+            android:paddingVertical="10dp"
             android:text="Solve Your queries with smartbot"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sendbtn"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/sendbtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="0dp"
             android:padding="5dp"
-            android:src="@drawable/profile" />
-    </RelativeLayout>
+            android:src="@drawable/profile"
+            app:civ_border_color="@color/purple_200"
+            app:civ_border_width="0.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/show_message" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

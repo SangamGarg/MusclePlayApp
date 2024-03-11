@@ -35,6 +35,7 @@
             android:exported="false" />
         <activity
             android:name=".drawer_nav.drawer_nav_personal_assistant.ui.AiChatBotActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".Calculators.AllCalculatorsActivity"
