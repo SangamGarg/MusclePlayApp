@@ -1,10 +1,12 @@
 package com.sangam.muscleplay.Calculators.caloryinfoodcalculator.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +39,26 @@ class CaloriesInFoodCalculatorFragment : Fragment() {
     }
 
     private fun initListener() {
-        callCaloriesInfoodApi("parrot")
+        binding.searchButton.setOnClickListener {
+            val query = binding.searchEt.text.toString()
+
+            if (query.isEmpty()) {
+                binding.searchLayout.isHelperTextEnabled = true
+                binding.searchLayout.helperText = "*Required"
+            } else {
+                // Close the keyboard
+                hideKeyboard()
+
+                binding.searchLayout.isHelperTextEnabled = false
+                callCaloriesInfoodApi(query)
+            }
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
     }
 
     private fun callCaloriesInfoodApi(query: String) {
@@ -48,13 +69,13 @@ class CaloriesInFoodCalculatorFragment : Fragment() {
         viewModel.caloriesInFoodResponse.observe(requireActivity(), Observer {
             listOfData = it.items
             if (listOfData.isNullOrEmpty()) {
-                binding.mainView.visibility = View.GONE
                 binding.lottieAnimation.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
 
             } else {
-                val adapter = CaloriesInFoodAdapter(requireContext(), listOfData!!) {
-
-                }
+                binding.recyclerView.visibility = View.VISIBLE
+                binding.lottieAnimation.visibility = View.GONE
+                val adapter = CaloriesInFoodAdapter(requireContext(), listOfData!!) {}
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 binding.recyclerView.adapter = adapter
 
@@ -65,11 +86,12 @@ class CaloriesInFoodCalculatorFragment : Fragment() {
     private fun observeProgress() {
         viewModel.showProgress.observe(viewLifecycleOwner, Observer {
             if (it) {
+                binding.lottieAnimation.visibility = View.GONE
                 binding.progressBar.visibility = View.VISIBLE
-                binding.mainView.visibility = View.GONE
+                binding.recyclerView.visibility = View.GONE
             } else {
                 binding.progressBar.visibility = View.GONE
-                binding.mainView.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.VISIBLE
             }
         })
     }

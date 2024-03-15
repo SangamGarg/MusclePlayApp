@@ -14,6 +14,10 @@ class BurnedCaloriesFromActivityAdapter(
     inner class MyViewHolder(val binding: BurnedCaloriesFromActivityItemLayoutBinding) :
         ViewHolder(binding.root) {
         fun bindView(items: BurnedCaloriesFromActivityModelItem, context: Context, position: Int) {
+            binding.activityName.text = items.name
+            binding.duration.text = items.duration_minutes + " min"
+            binding.totalcal.text = items.total_calories + " cal"
+            binding.calorieshour.text = items.calories_per_hour + " cal"
 
         }
     }

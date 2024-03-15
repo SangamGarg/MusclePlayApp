@@ -1,16 +1,16 @@
-package com.sangam.muscleplay.recipes.repository
+package com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
 import com.example.muscleplay.Retrofit.RetrofitUtilClass
-import com.sangam.muscleplay.recipes.model.RecipesResponseModel
-import com.sangam.muscleplay.recipes.network.RecipesNetworkService
+import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.model.RecipesResponseModel
+import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.network.RecipesNetworkService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RecepiesRepository {
+class RecipesRepository {
     val showProgress = MutableLiveData<Boolean>()
     var errorMessage = MutableLiveData<String>()
     var recipesResponse = MutableLiveData<RecipesResponseModel>()

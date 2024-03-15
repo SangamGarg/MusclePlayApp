@@ -1,5 +1,6 @@
 package com.sangam.muscleplay.Calculators.bmicalculator
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -65,9 +66,11 @@ class BmiCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 1) {
-                    binding.linearlayoutFemale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewFemale.strokeColor = Color.WHITE
+                    binding.tickFemale.visibility = View.GONE
                 }
-                binding.linearlayoutMale.setBackgroundColor(Color.GREEN)
+                binding.cardViewMale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickMale.visibility = View.VISIBLE
                 gender = "male"
                 flag = 0
             }
@@ -78,9 +81,11 @@ class BmiCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 0) {
-                    binding.linearlayoutMale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewMale.strokeColor = Color.WHITE
+                    binding.tickMale.visibility = View.GONE
                 }
-                binding.linearlayoutFemale.setBackgroundColor(Color.GREEN)
+                binding.cardViewFemale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickFemale.visibility = View.VISIBLE
                 gender = "female"
                 flag = 1
 
@@ -127,9 +132,7 @@ class BmiCalculatorFragment : Fragment() {
 
     private fun spinnerWeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_weight_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_weight_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -170,9 +173,7 @@ class BmiCalculatorFragment : Fragment() {
 
     private fun spinnerHeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -226,13 +227,23 @@ class BmiCalculatorFragment : Fragment() {
     }
 
     private fun showBottomDialog() {
-        val dialog = BottomSheetDialog(requireContext())
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         val view = FragmentBmiBottomSheetBinding.inflate(layoutInflater)
         view.close.setOnClickListener {
             dialog.dismiss()
         }
         view.tvBmiValue.text = bmi
         view.tvHealthValue.text = health
+
+        view.imageViewShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            val message =
+                "I measured my bmi using MusclePlay application and i my BMI is $bmi and i came in $health category"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            requireContext().startActivity(intent)
+        }
+
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(view.root)
         dialog.show()
@@ -255,7 +266,7 @@ class BmiCalculatorFragment : Fragment() {
     private fun observerBmiApiResponse() {
         viewModel.bmiResponse.observe(requireActivity(), Observer {
             bmi = it.data?.bmi.toString()
-            health = it.data?.health.toString()
+            health = "(${it.data?.health.toString()})"
             showBottomDialog()
         })
     }

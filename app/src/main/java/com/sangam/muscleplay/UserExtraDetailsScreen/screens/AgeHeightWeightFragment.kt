@@ -17,7 +17,6 @@ import com.sangam.muscleplay.AppUtils.AppArrays
 import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentAgeHeightWeightBinding
 
 class AgeHeightWeightFragment : Fragment() {

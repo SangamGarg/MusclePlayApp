@@ -1,24 +1,19 @@
 package com.sangam.muscleplay.botton_nav.profile
 
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -28,11 +23,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -40,11 +33,9 @@ import com.google.firebase.storage.ktx.storage
 import com.sangam.muscleplay.AppUtils.IntentUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
-import com.sangam.muscleplay.EditProfileActivity
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
-import com.sangam.muscleplay.UserDataUtils.model.UserDataExtra
-import com.sangam.muscleplay.UserDataUtils.model.UserDataNameAndEmail
+import com.sangam.muscleplay.botton_nav.profile.MyReport.ui.MyReportActivity
 import com.sangam.muscleplay.databinding.FragmentNotificationsBinding
 import com.sangam.muscleplay.databinding.PasswordUpdateDialogBinding
 import java.io.File
@@ -188,6 +179,9 @@ class ProfileFragment : Fragment() {
         binding.tvEditProfile.setOnClickListener {
             IntentUtil.startIntent(requireContext(), EditProfileActivity())
         }
+        binding.tvMyReport.setOnClickListener {
+            IntentUtil.startIntent(requireContext(), MyReportActivity())
+        }
         binding.tvLogout.setOnClickListener {
             logoutAlertDialog()
         }
@@ -250,7 +244,7 @@ class ProfileFragment : Fragment() {
 
 
     private fun chooseImage() {
-        val dialog = Dialog(requireContext())
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         val view = layoutInflater.inflate(R.layout.dialog_choose_profile_image, null)
         dialog.setContentView(view)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -272,6 +266,8 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
+
     private fun logoutAlertDialog() {
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setCancelable(true)
@@ -345,11 +341,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun changePassword() {
-        val alertDialog = AlertDialog.Builder(requireContext())
+        val bottomDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
         val binding = PasswordUpdateDialogBinding.inflate(layoutInflater)
-        alertDialog.setView(binding.root)
-        alertDialog.setCancelable(true)
-        alertDialog.create().show()
+        bottomDialog.setContentView(binding.root)
+        bottomDialog.setCancelable(true)
+        bottomDialog.show()
         binding.btnPassUpdate.setOnClickListener {
             val userPass = binding.ETUpdatePassword.text.toString()
             val confirmpassword = binding.ETConfirmUpdatePassword.text.toString()
@@ -381,7 +377,7 @@ class ProfileFragment : Fragment() {
                         Toast.makeText(
                             requireContext(), "Password Updated Successfully", Toast.LENGTH_SHORT
                         ).show()
-                        alertDialog.create().dismiss()
+                        bottomDialog.show()
                         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                             .requestIdToken("339910902548-8pjamj4qhoc5ogfrpptd42uqsnkvt1b4.apps.googleusercontent.com")
                             .requestEmail().build()
@@ -398,7 +394,7 @@ class ProfileFragment : Fragment() {
                             "Error: ${it.exception?.message.toString()}",
                             Toast.LENGTH_SHORT
                         ).show()
-                        alertDialog.create().dismiss()
+                        bottomDialog.dismiss()
 
                     }
                 }
@@ -421,9 +417,9 @@ class ProfileFragment : Fragment() {
 
     fun observeUserExtraData() {
         userViewModel.userDataExtraResponse.observe(viewLifecycleOwner, Observer {
-            binding.includeHeight.tvValue.text = it?.height
+            binding.includeHeight.tvValue.text = "${it?.height} cm"
             binding.includeAge.tvValue.text = it?.age
-            binding.includeWeight.tvValue.text = it?.weight
+            binding.includeWeight.tvValue.text = "${it?.weight} kg"
         })
     }
 

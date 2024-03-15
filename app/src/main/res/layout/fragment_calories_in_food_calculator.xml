@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gray"
     tools:context=".Calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment">
 
     <ProgressBar
@@ -43,34 +43,92 @@
         android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
         android:text="Calories In Food calculator"
-        android:textColor="@color/red"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/mainView"
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/purple_200"
+        android:outlineSpotShadowColor="@color/purple_200"
+        app:cardBackgroundColor="#FF2C2C"
+        app:cardCornerRadius="35dp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        app:helperTextTextColor="#F82B2B"
+
         app:layout_constraintTop_toBottomOf="@+id/textView28">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:hint="Search Here..."
+            android:textColorHint="@color/black"
+            app:boxBackgroundColor="#FFFFFF"
+            app:boxStrokeColor="@color/app_main_color"
+            app:boxStrokeErrorColor="@color/app_main_color"
+            app:boxStrokeWidth="0dp"
+            app:errorTextColor="@color/red"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawablePadding="20dp"
+                android:inputType="text"
+                android:paddingBottom="20dp"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/red"
+                android:outlineSpotShadowColor="@color/red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                <TextView
+                    android:id="@+id/searchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Search"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="0dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/bmicalculator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/foodName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Running"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <TextView
+                android:id="@+id/foodCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:text="250 cal"
+                android:textColor="#03A9F4"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/foodName" />
+
+            <TextView
+                android:id="@+id/foodServingSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:text="250 gm"
+                android:textColor="#F44336"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/foodCalories"
+                app:layout_constraintTop_toTopOf="@+id/foodCalories" />
+
+            <TextView
+                android:id="@+id/tvKnowMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/coustard"
+                android:text="More details"
+                android:textColor="#2196F3"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bottom_sheet_background"
+                android:padding="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvKnowMore">
+
+
+                <TextView
+                    android:id="@+id/tvCholesterol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Cholesterol"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvFatSaturated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Saturated Fats"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCholesterol"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvFibre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Fibre"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFatSaturated"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvPotassium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Potassium"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFibre"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvSodium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Sodium"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPotassium"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvSugar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Sugar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSodium"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvCholesterolValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Cholesterol"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvFatSaturatedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Saturated Fats"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCholesterolValue"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvFibreValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Fibre"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFatSaturatedValue"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvPotassiumValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Potassium"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFibreValue"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvSodiumValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Sodium"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPotassiumValue"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvSugarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Sugar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSodiumValue"
+
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/foodCalories">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textProtein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Protein"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Carbohydrates"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toStartOf="@+id/textFat"
+                        app:layout_constraintStart_toEndOf="@+id/textProtein"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Fats"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/foodProtein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textProtein" />
+
+                    <TextView
+                        android:id="@+id/foodCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/foodFat"
+                        app:layout_constraintStart_toEndOf="@+id/foodProtein"
+                        app:layout_constraintTop_toTopOf="@+id/foodProtein" />
+
+                    <TextView
+                        android:id="@+id/foodFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/foodCarbs" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

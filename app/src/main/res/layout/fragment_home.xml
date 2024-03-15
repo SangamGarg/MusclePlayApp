@@ -228,17 +228,17 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:paddingHorizontal="5dp"
+                    android:paddingBottom="@dimen/bottom_navigation_margin">
 
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:elevation="30dp"
                         app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp"
+                        app:cardElevation="5dp"
                         app:cardUseCompatPadding="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -262,7 +262,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cardView">
@@ -277,7 +277,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/comic_neue_light"
-                                android:text="Welcome,"
+                                android:text="Hi,"
                                 android:textColor="@color/gray2"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
@@ -296,55 +296,11 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-                            <View
-                                android:id="@+id/infoBMI"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:background="@drawable/baseline_error_outline_24"
-                                android:elevation="20dp"
-                                app:layout_constraintEnd_toEndOf="@+id/cardView9"
-                                app:layout_constraintTop_toTopOf="@+id/cardView9" />
-
-                            <View
-                                android:id="@+id/infoDailyCalories"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:background="@drawable/baseline_error_outline_24"
-                                android:elevation="20dp"
-                                app:layout_constraintEnd_toEndOf="@+id/cardView11"
-                                app:layout_constraintTop_toTopOf="@+id/cardView11" />
-
-                            <View
-                                android:id="@+id/infoIdealWeight"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:background="@drawable/baseline_error_outline_24"
-                                android:elevation="20dp"
-                                app:layout_constraintEnd_toEndOf="@+id/cardView10"
-                                app:layout_constraintTop_toTopOf="@+id/cardView10" />
-
-                            <View
-                                android:id="@+id/infoBodyFat"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:background="@drawable/baseline_error_outline_24"
-                                android:elevation="20dp"
-                                app:layout_constraintEnd_toEndOf="@+id/cardView12"
-                                app:layout_constraintTop_toTopOf="@+id/cardView12" />
-
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cardView9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
+                                android:layout_marginStart="5dp"
                                 android:elevation="15dp"
                                 android:outlineAmbientShadowColor="#FDE9E6"
                                 android:outlineSpotShadowColor="#FDE9E6"
@@ -357,8 +313,8 @@
                                     android:layout_height="wrap_content"
                                     android:background="#FDE9E6"
                                     android:orientation="vertical"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="40dp">
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="30dp">
 
                                     <TextView
                                         android:id="@+id/textView"
@@ -393,8 +349,8 @@
                                 android:id="@+id/cardView10"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="10dp"
                                 android:elevation="15dp"
                                 android:outlineAmbientShadowColor="#CFF6FB"
                                 android:outlineSpotShadowColor="#CFF6FB"
@@ -407,8 +363,8 @@
                                     android:layout_height="wrap_content"
                                     android:background="#CFF6FB"
                                     android:orientation="vertical"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="40dp">
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="30dp">
 
 
                                     <TextView
@@ -444,8 +400,7 @@
                                 android:id="@+id/cardView11"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="15dp"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="10dp"
                                 android:elevation="15dp"
                                 android:outlineAmbientShadowColor="#FBF8D4"
                                 android:outlineSpotShadowColor="#FBF8D4"
@@ -458,8 +413,8 @@
                                     android:layout_height="wrap_content"
                                     android:background="#FBF8D4"
                                     android:orientation="vertical"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="40dp">
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="30dp">
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -493,8 +448,8 @@
                                 android:id="@+id/cardView12"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="20dp"
-                                android:elevation="15dp"
+                                android:layout_marginStart="8dp"
+                                android:elevation="10dp"
                                 android:outlineAmbientShadowColor="#E7FBCF"
                                 android:outlineSpotShadowColor="#E7FBCF"
                                 app:cardCornerRadius="8dp"
@@ -506,8 +461,8 @@
                                     android:layout_height="wrap_content"
                                     android:background="#E7FBCF"
                                     android:orientation="vertical"
-                                    android:paddingHorizontal="20dp"
-                                    android:paddingVertical="40dp">
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="30dp">
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -542,6 +497,18 @@
 
                     </HorizontalScrollView>
 
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:padding="10dp"
+                        android:text="Popular Categories"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraint" />
+
                     <HorizontalScrollView
                         android:id="@+id/constraint_2"
                         android:layout_width="match_parent"
@@ -549,24 +516,11 @@
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/constraint">
+                        app:layout_constraintTop_toBottomOf="@id/textView9">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-
-                            <TextView
-                                android:id="@+id/textView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/crimson_pro_medium"
-                                android:padding="10dp"
-                                android:text="Category"
-                                android:textColor="@color/black"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
 
                             <include
                                 android:id="@+id/includeYoga"
@@ -575,7 +529,7 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintEnd_toStartOf="@+id/includeWarmUp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <include
                                 android:id="@+id/includeWarmUp"
@@ -584,7 +538,7 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintEnd_toStartOf="@+id/includeStrength"
                                 app:layout_constraintStart_toEndOf="@+id/includeYoga"
-                                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                                app:layout_constraintTop_toTopOf="@+id/includeYoga" />
 
                             <include
                                 android:id="@+id/includeStrength"
@@ -593,7 +547,7 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/includeWarmUp"
-                                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                                app:layout_constraintTop_toTopOf="@+id/includeWarmUp" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -606,22 +560,20 @@
                         android:id="@+id/constraint_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/constraint_2">
 
                         <TextView
                             android:id="@+id/textView10"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="20dp"
+                            android:layout_marginVertical="5dp"
                             android:fontFamily="@font/crimson_pro_medium"
                             android:padding="10dp"
-                            android:text="Calculators"
+                            android:text="Fitness and Health Calculators"
                             android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
+                            android:textSize="18sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -629,15 +581,12 @@
                             android:id="@+id/cardView3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="5dp"
-                            android:layout_marginTop="10dp"
-                            android:elevation="30dp"
                             android:outlineAmbientShadowColor="@color/app_main_color"
                             android:outlineSpotShadowColor="@color/app_main_color"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="10dp"
+                            app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
-                            app:layout_constraintEnd_toStartOf="@+id/fabCalculator"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView10">
 
@@ -651,52 +600,46 @@
                                 android:outAnimation="@android:anim/slide_out_right"
                                 android:text="hello"
                                 android:textColor="@color/black"
-                                android:textSize="20sp">
-
-                                <!--                            <androidx.appcompat.widget.AppCompatImageView-->
-                                <!--                                android:id="@+id/viewFlipperImage1"-->
-                                <!--                                android:layout_width="match_parent"-->
-                                <!--                                android:layout_height="wrap_content"-->
-                                <!--                                android:scaleType="fitXY"-->
-                                <!--                                android:src="@drawable/onboard3image" />-->
-
-                                <!--                            <ImageView-->
-                                <!--                                android:id="@+id/viewFlipperImage2"-->
-                                <!--                                android:layout_width="match_parent"-->
-                                <!--                                android:layout_height="wrap_content"-->
-                                <!--                                android:scaleType="fitXY"-->
-                                <!--                                android:src="@drawable/onboard1image" />-->
-
-                                <!--                            <ImageView-->
-                                <!--                                android:id="@+id/viewFlipperImage3"-->
-                                <!--                                android:layout_width="match_parent"-->
-                                <!--                                android:layout_height="wrap_content"-->
-                                <!--                                android:scaleType="fitXY"-->
-                                <!--                                android:src="@drawable/onboard2image" />-->
-
-
-                            </ViewFlipper>
-
-
+                                android:textSize="20sp"></ViewFlipper>
                         </androidx.cardview.widget.CardView>
 
 
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fabCalculator"
+                        <TextView
+                            android:id="@+id/tvViewAllCalculator"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
+                            android:layout_height="0dp"
+                            android:layout_marginEnd="8dp"
                             android:elevation="10dp"
-                            android:outlineAmbientShadowColor="@color/app_main_color"
-                            android:outlineSpotShadowColor="@color/app_main_color"
-                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:gravity="center"
+                            android:text="View All"
+                            android:textColor="@color/gray2"
+                            android:textSize="14sp"
                             app:backgroundTint="@color/app_main_color"
-                            app:elevation="10dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/cardView3"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView10"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/cardView3" />
+                            app:layout_constraintTop_toTopOf="@+id/textView10" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:padding="10dp"
+                        android:text="Fitness Facts"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraint_3" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -712,6 +655,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/navigation_drawer_background"
+        android:elevation="30dp"
+        app:elevation="30dp"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/drawer_nav_menu" />
 

@@ -1,6 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/bmicalculator"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/activityName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Running"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/gray"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/activityName">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textProtein"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Calories / hr"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textCarbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Duration"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textProtein" />
+
+                    <TextView
+                        android:id="@+id/textFat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="Total Calories"
+                        android:textColor="@color/gray2"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textCarbs" />
+
+
+                    <TextView
+                        android:id="@+id/calorieshour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textProtein"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textCarbs"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/totalcal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="250 gm"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/textFat"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

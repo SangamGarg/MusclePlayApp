@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.codebyashish.autoimageslider.Enums.ImageAnimationTypes
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
@@ -36,15 +37,17 @@ import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.Calculators.AllCalculatorsActivity
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.R
+import com.sangam.muscleplay.botton_nav.home.model.FitnessFactsResponseModel
+import com.sangam.muscleplay.botton_nav.home.ui.adapter.FitnessFactsAdapter
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentHomeBinding
 import com.sangam.muscleplay.drawer_nav.drawer_nav_about_us.AboutUsActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_feedback.FeedbackActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_history.HistoryActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.ui.AiChatBotActivity
+import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.ui.RecipesActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
-import com.sangam.muscleplay.stepCounter.StepCounterActivity
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HomeFragment : Fragment() {
@@ -124,9 +127,6 @@ class HomeFragment : Fragment() {
         observerBodyFatApiResponse()
         observerProgressResponse()
 
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU) if (!checkPermission()) {
-            requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-        }
         return root
     }
 
@@ -213,6 +213,9 @@ class HomeFragment : Fragment() {
 //                IntentUtil.startIntent(requireActivity(), UserDetailsActivity())
 //            }
             if (dataFilled == true) {
+                @RequiresApi(Build.VERSION_CODES.TIRAMISU) if (!checkPermission()) {
+                    requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                }
                 callBmiApi()
                 callBodyFatApi()
                 callDailyCaloriesApi()
@@ -223,16 +226,71 @@ class HomeFragment : Fragment() {
     }
 
     private fun initListener() {
+        val listOfData = arrayListOf(
+            FitnessFactsResponseModel(
+                "Healthy Eating Habits",
+                "Eating a balanced diet rich in fruits, vegetables, lean proteins, and whole grains is essential for overall health.",
+                "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?cs=srgb&dl=pexels-victor-freitas-841130.jpg&fm=jpg"
+            ), FitnessFactsResponseModel(
+                "Importance of Hydration",
+                "Staying hydrated is crucial for maintaining bodily functions, regulating body temperature, and supporting cognitive function.",
+                "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?cs=srgb&dl=pexels-pixabay-414029.jpg&fm=jpg"
+            ), FitnessFactsResponseModel(
+                "Benefits of Regular Exercise",
+                "Regular exercise can improve your mood, boost energy levels, and reduce the risk of chronic diseases.",
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fphotos%2Ffitness&psig=AOvVaw3V4Gmyt4Ar2KQL5aoSOLgW&ust=1710486571919000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCIiHlJaZ84QDFQAAAAAdAAAAABAQ"
+            )
+        )
+
+        val adapter = FitnessFactsAdapter(requireContext(), listOfData)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+
         binding.viewFlipper.setOnClickListener {
-            IntentUtil.startIntent(requireContext(), StepCounterActivity())
+            IntentUtil.startIntent(requireContext(), AllCalculatorsActivity())
         }
         categoryInitListener()
         binding.swiperefresh.setOnRefreshListener {
             callGetUserData()
             callGetUserExtraData()
         }
+//        binding.includeCaloriesInFood.apply {
+//            tvNameOfCalculator.text = "Calories In Food Calculator"
+//            ivImageOfCalculator.setImageResource(R.drawable.caloriesinfood)
+//            calculatorLayout.setOnClickListener {
+//                findNavController().navigate(R.id.action_navigation_home_to_caloriesInFoodCalculatorFragment2)
+//
+//            }
+//        }
+//
+//        binding.includeBmi.apply {
+//            tvNameOfCalculator.text = "Bmi Calculator"
+//            ivImageOfCalculator.setImageResource(R.drawable.bmicalculator)
+//            calculatorLayout.setOnClickListener {
+//                findNavController().navigate(R.id.action_navigation_home_to_bmiCalculatorFragment2)
+//
+//            }
+//        }
+//        binding.includeDailyCalories.apply {
+//            tvNameOfCalculator.text = "Daily Calories Calculator"
+//            ivImageOfCalculator.setImageResource(R.drawable.dailycalories)
+//            calculatorLayout.setOnClickListener {
+//                findNavController().navigate(R.id.action_navigation_home_to_dailyCaloriesCalculatorFragment2)
+//
+//            }
+//        }
+//
+//        binding.includeBurnedCaloriesFromActivity.apply {
+//            tvNameOfCalculator.text = "Burned Calories From An Activity Calculator"
+//            ivImageOfCalculator.setImageResource(R.drawable.burnedcaloriesfromactivity)
+//            calculatorLayout.setOnClickListener {
+//                findNavController().navigate(R.id.action_navigation_home_to_burnedCaloriesFromActivityFragment2)
+//
+//            }
+//        }
 
-        binding.fabCalculator.setOnClickListener {
+
+        binding.tvViewAllCalculator.setOnClickListener {
 
             IntentUtil.startIntent(requireActivity(), AllCalculatorsActivity())
         }
@@ -244,6 +302,7 @@ class HomeFragment : Fragment() {
             when (it.itemId) {
                 R.id.nav_about_us -> IntentUtil.startIntent(requireActivity(), AboutUsActivity())
                 R.id.nav_support -> IntentUtil.startIntent(requireActivity(), SupportActivity())
+                R.id.nav_recipe -> IntentUtil.startIntent(requireActivity(), RecipesActivity())
                 R.id.nav_history -> IntentUtil.startIntent(requireActivity(), HistoryActivity())
                 R.id.nav_feedback -> IntentUtil.startIntent(requireActivity(), FeedbackActivity())
                 R.id.nav_rate_us -> ToastUtil.makeToast(requireContext(), "Soon..When Uploaded")

@@ -25,10 +25,27 @@ class AllCalculatorsNameFragment : Fragment() {
     }
 
     private fun initListener() {
+        binding.includeFullStats.apply {
+            tvNameOfCalculator.text = "Calculate Full Stats"
+            ivImageOfCalculator.setImageResource(R.drawable.full_stats)
+            calculatorLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_fullStatsFragment)
+
+            }
+        }
+        binding.includeCaloriesInFood.apply {
+            tvNameOfCalculator.text = "Calories In Food Calculator"
+            ivImageOfCalculator.setImageResource(R.drawable.caloriesinfood)
+            calculatorLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_caloriesInFoodCalculatorFragment)
+
+            }
+        }
+
         binding.includeBmi.apply {
             tvNameOfCalculator.text = "Bmi Calculator"
             ivImageOfCalculator.setImageResource(R.drawable.bmicalculator)
-            ivImageOfCalculator.setOnClickListener {
+            calculatorLayout.setOnClickListener {
                 findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_bmiCalculatorFragment)
 
             }
@@ -36,22 +53,16 @@ class AllCalculatorsNameFragment : Fragment() {
         binding.includeDailyCalories.apply {
             tvNameOfCalculator.text = "Daily Calories Calculator"
             ivImageOfCalculator.setImageResource(R.drawable.dailycalories)
-            ivImageOfCalculator.setOnClickListener {
+            calculatorLayout.setOnClickListener {
                 findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_dailyCaloriesCalculatorFragment)
 
             }
         }
-        binding.includeIdealWeight.apply {
-            tvNameOfCalculator.text = "Ideal Weight Calculator"
-            ivImageOfCalculator.setImageResource(R.drawable.idealbodyweight)
-            ivImageOfCalculator.setOnClickListener {
-                findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_idealWeightCalculatorFragment)
-            }
-        }
+
         binding.includeBurnedCaloriesFromActivity.apply {
             tvNameOfCalculator.text = "Burned Calories From An Activity Calculator"
             ivImageOfCalculator.setImageResource(R.drawable.burnedcaloriesfromactivity)
-            ivImageOfCalculator.setOnClickListener {
+            calculatorLayout.setOnClickListener {
                 findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_burnedCaloriesFromActivityFragment)
 
             }
@@ -59,19 +70,19 @@ class AllCalculatorsNameFragment : Fragment() {
         binding.includeBodyMass.apply {
             tvNameOfCalculator.text = "Body Fat Calculator"
             ivImageOfCalculator.setImageResource(R.drawable.bodyfat)
-            ivImageOfCalculator.setOnClickListener {
+            calculatorLayout.setOnClickListener {
                 findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_bodyMassCalculatorFragment)
 
             }
         }
-        binding.includeCaloriesInFood.apply {
-            tvNameOfCalculator.text = "Calories In Food Calculator"
-            ivImageOfCalculator.setImageResource(R.drawable.caloriesinfood)
-            ivImageOfCalculator.setOnClickListener {
-                findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_caloriesInFoodCalculatorFragment)
-
+        binding.includeIdealWeight.apply {
+            tvNameOfCalculator.text = "Ideal Weight Calculator"
+            ivImageOfCalculator.setImageResource(R.drawable.idealbodyweight)
+            calculatorLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_allCalculatorsNameFragment_to_idealWeightCalculatorFragment)
             }
         }
+
 
     }
 

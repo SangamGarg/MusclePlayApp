@@ -26,11 +26,11 @@ class HomeRepository {
     var bodyFatResponse = MutableLiveData<BodyFatPercentageResponseModel>()
 
 
-    fun bmiApiResponse(age: String?, weight: String?, height: String?) {
+     fun bmiApiResponse(age: String?, weight: String?, height: String?) {
         showProgressBmi.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
-        var call = client?.callBmiApi(age, weight, height)
-        call?.enqueue(object : Callback<BmiResponseModel> {
+        val call = client.callBmiApi(age, weight, height)
+        call.enqueue(object : Callback<BmiResponseModel> {
             override fun onResponse(
                 call: Call<BmiResponseModel>, response: Response<BmiResponseModel>
             ) {
@@ -54,11 +54,11 @@ class HomeRepository {
     }
 
 
-    fun idealWeightApiResponse(gender: String?, height: String?) {
+     fun idealWeightApiResponse(gender: String?, height: String?) {
         showProgressIdealWeight.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
-        var call = client?.callIdealWeightApi(gender, height)
-        call?.enqueue(object : Callback<IdealWeightResponseModel> {
+        val call = client.callIdealWeightApi(gender, height)
+        call.enqueue(object : Callback<IdealWeightResponseModel> {
             override fun onResponse(
                 call: Call<IdealWeightResponseModel>, response: Response<IdealWeightResponseModel>
             ) {
@@ -81,14 +81,14 @@ class HomeRepository {
 
     }
 
-    fun dailyCaloriesApiResponse(
+     fun dailyCaloriesApiResponse(
         age: String?, gender: String?, height: String?, weight: String?, activity_level: String?
     ) {
         showProgressDalyCalories.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
-        var call =
-            client?.callDailyCalorieRequirementsApi(age, gender, height, weight, activity_level)
-        call?.enqueue(object : Callback<DailyCalorieRequirementsResponseModel> {
+        val call =
+            client.callDailyCalorieRequirementsApi(age, gender, height, weight, activity_level)
+        call.enqueue(object : Callback<DailyCalorieRequirementsResponseModel> {
             override fun onResponse(
                 call: Call<DailyCalorieRequirementsResponseModel>,
                 response: Response<DailyCalorieRequirementsResponseModel>
@@ -115,7 +115,7 @@ class HomeRepository {
         })
     }
 
-    fun bodyFatApiResponse(
+     fun bodyFatApiResponse(
         age: String?,
         gender: String?,
         weight: String?,
@@ -126,8 +126,8 @@ class HomeRepository {
     ) {
         showProgressBodyFat.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
-        var call = client?.callBodyFatPercentageApi(age, gender, weight, height, neck, waist, hip)
-        call?.enqueue(object : Callback<BodyFatPercentageResponseModel> {
+        val call = client.callBodyFatPercentageApi(age, gender, weight, height, neck, waist, hip)
+        call.enqueue(object : Callback<BodyFatPercentageResponseModel> {
             override fun onResponse(
                 call: Call<BodyFatPercentageResponseModel>,
                 response: Response<BodyFatPercentageResponseModel>

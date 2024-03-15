@@ -1,10 +1,12 @@
 package com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +41,26 @@ class BurnedCaloriesFromActivityFragment : Fragment() {
     }
 
     private fun initListener() {
-        callBurnedCaloriesFromActivityApi("running")
+        binding.searchButton.setOnClickListener {
+            val query = binding.searchEt.text.toString()
+
+            if (query.isEmpty()) {
+                binding.searchLayout.isHelperTextEnabled = true
+                binding.searchLayout.helperText = "*Required"
+            } else {
+                // Close the keyboard
+                hideKeyboard()
+
+                binding.searchLayout.isHelperTextEnabled = false
+                callBurnedCaloriesFromActivityApi(query)
+            }
+        }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
     }
 
     private fun callBurnedCaloriesFromActivityApi(activity: String) {
@@ -50,9 +71,13 @@ class BurnedCaloriesFromActivityFragment : Fragment() {
         viewModel.burnedCaloriesFromActivityResponse.observe(requireActivity(), Observer {
             listOfData = it
             if (listOfData.isNullOrEmpty()) {
-                binding.mainView.visibility = View.GONE
                 binding.lottieAnimation.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
+
             } else {
+                binding.recyclerView.visibility = View.VISIBLE
+                binding.lottieAnimation.visibility = View.GONE
+
                 val adapter = BurnedCaloriesFromActivityAdapter(requireContext(), listOfData!!)
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 binding.recyclerView.adapter = adapter
@@ -70,11 +95,12 @@ class BurnedCaloriesFromActivityFragment : Fragment() {
     private fun observeProgress() {
         viewModel.showProgress.observe(viewLifecycleOwner, Observer {
             if (it) {
+                binding.lottieAnimation.visibility = View.GONE
                 binding.progressBar.visibility = View.VISIBLE
-                binding.mainView.visibility = View.GONE
+                binding.recyclerView.visibility = View.GONE
             } else {
                 binding.progressBar.visibility = View.GONE
-                binding.mainView.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.VISIBLE
             }
         })
     }

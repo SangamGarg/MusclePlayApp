@@ -9,25 +9,57 @@
         android:id="@+id/allCalculatorsNameFragment"
         android:name="com.sangam.muscleplay.Calculators.AllCalculatorsNameFragment"
         android:label="fragment_all_calculators_name"
-        tools:layout="@layout/fragment_all_calculators_name" >
+        tools:layout="@layout/fragment_all_calculators_name">
         <action
             android:id="@+id/action_allCalculatorsNameFragment_to_bmiCalculatorFragment"
-            app:destination="@id/bmiCalculatorFragment" />
+            app:destination="@id/bmiCalculatorFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
+
             android:id="@+id/action_allCalculatorsNameFragment_to_idealWeightCalculatorFragment"
-            app:destination="@id/idealWeightCalculatorFragment" />
+            app:destination="@id/idealWeightCalculatorFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_allCalculatorsNameFragment_to_dailyCaloriesCalculatorFragment"
-            app:destination="@id/dailyCaloriesCalculatorFragment" />
+            app:destination="@id/dailyCaloriesCalculatorFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_allCalculatorsNameFragment_to_burnedCaloriesFromActivityFragment"
-            app:destination="@id/burnedCaloriesFromActivityFragment" />
+            app:destination="@id/burnedCaloriesFromActivityFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_allCalculatorsNameFragment_to_bodyMassCalculatorFragment"
-            app:destination="@id/bodyMassCalculatorFragment" />
+            app:destination="@id/bodyMassCalculatorFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_allCalculatorsNameFragment_to_caloriesInFoodCalculatorFragment"
-            app:destination="@id/caloriesInFoodCalculatorFragment" />
+            app:destination="@id/caloriesInFoodCalculatorFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_allCalculatorsNameFragment_to_fullStatsFragment"
+            app:destination="@id/fullStatsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/bmiCalculatorFragment"
@@ -59,4 +91,9 @@
         android:name="com.sangam.muscleplay.Calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment"
         android:label="fragment_calories_in_food_calculator"
         tools:layout="@layout/fragment_calories_in_food_calculator" />
+    <fragment
+        android:id="@+id/fullStatsFragment"
+        android:name="com.sangam.muscleplay.Calculators.fullStatsCalculator.FullStatsFragment"
+        android:label="fragment_full_stats"
+        tools:layout="@layout/fragment_full_stats" />
 </navigation>

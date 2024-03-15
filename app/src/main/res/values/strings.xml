@@ -11,4 +11,12 @@
     <string name="onboard2text">Experience next-level fitness: AI-guided workouts, real-time pose detection, nutritional insights, and rewards for every milestone. Your personalized path to peak health</string>
     <string name="number_picker_formatter">%02d\n</string>
     <string name="roboto_light">Roboto-Light.ttf</string>
+    <string name="about_bmi">A BMI of 18.5 – 24.9 indicates that you are at a healthy weight for your height. By Maintaining a healthy weight, you lower your risk of developing serious health problems.</string>
+    <string name="about_ideal_weight">By Maintaining a healthy weight, you lower your risk of developing serious health problems.</string>
+    <string name="about_body_fat">
+Achieving a healthy body fat percentage is essential for overall well-being. Maintaining an optimal level of body fat can help enhance physical performance, promote organ function, and contribute to a balanced metabolism. Striving for a healthy body fat percentage through regular exercise and a nutritious diet can support long-term health and vitality.</string>
+    <string name="about_daily_calories">
+Understanding your daily calorie needs is crucial for maintaining a balanced diet and achieving fitness goals. Calculating your daily calorie requirements based on factors like age, gender, activity level, and metabolism helps ensure you are fueling your body appropriately for optimal health and performance. Tracking your calorie intake can support weight management, muscle gain, or weight loss goals, leading to better overall fitness outcomes.    </string>
+
+
 </resources>

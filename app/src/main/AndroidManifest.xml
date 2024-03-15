@@ -28,15 +28,21 @@
         android:theme="@style/Theme.MusclePlay"
         tools:targetApi="31">
         <activity
+            android:name=".startActivtyCalculateBurnedCalories.StartActivtyBurnedCaloriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".botton_nav.profile.MyReport.ui.MyReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".stepCounter.StepCounterActivity"
             android:exported="false" />
         <activity
-            android:name=".recipes.ui.RecipesActivity"
+            android:name=".drawer_nav.drawer_nav_recipes.ui.RecipesActivity"
             android:exported="false" />
         <activity
             android:name=".drawer_nav.drawer_nav_personal_assistant.ui.AiChatBotActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Calculators.AllCalculatorsActivity"
             android:exported="false" />
@@ -47,7 +53,7 @@
             android:name=".UserExtraDetailsScreen.UserDetailsActivity"
             android:exported="true" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".botton_nav.profile.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".onBoardingScreen.OnBoardActivity"

@@ -9,7 +9,20 @@
         android:id="@+id/navigation_home"
         android:name="com.sangam.muscleplay.botton_nav.home.ui.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_caloriesInFoodCalculatorFragment2"
+            app:destination="@id/caloriesInFoodCalculatorFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_bmiCalculatorFragment2"
+            app:destination="@id/bmiCalculatorFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_burnedCaloriesFromActivityFragment2"
+            app:destination="@id/burnedCaloriesFromActivityFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_dailyCaloriesCalculatorFragment2"
+            app:destination="@id/dailyCaloriesCalculatorFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +35,24 @@
         android:name="com.sangam.muscleplay.botton_nav.profile.ProfileFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/bmiCalculatorFragment2"
+        android:name="com.sangam.muscleplay.Calculators.bmicalculator.BmiCalculatorFragment"
+        android:label="fragment_bmi"
+        tools:layout="@layout/fragment_bmi" />
+    <fragment
+        android:id="@+id/caloriesInFoodCalculatorFragment2"
+        android:name="com.sangam.muscleplay.Calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment"
+        android:label="fragment_calories_in_food_calculator"
+        tools:layout="@layout/fragment_calories_in_food_calculator" />
+    <fragment
+        android:id="@+id/burnedCaloriesFromActivityFragment2"
+        android:name="com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment"
+        android:label="fragment_burned_calories_from_activity"
+        tools:layout="@layout/fragment_burned_calories_from_activity" />
+    <fragment
+        android:id="@+id/dailyCaloriesCalculatorFragment2"
+        android:name="com.sangam.muscleplay.Calculators.dailycaloriescalculator.DailyCaloriesCalculatorFragment"
+        android:label="fragment_dailycalories_calculator"
+        tools:layout="@layout/fragment_dailycalories_calculator" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.sangam.muscleplay.Calculators.dailycaloriescalculator
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.model.DailyCalorieGoals
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
+import com.sangam.muscleplay.databinding.DailyCaloriesBottomSheetDialogBinding
 import com.sangam.muscleplay.databinding.FragmentBmiBottomSheetBinding
 import com.sangam.muscleplay.databinding.FragmentDailycaloriesCalculatorBinding
 
@@ -64,9 +66,11 @@ class DailyCaloriesCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 1) {
-                    binding.linearlayoutFemale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewFemale.strokeColor = Color.WHITE
+                    binding.tickFemale.visibility = View.GONE
                 }
-                binding.linearlayoutMale.setBackgroundColor(Color.GREEN)
+                binding.cardViewMale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickMale.visibility = View.VISIBLE
                 gender = "male"
                 flag = 0
             }
@@ -77,9 +81,11 @@ class DailyCaloriesCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 0) {
-                    binding.linearlayoutMale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewMale.strokeColor = Color.WHITE
+                    binding.tickMale.visibility = View.GONE
                 }
-                binding.linearlayoutFemale.setBackgroundColor(Color.GREEN)
+                binding.cardViewFemale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickFemale.visibility = View.VISIBLE
                 gender = "female"
                 flag = 1
 
@@ -158,9 +164,7 @@ class DailyCaloriesCalculatorFragment : Fragment() {
 
     private fun spinnerWeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_weight_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_weight_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -201,9 +205,7 @@ class DailyCaloriesCalculatorFragment : Fragment() {
 
     private fun spinnerHeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -256,14 +258,34 @@ class DailyCaloriesCalculatorFragment : Fragment() {
         binding.tvAgeLive.text = dailyCaloriesViewModel.age.toString()
     }
 
-    private fun showBottomDialog(goals: DailyCalorieGoals?) {
-        val dialog = BottomSheetDialog(requireContext())
-        val view = FragmentBmiBottomSheetBinding.inflate(layoutInflater)
+    private fun showBottomDialog(bmr: Double?, goals: DailyCalorieGoals?) {
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = DailyCaloriesBottomSheetDialogBinding.inflate(layoutInflater)
         view.close.setOnClickListener {
             dialog.dismiss()
         }
-        view.tvBmiValue.text = goals.toString()
-        view.tvHealthValue.visibility = View.GONE
+        view.bmr.text = "BMR: $bmr"
+        view.maintainWeight.text = String.format("%.2f", goals?.maintainweight) + " cal"
+        view.mildWeightGain.text = String.format("%.2f", goals?.weightGain?.calory) + " cal"
+        view.weightGain.text = String.format("%.2f", goals?.mildWeightGain?.calory) + " cal"
+        view.extremeWeightGain.text =
+            String.format("%.2f", goals?.extremeWeightGain?.calory) + " cal"
+        view.mildWeightLoss.text = String.format("%.2f", goals?.weightLoss?.calory) + " cal"
+        view.weightLoss.text = String.format("%.2f", goals?.mildWeightLoss?.calory) + " cal"
+        view.extremeWeightLoss.text =
+            String.format("%.2f", goals?.extremeWeightLoss?.calory) + " cal"
+
+
+
+        view.imageViewShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            val message =
+                "I measured my daily calories intake using MusclePlay application and it comes out is ${goals?.maintainweight.toString()}"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            requireContext().startActivity(intent)
+        }
+        var flag = 0
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(view.root)
         dialog.show()
@@ -286,7 +308,7 @@ class DailyCaloriesCalculatorFragment : Fragment() {
     private fun observerDailyCaloriesApiResponse() {
         viewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
 
-            showBottomDialog(it.data?.goals)
+            showBottomDialog(it.data?.BMR, it.data?.goals)
         })
     }
 

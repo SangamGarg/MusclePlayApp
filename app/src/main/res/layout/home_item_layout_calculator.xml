@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calculatorLayout"
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvNameOfCalculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="BMI CALCULATOR"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivImageOfCalculator"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bmicalculator" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

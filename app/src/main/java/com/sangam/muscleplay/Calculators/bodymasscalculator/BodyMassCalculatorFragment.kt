@@ -1,5 +1,6 @@
 package com.sangam.muscleplay.Calculators.bodymasscalculator
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -17,9 +18,8 @@ import com.sangam.muscleplay.AppUtils.AppArrays
 import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.UserExtraDetailsScreen.screens.ExtraDetailViewModel
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
-import com.sangam.muscleplay.databinding.FragmentBmiBottomSheetBinding
+import com.sangam.muscleplay.databinding.BottomFatMassBottomSheetDialogBinding
 import com.sangam.muscleplay.databinding.FragmentBodyMassCalculatorBinding
 
 class BodyMassCalculatorFragment : Fragment() {
@@ -32,8 +32,8 @@ class BodyMassCalculatorFragment : Fragment() {
     private var numberPickerArrayWeight = emptyArray<String>()
     private var numberPickerArrayHeight = emptyArray<String>()
     lateinit var selectedItemHeight: String
-    lateinit var gender: String
     lateinit var selectedItemWeight: String
+    lateinit var gender: String
     private var flag = 3
     private var numberPickerArrayNeck = emptyArray<String>()
     private var numberPickerArrayHip = emptyArray<String>()
@@ -78,9 +78,11 @@ class BodyMassCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 1) {
-                    binding.linearlayoutFemale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewFemale.strokeColor = Color.WHITE
+                    binding.tickFemale.visibility = View.GONE
                 }
-                binding.linearlayoutMale.setBackgroundColor(Color.GREEN)
+                binding.cardViewMale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickMale.visibility = View.VISIBLE
                 gender = "male"
                 flag = 0
             }
@@ -91,9 +93,11 @@ class BodyMassCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 0) {
-                    binding.linearlayoutMale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewMale.strokeColor = Color.WHITE
+                    binding.tickMale.visibility = View.GONE
                 }
-                binding.linearlayoutFemale.setBackgroundColor(Color.GREEN)
+                binding.cardViewFemale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickFemale.visibility = View.VISIBLE
                 gender = "female"
                 flag = 1
 
@@ -149,14 +153,46 @@ class BodyMassCalculatorFragment : Fragment() {
     }
 
 
-    private fun showBottomDialog(bodyFat: String?) {
-        val dialog = BottomSheetDialog(requireContext())
-        val view = FragmentBmiBottomSheetBinding.inflate(layoutInflater)
+    private fun showBottomDialog(
+        bodyFat: String?, lean: String?, category: String?, bmi: String?, navy: String?
+    ) {
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = BottomFatMassBottomSheetDialogBinding.inflate(layoutInflater)
         view.close.setOnClickListener {
             dialog.dismiss()
         }
-        view.tvBmiValue.text = bodyFat
-        view.tvHealthValue.visibility = View.GONE
+        view.bodyFatMass.text = bodyFat
+        view.leanBodyMass.text = lean
+//        view.bodyFatCategory.text = category
+        view.bodyFatBMIMethod.text = bmi
+        view.bodyFatUSNavyMethod.text = navy
+
+
+        view.imageViewShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            val message =
+                "I measured my body mass using MusclePlay application and my body mass comes out is $bodyFat"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            requireContext().startActivity(intent)
+        }
+        var flag = 0
+
+        view.moredetails.setOnClickListener {
+            if (flag == 0) {
+                view.imageView1.visibility = View.VISIBLE
+                view.imageView2.visibility = View.VISIBLE
+                view.moredetails.text = "Hide details"
+                flag = 1
+            } else {
+                view.moredetails.text = "More details"
+                view.imageView1.visibility = View.GONE
+                view.imageView2.visibility = View.GONE
+                flag = 0
+            }
+        }
+
+
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(view.root)
         dialog.show()
@@ -167,7 +203,14 @@ class BodyMassCalculatorFragment : Fragment() {
     private fun observerBodyMassApiResponse() {
         homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
 
-            showBottomDialog(it.data?.bodyFatBMIMethod)
+            val bodyMass = it.data?.bodyFatMass
+            val leanBodyMass = it.data?.leanBodyMass
+            val fatCategory = it.data?.bodyFatCategory
+            val bmiMethod = it.data?.bodyFatBMIMethod
+            val navyMethod = it.data?.bodyFatUSNavyMethod
+            showBottomDialog(
+                bodyMass, leanBodyMass, fatCategory, bmiMethod, navyMethod
+            )
         })
     }
 
@@ -221,9 +264,7 @@ class BodyMassCalculatorFragment : Fragment() {
 
     private fun spinnerWaist() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -276,9 +317,7 @@ class BodyMassCalculatorFragment : Fragment() {
 
     private fun spinnerNeck() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -329,9 +368,7 @@ class BodyMassCalculatorFragment : Fragment() {
 
     private fun spinnerHip() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -383,9 +420,7 @@ class BodyMassCalculatorFragment : Fragment() {
 
     private fun spinnerWeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_weight_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_weight_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -426,9 +461,7 @@ class BodyMassCalculatorFragment : Fragment() {
 
     private fun spinnerHeight() {
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)

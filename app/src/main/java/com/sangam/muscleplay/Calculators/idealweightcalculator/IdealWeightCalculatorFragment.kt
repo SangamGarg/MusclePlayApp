@@ -1,24 +1,26 @@
 package com.sangam.muscleplay.Calculators.idealweightcalculator
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sangam.muscleplay.AppUtils.AppArrays
 import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
 import com.sangam.muscleplay.databinding.FragmentIdealWeightCalculatorBinding
+import com.sangam.muscleplay.databinding.IdealWeightLayoutBottomSheetDialogBinding
 
 class IdealWeightCalculatorFragment : Fragment() {
     private val binding by lazy {
@@ -26,7 +28,7 @@ class IdealWeightCalculatorFragment : Fragment() {
     }
     private var numberPickerArray = emptyArray<String>()
     lateinit var viewModel: HomeViewModel
-    lateinit var height: String
+    lateinit var idealWeight: String
     lateinit var gender: String
     private var flag = 3
     lateinit var selectedItem: String
@@ -56,9 +58,11 @@ class IdealWeightCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 1) {
-                    binding.linearlayoutFemale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewFemale.strokeColor = Color.WHITE
+                    binding.tickFemale.visibility = View.GONE
                 }
-                binding.linearlayoutMale.setBackgroundColor(Color.GREEN)
+                binding.cardViewMale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickMale.visibility = View.VISIBLE
                 gender = "male"
                 flag = 0
             }
@@ -69,9 +73,11 @@ class IdealWeightCalculatorFragment : Fragment() {
                     AnimationUtils.loadAnimation(requireContext(), R.anim.bounce)
                 )
                 if (flag == 0) {
-                    binding.linearlayoutMale.setBackgroundColor(Color.WHITE)
+                    binding.cardViewMale.strokeColor = Color.WHITE
+                    binding.tickMale.visibility = View.GONE
                 }
-                binding.linearlayoutFemale.setBackgroundColor(Color.GREEN)
+                binding.cardViewFemale.strokeColor = Color.parseColor("#FFBB86FC")
+                binding.tickFemale.visibility = View.VISIBLE
                 gender = "female"
                 flag = 1
 
@@ -80,7 +86,7 @@ class IdealWeightCalculatorFragment : Fragment() {
 
         binding.calculateIdealWeightButton.setOnClickListener {
             val height = AppConvertUnitsUtil.convertUnitHeight(
-                selectedItem, numberPickerArray, binding.numberPicker
+                selectedItem, numberPickerArray, binding.numberPickerHeight
             )
 //            ToastUtil.makeToast(requireContext(), height)
 
@@ -91,9 +97,7 @@ class IdealWeightCalculatorFragment : Fragment() {
             }
         }
         ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.spinner_length_measurements,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.spinner_length_measurements, R.layout.custom_spinner_layout
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown)
@@ -108,26 +112,26 @@ class IdealWeightCalculatorFragment : Fragment() {
                     "centimeters (cm)" -> {
                         idealWeightCalculatorViewModel.changeToCentimeters()
 
-                        binding.numberPicker.minValue = 0
-                        binding.numberPicker.maxValue = AppArrays.numbersArrayCm.size - 1
-                        binding.numberPicker.displayedValues = AppArrays.numbersArrayCm
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayCm.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayCm
                         numberPickerArray = AppArrays.numbersArrayCm
                     }
 
                     "meters (m)" -> {
                         idealWeightCalculatorViewModel.changeTometers()
-                        binding.numberPicker.minValue = 0
-                        binding.numberPicker.maxValue = AppArrays.numbersArrayMeter.size - 1
-                        binding.numberPicker.displayedValues = AppArrays.numbersArrayMeter
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayMeter.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayMeter
                         numberPickerArray = AppArrays.numbersArrayMeter
 
                     }
 
                     "feet (ft)" -> {
                         idealWeightCalculatorViewModel.changeToFeets()
-                        binding.numberPicker.minValue = 0
-                        binding.numberPicker.maxValue = AppArrays.numbersArrayFeet.size - 1
-                        binding.numberPicker.displayedValues = AppArrays.numbersArrayFeet
+                        binding.numberPickerHeight.minValue = 0
+                        binding.numberPickerHeight.maxValue = AppArrays.numbersArrayFeet.size - 1
+                        binding.numberPickerHeight.displayedValues = AppArrays.numbersArrayFeet
                         numberPickerArray = AppArrays.numbersArrayFeet
 
                     }
@@ -150,10 +154,40 @@ class IdealWeightCalculatorFragment : Fragment() {
 
     private fun observerIdealWeightApiResponse() {
         viewModel.idealWeightResponse.observe(requireActivity(), Observer {
-            height = "${it.data?.hamwi.toString()} kg"
-            ToastUtil.makeToast(requireContext(), height)
+            val hamwi = "${it.data?.hamwi.toString()} kg"
+            val miller = "${it.data?.miller.toString()} kg"
+            val robinson = "${it.data?.robinson.toString()} kg"
+            val devine = "${it.data?.devine.toString()} kg"
+            showBottomDialog(hamwi, miller, robinson, devine)
 
         })
+    }
+
+    private fun showBottomDialog(hamwi: String, miller: String, robinson: String, devine: String) {
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = IdealWeightLayoutBottomSheetDialogBinding.inflate(layoutInflater)
+        view.close.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.hamwi.text = hamwi
+        view.miller.text = miller
+        view.robinson.text = robinson
+        view.devine.text = devine
+
+        view.imageViewShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            val message =
+                "I measured my ideal weight using MusclePlay application and it comes out to be approx. $idealWeight"
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            requireContext().startActivity(intent)
+        }
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(view.root)
+        dialog.show()
+//        val bottomDialogSheet = BmiBottomSheetFragment()
+//        bottomDialogSheet.show(parentFragmentManager, "Bottom Sheet")
     }
 
     private fun callIdealWeightApi(gender: String, height: String) {

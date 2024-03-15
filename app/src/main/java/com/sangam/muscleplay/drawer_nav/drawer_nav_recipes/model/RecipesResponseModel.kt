@@ -1,4 +1,4 @@
-package com.sangam.muscleplay.recipes.model
+package com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.model
 
 import com.google.gson.annotations.SerializedName
 

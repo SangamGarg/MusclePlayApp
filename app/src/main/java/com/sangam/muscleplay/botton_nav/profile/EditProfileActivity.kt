@@ -1,15 +1,11 @@
-package com.sangam.muscleplay
+package com.sangam.muscleplay.botton_nav.profile
 
-import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.R
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.UserDataUtils.model.UserDataExtra
 import com.sangam.muscleplay.databinding.ActivityEditProfileBinding
@@ -39,7 +36,6 @@ class EditProfileActivity : AppCompatActivity() {
         ViewModelProvider(this).get(UserViewModel::class.java)
     }
 
-    private val namePattern = "^[a-zA-Z]+$"
 
     private val emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
@@ -93,9 +89,11 @@ class EditProfileActivity : AppCompatActivity() {
                 }) {
                 binding.EtPhone.error = "Enter Valid Phone No (Only Digits)"
 
-            } else if (!name.matches(namePattern.toRegex())) {
-                binding.EtName.error = "Enter Valid Name (Only Alphabets)"
-            } else if (name.trim().length < 6) {
+            }
+//            else if (!name.matches(namePattern.toRegex())) {
+//                binding.EtName.error = "Enter Valid Name (Only Alphabets)"
+//            }
+            else if (name.trim().length < 6) {
                 binding.EtName.error = "Enter Minimum 6 Characters"
 
             } else if (name.trim().length > 20) {

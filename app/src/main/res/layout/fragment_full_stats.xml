@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Calculators.fullStatsCalculator.FullStatsFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="30dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:gravity="center"
+                android:text="Full Body Stats"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:id="@+id/tickFemale"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="14dp"
+                android:background="@drawable/baseline_check_circle_24"
+                android:backgroundTint="@color/purple_200"
+                android:elevation="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/cardViewFemale"
+                app:layout_constraintTop_toTopOf="@+id/cardViewFemale" />
+
+            <View
+                android:id="@+id/tickMale"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="14dp"
+                android:background="@drawable/baseline_check_circle_24"
+                android:backgroundTint="@color/purple_200"
+                android:elevation="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/cardViewMale"
+                app:layout_constraintTop_toTopOf="@+id/cardViewMale" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/cardViewFemale"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/male" />
+
+                    <TextView
+                        android:id="@+id/tvMale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Male"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cardViewMale"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutFemale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/female" />
+
+                    <TextView
+                        android:id="@+id/tvFemale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Female"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewMale">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Select Your Height"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerHeight"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toTopOf="@+id/spinnerHeight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHeight"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="20dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="12dp"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerHeight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHeight" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/cardView6">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Select Your Weight"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerWeight"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toTopOf="@+id/spinnerWeight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWeight"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="20dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="12dp"
+                        app:np_wrapSelectorWheel="false"
+
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tvUnitsWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="Kg"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerWeight"
+                        app:layout_constraintEnd_toEndOf="@+id/numberPickerWeight"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWeight" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_weight_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="15dp">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/increment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:elevation="0dp"
+                        android:outlineAmbientShadowColor="#00BB86FC"
+                        android:outlineSpotShadowColor="#00BB86FC"
+                        android:src="@drawable/baseline_add_24"
+                        app:backgroundTint="@color/purple_200"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:rippleColor="@color/white"
+                        app:tint="@color/white" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/decrement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:elevation="0dp"
+                        android:outlineAmbientShadowColor="#00BB86FC"
+                        android:outlineSpotShadowColor="#00BB86FC"
+                        android:src="@drawable/baseline_remove_24"
+                        app:backgroundTint="@color/purple_200"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:rippleColor="@color/white"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Choose Your Age"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/tvAgeLive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:text="130"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView8">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvWaist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="Select Your Waist Size"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerWaist"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toTopOf="@+id/spinnerWaist"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWaist"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="20dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="12dp"
+                        app:np_wrapSelectorWheel="false"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tvUnitsWaist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerWaist"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWaist" />
+
+                    <Spinner
+                        android:id="@+id/spinnerWaist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/view7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card"
+                app:layout_constraintTop_toTopOf="@+id/card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvHip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Select Your Hip Size"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerHip"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toTopOf="@+id/spinnerHip"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHip"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="20dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="12dp"
+                        app:np_wrapSelectorWheel="false"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tvUnitsHip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerHip"
+                        app:layout_constraintEnd_toEndOf="@+id/numberPickerHip"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerHip" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerHip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvNeck"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Select Your Neck Size"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerNeck"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toTopOf="@id/spinnerNeck"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNeck"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="20dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="12dp"
+                        app:np_wrapSelectorWheel="false"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tvUnitsNeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="cm"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerNeck"
+                        app:layout_constraintEnd_toEndOf="@+id/numberPickerNeck"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNeck" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerNeck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_length_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/chooseActivityLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:fontFamily="@font/crimson_pro_medium"
+                android:text="Choose Your Activity Level"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card8" />
+
+            <Spinner
+                android:id="@+id/spinnerActivityLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_stroke_rounded"
+                android:entries="@array/spinner_array_activity_level"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chooseActivityLevel" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/red"
+                android:outlineSpotShadowColor="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerActivityLevel">
+
+                <TextView
+                    android:id="@+id/calculateStatsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Calculate"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

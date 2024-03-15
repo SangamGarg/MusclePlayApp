@@ -43,7 +43,7 @@ class SplashScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 observeConnectionInternet()
-            }, 1000
+            }, 500
         )
         return binding.root
     }
