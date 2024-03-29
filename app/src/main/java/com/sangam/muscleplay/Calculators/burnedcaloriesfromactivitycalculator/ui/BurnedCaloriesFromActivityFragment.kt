@@ -44,7 +44,7 @@ class BurnedCaloriesFromActivityFragment : Fragment() {
         binding.searchButton.setOnClickListener {
             val query = binding.searchEt.text.toString()
 
-            if (query.isEmpty()) {
+            if (query.trim().isEmpty()) {
                 binding.searchLayout.isHelperTextEnabled = true
                 binding.searchLayout.helperText = "*Required"
             } else {

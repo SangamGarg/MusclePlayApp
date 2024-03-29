@@ -4,7 +4,327 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".startActivtyCalculateBurnedCalories.StartActivtyBurnedCaloriesActivity">
+    android:background="@color/gray"
+    tools:context=".startActivtyCalculateBurnedCalories.StartActivityBurnedCaloriesActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounder_corners_one_side"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/gray2"
+                android:outlineSpotShadowColor="@color/gray2"
+                android:paddingHorizontal="15dp"
+                android:paddingTop="50dp"
+                android:paddingBottom="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#ECDEFD"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView4"
+                    app:strokeColor="@color/app_main_color">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/ic_arrow_back_24"
+                        app:tint="@color/app_main_color" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/imageView4"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Start an activity"
+                    android:textColor="@color/app_main_color"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/historyButton"
+                    app:layout_constraintStart_toEndOf="@+id/backButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/historyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#ECDEFD"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView4"
+                    app:strokeColor="@color/app_main_color">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/baseline_history_24"
+                        app:tint="@color/app_main_color" />
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chooseActivity">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/crimson_pro_medium"
+                        android:gravity="center"
+                        android:text="Select Your Weight"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:rotation="90"
+                        android:src="@drawable/baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/numberPickerWeight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/numberPickerWeight" />
+
+                    <com.shawnlin.numberpicker.NumberPicker
+                        android:id="@+id/numberPickerWeight"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        app:layout_constraintBottom_toTopOf="@+id/spinnerWeight"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvWeight"
+                        app:np_dividerColor="@color/gray2"
+                        app:np_dividerThickness="0.8dp"
+                        app:np_formatter="@string/number_picker_formatter"
+                        app:np_orientation="vertical"
+                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextSize="30dp"
+                        app:np_textColor="@color/gray2"
+                        app:np_textSize="18dp"
+                        app:np_value="17"
+                        app:np_wrapSelectorWheel="false" />
+
+                    <TextView
+                        android:id="@+id/tvUnitsWeight"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/comic_neue_light"
+                        android:text="Kg"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+
+                    <Spinner
+                        android:id="@+id/spinnerWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_stroke_rounded"
+                        android:entries="@array/spinner_weight_measurements"
+                        android:padding="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/chooseActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                tools:layout_editor_absoluteX="-19dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="30dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:text="Choose an activity"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#ECDEFD"
+                app:cardCornerRadius="60dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView7"
+                app:strokeColor="@color/app_main_color">
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="40dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="00:00:00"
+                    android:textColor="@color/app_main_color"
+                    android:textSize="30sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:id="@+id/buttonReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                android:paddingEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timer">
+
+                <TextView
+                    android:id="@+id/tvReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/baseline_restart_alt_24"
+                    android:drawablePadding="8dp"
+                    android:focusable="true"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Reset Timer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/purple_200"
+                android:outlineSpotShadowColor="@color/purple_200"
+                android:paddingHorizontal="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timer">
+
+                <TextView
+                    android:id="@+id/tvStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Start Timer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/button_background_1"
+                android:elevation="10dp"
+                android:outlineAmbientShadowColor="@color/app_color"
+                android:outlineSpotShadowColor="@color/app_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonStart">
+
+                <TextView
+                    android:id="@+id/calculateButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="See Result"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

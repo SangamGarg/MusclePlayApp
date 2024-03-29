@@ -161,11 +161,11 @@ class BodyMassCalculatorFragment : Fragment() {
         view.close.setOnClickListener {
             dialog.dismiss()
         }
-        view.bodyFatMass.text = bodyFat
-        view.leanBodyMass.text = lean
+        view.bodyFatMass.text = "$bodyFat kg"
+        view.leanBodyMass.text = "$lean kg"
 //        view.bodyFatCategory.text = category
-        view.bodyFatBMIMethod.text = bmi
-        view.bodyFatUSNavyMethod.text = navy
+        view.bodyFatBMIMethod.text = "$bmi %"
+        view.bodyFatUSNavyMethod.text = "$navy %"
 
 
         view.imageViewShare.setOnClickListener {

@@ -57,169 +57,205 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/nameLayout"
-                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/emailLayout"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Type Your Name"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="#D6D6D6"
-                    app:boxCornerRadiusBottomEnd="30dp"
-                    app:boxCornerRadiusBottomStart="30dp"
-                    app:boxCornerRadiusTopEnd="30dp"
-                    app:boxCornerRadiusTopStart="30dp"
-                    app:boxStrokeColor="@color/app_main_color"
-                    app:boxStrokeErrorColor="@color/app_main_color"
-                    app:boxStrokeWidth="0dp"
-                    app:errorTextColor="@color/red"
-                    app:hintTextColor="@color/black">
+                    app:cardCornerRadius="35dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/nameET"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nameLayout"
+                        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
-                        android:inputType="textCapWords"
-                        android:maxLength="100"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/black" />
+                        android:layout_above="@id/emailLayout"
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="Type Your Name"
+                        android:textColorHint="@color/black"
+                        app:boxBackgroundColor="#D6D6D6"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeColor="#D6D6D6"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="0dp"
+                        app:errorTextColor="@color/red"
+                        app:hintTextColor="@color/black">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/emailLayout"
-                    style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nameET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="20dp"
+                            android:inputType="textCapWords"
+                            android:maxLength="100"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/black" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@id/phoneLayout"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Type Your Email"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="#D6D6D6"
-                    app:boxCornerRadiusBottomEnd="30dp"
-                    app:boxCornerRadiusBottomStart="30dp"
-                    app:boxCornerRadiusTopEnd="30dp"
-                    app:boxCornerRadiusTopStart="30dp"
-                    app:boxStrokeColor="@color/app_main_color"
-                    app:boxStrokeErrorColor="@color/app_main_color"
-                    app:boxStrokeWidth="0dp"
-                    app:errorTextColor="@color/red"
-                    app:hintTextColor="@color/black">
+                    app:cardCornerRadius="35dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/emailEt"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailLayout"
+                        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
-                        android:inputType="textEmailAddress"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/black" />
+                        android:layout_above="@id/phoneLayout"
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:hint="Type Your Email"
+                        android:textColorHint="@color/black"
+                        app:boxBackgroundColor="#D6D6D6"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeColor="#D6D6D6"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="0dp"
+                        app:errorTextColor="@color/red"
+                        app:hintTextColor="@color/black">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneLayout"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/emailEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="20dp"
+                            android:inputType="textEmailAddress"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/black" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/passwordLayout"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Type Your Phone Number"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="#D6D6D6"
-                    app:boxCornerRadiusBottomEnd="30dp"
-                    app:boxCornerRadiusBottomStart="30dp"
-                    app:boxCornerRadiusTopEnd="30dp"
-                    app:boxCornerRadiusTopStart="30dp"
-                    app:boxStrokeColor="@color/app_main_color"
-                    app:boxStrokeErrorColor="@color/app_main_color"
-                    app:boxStrokeWidth="0dp"
-                    app:errorTextColor="@color/red"
-                    app:hintTextColor="@color/black">
+                    app:cardCornerRadius="35dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phoneEt"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phoneLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_above="@+id/passwordLayout"
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/passwordLayout"
+                        android:hint="Type Your Phone Number"
+                        android:textColorHint="@color/black"
+                        app:boxBackgroundColor="#D6D6D6"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeColor="#D6D6D6"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="0dp"
+                        app:errorTextColor="@color/red"
+                        app:hintTextColor="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/phoneEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="20dp"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_above="@+id/confirmPasswordLayout"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Type Your Password"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="#D6D6D6"
-                    app:boxCornerRadiusBottomEnd="30dp"
-                    app:boxCornerRadiusBottomStart="30dp"
-                    app:boxCornerRadiusTopEnd="30dp"
-                    app:boxCornerRadiusTopStart="30dp"
-                    app:boxStrokeColor="@color/app_main_color"
-                    app:boxStrokeErrorColor="@color/app_main_color"
-                    app:boxStrokeWidth="0dp"
-                    app:errorTextColor="@color/red"
-                    app:hintTextColor="@color/black"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/black">
+                    app:cardCornerRadius="35dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/passET"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/passwordLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
+                        android:layout_above="@+id/confirmPasswordLayout"
+                        android:hint="Type Your Password"
+                        android:textColorHint="@color/black"
+                        app:boxBackgroundColor="#D6D6D6"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeColor="#D6D6D6"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="0dp"
+                        app:errorTextColor="@color/red"
+                        app:hintTextColor="@color/black"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/black">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/passET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="20dp"
+                            android:inputType="textPassword"
+                            android:paddingEnd="40dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="20dp"
+                    app:cardCornerRadius="35dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/confirmPasswordLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/btnSignUp"
+
+                        android:hint="Confirm Your Password"
                         android:inputType="textPassword"
-                        android:paddingEnd="40dp"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:textColorHint="@color/black"
+                        app:boxBackgroundColor="#D6D6D6"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeColor="#D6D6D6"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:boxStrokeWidth="0dp"
+                        app:errorTextColor="@color/red"
+                        app:hintTextColor="@color/black"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/black">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/confirmPasswordLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/btnSignUp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="Confirm Your Password"
-                    android:inputType="textPassword"
-                    android:textColorHint="@color/black"
-                    app:boxBackgroundColor="#D6D6D6"
-                    app:boxCornerRadiusBottomEnd="30dp"
-                    app:boxCornerRadiusBottomStart="30dp"
-                    app:boxCornerRadiusTopEnd="30dp"
-                    app:boxCornerRadiusTopStart="30dp"
-                    app:boxStrokeColor="@color/app_main_color"
-                    app:boxStrokeErrorColor="@color/app_main_color"
-                    app:boxStrokeWidth="0dp"
-                    app:errorTextColor="@color/red"
-                    app:hintTextColor="@color/black"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/black">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/confirmPassEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="20dp"
+                            android:inputType="textPassword"
+                            android:paddingEnd="40dp"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/confirmPassEt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
-                        android:inputType="textPassword"
-                        android:paddingEnd="40dp"
-                        android:paddingBottom="20dp"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/btnSignUp"

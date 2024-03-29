@@ -343,29 +343,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-//    private fun fetchUserData() {
-//        val userId = auth.currentUser!!.uid
-//        database.collection("users").orderBy("userId") // Order the documents by the userId field
-//            .whereEqualTo("userId", userId) // Filter to get only the current user's data
-//            .limit(1) // Limit to 1 because we're fetching the current user's data
-//            .get().addOnSuccessListener { documents ->
-//                for (document in documents) {
-//                    val name = document.getString("name") ?: ""
-//                    val email = document.getString("email") ?: ""
-//                    Log.d("NAMEANDEMAIL", "${name}  AND   ${email}   ")
-//                    userViewModel.setUserData(name, email)
-//
-//                    headerViewName.text = name
-//                    headerViewEmail.text = email
-//                }
-//            }.addOnFailureListener { exception ->
-//                Toast.makeText(
-//                    context, "Error fetching user data: ${exception.message}", Toast.LENGTH_SHORT
-//                ).show()
-//            }
-//    }
-
     //
     private fun addImageOnAutoImageSlider() {
         // add some images or titles (text) inside the imagesArrayList
@@ -440,6 +417,12 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun observerBodyFatApiResponse() {
+        homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
+            binding.tvBodyFatPercentage.text = it.data?.bodyFatBMIMethod.toString()
+        })
+    }
+
     private fun observerDailyCaloriesApiResponse() {
         homeViewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
             when (goal) {
@@ -465,12 +448,6 @@ class HomeFragment : Fragment() {
         })
     }
 
-
-    private fun observerBodyFatApiResponse() {
-        homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
-            binding.tvBodyFatPercentage.text = it.data?.bodyFatBMIMethod.toString()
-        })
-    }
 
     private fun observerProgressResponse() {
         userViewModel.showProgress.observe(requireActivity(), Observer {

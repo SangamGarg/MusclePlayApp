@@ -56,11 +56,9 @@
         android:layout_height="wrap_content"
         android:outlineAmbientShadowColor="@color/purple_200"
         android:outlineSpotShadowColor="@color/purple_200"
-        app:cardBackgroundColor="#FF2C2C"
         app:cardCornerRadius="35dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
-        app:helperTextTextColor="#F82B2B"
         app:layout_constraintTop_toBottomOf="@+id/textView28">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -70,11 +68,12 @@
             android:layout_height="wrap_content"
             android:hint="Search Here..."
             android:textColorHint="@color/black"
+            app:helperTextTextColor="#F82B2B"
             app:boxBackgroundColor="#FFFFFF"
             app:boxStrokeColor="@color/app_main_color"
             app:boxStrokeErrorColor="@color/app_main_color"
             app:boxStrokeWidth="0dp"
-            app:errorTextColor="@color/red"
+            app:errorTextColor="@color/app_color"
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -99,8 +98,8 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_background_1"
         android:elevation="10dp"
-        android:outlineAmbientShadowColor="@color/red"
-        android:outlineSpotShadowColor="@color/red"
+        android:outlineAmbientShadowColor="@color/app_color"
+        android:outlineSpotShadowColor="@color/app_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">

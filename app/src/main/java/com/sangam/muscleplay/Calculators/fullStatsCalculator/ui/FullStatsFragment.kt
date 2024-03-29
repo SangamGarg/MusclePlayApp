@@ -1,5 +1,6 @@
-package com.sangam.muscleplay.Calculators.fullStatsCalculator
+package com.sangam.muscleplay.Calculators.fullStatsCalculator.ui
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,23 +11,30 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sangam.muscleplay.AppUtils.AppArrays
 import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.Calculators.bodymasscalculator.BodyMassViewModel
+import com.sangam.muscleplay.Calculators.fullStatsCalculator.viewModel.FullStatsViewModel
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.botton_nav.home.viewmodel.HomeViewModel
-import com.sangam.muscleplay.databinding.FragmentBmiBottomSheetBinding
+import com.sangam.muscleplay.botton_nav.home.model.BmiResponseModel
+import com.sangam.muscleplay.botton_nav.home.model.BodyFatPercentageResponseModel
+import com.sangam.muscleplay.botton_nav.home.model.DailyCalorieRequirementsResponseModel
+import com.sangam.muscleplay.botton_nav.home.model.IdealWeightResponseModel
 import com.sangam.muscleplay.databinding.FragmentFullStatsBinding
+import com.sangam.muscleplay.databinding.FullStatsBottomSheetDialogBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class FullStatsFragment : Fragment() {
     private val binding by lazy {
         FragmentFullStatsBinding.inflate(layoutInflater)
     }
-    lateinit var homeViewModel: HomeViewModel
+    private lateinit var fullStatsViewModel: FullStatsViewModel
     private lateinit var viewModel: BodyMassViewModel
     private var numberPickerArrayWeight = emptyArray<String>()
     private var numberPickerArrayHeight = emptyArray<String>()
@@ -41,14 +49,18 @@ class FullStatsFragment : Fragment() {
     lateinit var selectedItemHip: String
     lateinit var selectedItemWaist: String
     lateinit var activityLevel: String
+    private lateinit var bmiResponse: BmiResponseModel
+    private lateinit var idealWeightResponse: IdealWeightResponseModel
+    private lateinit var bodyFatResponse: BodyFatPercentageResponseModel
+    private lateinit var dailyCaloriesResponse: DailyCalorieRequirementsResponseModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        fullStatsViewModel = ViewModelProvider(requireActivity())[FullStatsViewModel::class.java]
         viewModel = ViewModelProvider(requireActivity())[BodyMassViewModel::class.java]
-        val view = inflater.inflate(R.layout.fragment_full_stats, container, false)
+        inflater.inflate(R.layout.fragment_full_stats, container, false)
         initListener()
 
         spinnerWaist()
@@ -63,6 +75,15 @@ class FullStatsFragment : Fragment() {
 
         spinnerHeight()
         spinnerWeight()
+
+
+
+        observerErrorMessageApiResponse()
+        observerBmiApiResponse()
+        observerIdealWeightApiResponse()
+        observerDailyCaloriesApiResponse()
+        observerBodyFatApiResponse()
+        observerProgressResponse()
 
         return binding.root
     }
@@ -113,8 +134,7 @@ class FullStatsFragment : Fragment() {
                 override fun onItemSelected(
                     parent: AdapterView<*>?, view: View?, position: Int, id: Long
                 ) {
-                    val selectedItem = parent?.getItemAtPosition(position).toString()
-                    when (selectedItem) {
+                    when (parent?.getItemAtPosition(position).toString()) {
                         "Sedentary: little or no exercise" -> activityLevel = "level_1"
                         "Exercise 1–3 times/week" -> activityLevel = "level_2"
                         "Exercise 4–5 times/week" -> activityLevel = "level_3"
@@ -154,7 +174,9 @@ class FullStatsFragment : Fragment() {
             if (flag == 3) {
                 ToastUtil.makeToast(requireContext(), "Please select a gender")
             } else {
-
+                CoroutineScope(Dispatchers.Main).launch {
+                    callAllApi(age, weight, height, neck, waist, hip)
+                }
             }
         }
 
@@ -180,22 +202,133 @@ class FullStatsFragment : Fragment() {
 
     }
 
+    private suspend fun callAllApi(
+        age: String, weight: String, height: String, neck: String, waist: String, hip: String
+    ) {
+        // Use CoroutineScope to launch a coroutine
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            // Use async to call each API asynchronously
+            val bmiDeferred = async { fullStatsViewModel.callBmiApi(age, weight, height) }
+            val idealWeightDeferred =
+                async { fullStatsViewModel.callIdealWeightApi(gender, height) }
+            val dailyCaloriesDeferred = async {
+                fullStatsViewModel.callDailyCaloriesApi(
+                    age, gender, height, weight, activityLevel
+                )
+            }
+            val bodyFatDeferred = async {
+                fullStatsViewModel.callBodyFatApi(
+                    age, gender, weight, height, neck, waist, hip
+                )
+            }
+
+            // Await for all API calls to finish
+            bmiDeferred.await()
+            idealWeightDeferred.await()
+            dailyCaloriesDeferred.await()
+            bodyFatDeferred.await()
+
+            // Handle error case if any API call fails
+        }
+        job.join()
+        showBottomDialog()
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showBottomDialog(
+    ) {
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+        val view = FullStatsBottomSheetDialogBinding.inflate(layoutInflater)
+        view.close.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.bodyFatMass.text = "${bodyFatResponse.data?.bodyFatMass} kg"
+        view.leanBodyMass.text = "${bodyFatResponse.data?.leanBodyMass} kg"
+//        view.bodyFatCategory.text = category
+        view.bodyFatBMIMethod.text = "${bodyFatResponse.data?.bodyFatBMIMethod} %"
+        view.bodyFatUSNavyMethod.text = "${bodyFatResponse.data?.bodyFatUSNavyMethod} %"
+
+
+
+        view.tvBmiValue.text = bmiResponse.data?.bmi.toString()
+        view.tvBmiHealthValue.text = "(${bmiResponse.data?.health.toString()})"
+
+
+
+        view.hamwi.text = "${idealWeightResponse.data?.hamwi.toString()} kg"
+        view.miller.text = "${idealWeightResponse.data?.miller.toString()} kg"
+        view.robinson.text = "${idealWeightResponse.data?.robinson.toString()} kg"
+        view.devine.text = "${idealWeightResponse.data?.devine.toString()} kg"
+
+
+        view.bmr.text = "BMR: ${dailyCaloriesResponse.data?.BMR}"
+        view.maintainWeight.text =
+            String.format("%.2f", dailyCaloriesResponse.data?.goals?.maintainweight) + " cal"
+        view.mildWeightGain.text =
+            String.format("%.2f", dailyCaloriesResponse.data?.goals?.weightGain?.calory) + " cal"
+        view.weightGain.text = String.format(
+            "%.2f", dailyCaloriesResponse.data?.goals?.mildWeightGain?.calory
+        ) + " cal"
+        view.extremeWeightGain.text = String.format(
+            "%.2f", dailyCaloriesResponse.data?.goals?.extremeWeightGain?.calory
+        ) + " cal"
+        view.mildWeightLoss.text =
+            String.format("%.2f", dailyCaloriesResponse.data?.goals?.weightLoss?.calory) + " cal"
+        view.weightLoss.text = String.format(
+            "%.2f", dailyCaloriesResponse.data?.goals?.mildWeightLoss?.calory
+        ) + " cal"
+        view.extremeWeightLoss.text = String.format(
+            "%.2f", dailyCaloriesResponse.data?.goals?.extremeWeightLoss?.calory
+        ) + " cal"
+
+
+//        view.imageViewShare.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_SEND)
+//            intent.type = "text/plain"
+//            val message =
+//                "I measured my body mass using MusclePlay application and my body mass comes out is $bodyFat"
+//            intent.putExtra(Intent.EXTRA_TEXT, message)
+//            requireContext().startActivity(intent)
+//        }
+        var flag = 0
+
+        view.moredetails.setOnClickListener {
+            if (flag == 0) {
+                view.imageView1.visibility = View.VISIBLE
+                view.imageView2.visibility = View.VISIBLE
+                view.moredetails.text = "Hide details"
+                flag = 1
+            } else {
+                view.moredetails.text = "More details"
+                view.imageView1.visibility = View.GONE
+                view.imageView2.visibility = View.GONE
+                flag = 0
+            }
+        }
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(view.root)
+        dialog.show()
+//        val bottomDialogSheet = BmiBottomSheetFragment()
+//        bottomDialogSheet.show(parentFragmentManager, "Bottom Sheet")
+    }
+
     private fun observeWaistUnit() {
-        viewModel.measureWaist.observe(viewLifecycleOwner, Observer {
+        viewModel.measureWaist.observe(viewLifecycleOwner) {
             binding.tvUnitsWaist.text = it
-        })
+        }
     }
 
     private fun observeHipUnit() {
-        viewModel.measureHip.observe(viewLifecycleOwner, Observer {
+        viewModel.measureHip.observe(viewLifecycleOwner) {
             binding.tvUnitsHip.text = it
-        })
+        }
     }
 
     private fun observeNeckUnit() {
-        viewModel.measureNeck.observe(viewLifecycleOwner, Observer {
+        viewModel.measureNeck.observe(viewLifecycleOwner) {
             binding.tvUnitsNeck.text = it
-        })
+        }
     }
 
     private fun spinnerWaist() {
@@ -447,18 +580,90 @@ class FullStatsFragment : Fragment() {
     }
 
     private fun observeWeightUnit() {
-        viewModel.measureWeight.observe(viewLifecycleOwner, Observer {
+        viewModel.measureWeight.observe(viewLifecycleOwner) {
             binding.tvUnitsWeight.text = it
-        })
+        }
     }
 
     private fun observeHeightUnit() {
-        viewModel.measureHeight.observe(viewLifecycleOwner, Observer {
+        viewModel.measureHeight.observe(viewLifecycleOwner) {
             binding.tvUnitsHeight.text = it
-        })
+        }
     }
 
-    fun setText() {
+    private fun setText() {
         binding.tvAgeLive.text = viewModel.age.toString()
+    }
+
+    private fun observerBmiApiResponse() {
+        fullStatsViewModel.bmiResponse.observe(viewLifecycleOwner) {
+            bmiResponse = it
+        }
+    }
+
+    private fun observerIdealWeightApiResponse() {
+        fullStatsViewModel.idealWeightResponse.observe(viewLifecycleOwner) {
+            idealWeightResponse = it
+        }
+    }
+
+    private fun observerBodyFatApiResponse() {
+        fullStatsViewModel.bodyFatResponse.observe(viewLifecycleOwner) {
+            bodyFatResponse = it
+        }
+    }
+
+    private fun observerDailyCaloriesApiResponse() {
+        fullStatsViewModel.dailyCaloriesResponse.observe(viewLifecycleOwner) {
+            dailyCaloriesResponse = it
+
+        }
+    }
+
+
+    private fun observerErrorMessageApiResponse() {
+        fullStatsViewModel.errorMessage.observe(viewLifecycleOwner) {
+            ToastUtil.makeToast(requireContext(), it)
+        }
+    }
+
+    private fun observerProgressResponse() {
+        fullStatsViewModel.showProgressBmi.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+        fullStatsViewModel.showProgressIdealWeight.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+
+        fullStatsViewModel.showProgressDalyCalories.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+        fullStatsViewModel.showProgressBodyFat.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.mainView.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.mainView.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 }

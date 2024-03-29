@@ -35,9 +35,11 @@ import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.UserDataUtils.UserViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity
+import com.sangam.muscleplay.botton_nav.profile.MyProgress.MyProgressActivity
 import com.sangam.muscleplay.botton_nav.profile.MyReport.ui.MyReportActivity
 import com.sangam.muscleplay.databinding.FragmentNotificationsBinding
 import com.sangam.muscleplay.databinding.PasswordUpdateDialogBinding
+import com.sangam.muscleplay.startActivtyCalculateBurnedCalories.StartActivityBurnedCaloriesActivity
 import java.io.File
 
 class ProfileFragment : Fragment() {
@@ -176,11 +178,14 @@ class ProfileFragment : Fragment() {
             ToastUtil.makeToast(requireContext(), "Soon....")
         }
 
-        binding.tvEditProfile.setOnClickListener {
+        binding.ivEditProfileCircle.setOnClickListener {
             IntentUtil.startIntent(requireContext(), EditProfileActivity())
         }
-        binding.tvMyReport.setOnClickListener {
-            IntentUtil.startIntent(requireContext(), MyReportActivity())
+        binding.tvMyProgress.setOnClickListener {
+            IntentUtil.startIntent(requireContext(), MyProgressActivity())
+        }
+        binding.tvStartActivity.setOnClickListener {
+            IntentUtil.startIntent(requireContext(), StartActivityBurnedCaloriesActivity())
         }
         binding.tvLogout.setOnClickListener {
             logoutAlertDialog()

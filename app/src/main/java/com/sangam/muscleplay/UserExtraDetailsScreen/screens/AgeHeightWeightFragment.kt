@@ -24,10 +24,11 @@ class AgeHeightWeightFragment : Fragment() {
         FragmentAgeHeightWeightBinding.inflate(layoutInflater)
     }
     private var numberPickerArrayWeight = emptyArray<String>()
+    lateinit var selectedItemWeight: String
+
     private var numberPickerArrayHeight = emptyArray<String>()
     lateinit var viewModel: ExtraDetailViewModel
     lateinit var selectedItemHeight: String
-    lateinit var selectedItemWeight: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {

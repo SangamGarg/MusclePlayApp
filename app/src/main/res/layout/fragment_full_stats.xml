@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Calculators.fullStatsCalculator.FullStatsFragment">
+    tools:context=".Calculators.fullStatsCalculator.ui.FullStatsFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -681,8 +681,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background_1"
                 android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/red"
-                android:outlineSpotShadowColor="@color/red"
+                android:outlineAmbientShadowColor="@color/app_color"
+                android:outlineSpotShadowColor="@color/app_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

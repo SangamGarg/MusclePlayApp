@@ -56,12 +56,9 @@
         android:layout_height="wrap_content"
         android:outlineAmbientShadowColor="@color/purple_200"
         android:outlineSpotShadowColor="@color/purple_200"
-        app:cardBackgroundColor="#FF2C2C"
         app:cardCornerRadius="35dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
-        app:helperTextTextColor="#F82B2B"
-
         app:layout_constraintTop_toBottomOf="@+id/textView28">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -75,7 +72,8 @@
             app:boxStrokeColor="@color/app_main_color"
             app:boxStrokeErrorColor="@color/app_main_color"
             app:boxStrokeWidth="0dp"
-            app:errorTextColor="@color/red"
+            app:errorTextColor="@color/app_color"
+            app:helperTextTextColor="#F82B2B"
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -92,43 +90,43 @@
     </com.google.android.material.card.MaterialCardView>
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/button_background_1"
-                android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/red"
-                android:outlineSpotShadowColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background_1"
+        android:elevation="10dp"
+        android:outlineAmbientShadowColor="@color/app_color"
+        android:outlineSpotShadowColor="@color/app_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-                <TextView
-                    android:id="@+id/searchButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:fontFamily="@font/crimson_pro_medium"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="Search"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/crimson_pro_medium"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            </LinearLayout>
+    </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

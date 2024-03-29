@@ -90,6 +90,12 @@ object AppArrays {
         "1.30"
     )
 
+//    val numbersArrayInch2080 = arrayOf(
+//
+//    )
+//    val numbersArrayInch40130 = arrayOf(
+//
+//    )
 
     val numbersArrayKg = arrayOf(
         "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",

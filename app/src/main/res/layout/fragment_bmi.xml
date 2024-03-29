@@ -410,8 +410,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background_1"
                 android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/red"
-                android:outlineSpotShadowColor="@color/red"
+                android:outlineAmbientShadowColor="@color/app_color"
+                android:outlineSpotShadowColor="@color/app_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -427,7 +427,7 @@
                     android:padding="10dp"
                     android:text="Calculate"
                     android:textAllCaps="false"
-                    android:textColor="#B3FFFFFF"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

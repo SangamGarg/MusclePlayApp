@@ -93,7 +93,7 @@
         tools:layout="@layout/fragment_calories_in_food_calculator" />
     <fragment
         android:id="@+id/fullStatsFragment"
-        android:name="com.sangam.muscleplay.Calculators.fullStatsCalculator.FullStatsFragment"
+        android:name="com.sangam.muscleplay.Calculators.fullStatsCalculator.ui.FullStatsFragment"
         android:label="fragment_full_stats"
         tools:layout="@layout/fragment_full_stats" />
 </navigation>

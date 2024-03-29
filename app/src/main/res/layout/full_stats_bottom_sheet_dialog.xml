@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/bottom_sheet_background"
+                android:padding="5dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBmiHealthValue">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/ivBmi"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/bmimeter"
+                            app:layout_constraintDimensionRatio="3:1"
+                            app:layout_constraintTop_toBottomOf="@+id/bmiKnowMore" />
+
+                        <TextView
+                            android:id="@+id/bmiKnowMore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="More About BMI (Body Mass Index)"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="@string/about_bmi"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivBmi" />
+
+                        <!--                    <ImageView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="wrap_content"-->
+                        <!--                        android:layout_marginTop="10dp"-->
+                        <!--                        android:layout_marginBottom="5dp"-->
+                        <!--                        android:src="@drawable/baseline_share_24"-->
+                        <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                        app:layout_constraintTop_toBottomOf="@+id/tvAboutBmi" />-->
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/bmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Your BMI result"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvBmiValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bmi" />
+
+                <TextView
+                    android:id="@+id/tvBmiHealthValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/comic_neue_light"
+                    android:text="Health Value"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBmiValue" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F8F7F7"
+                android:padding="5dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/robinson">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"
+                        android:padding="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/imageViewIdeal"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:cardCornerRadius="15dp"
+                            app:layout_constraintDimensionRatio="3:1"
+                            app:layout_constraintTop_toBottomOf="@+id/tvknowMoreIdealWeight">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/idealweight" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <TextView
+                            android:id="@+id/tvknowMoreIdealWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="More About Ideal Weight"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAboutIdealWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="@string/about_ideal_weight"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageViewIdeal" />
+
+                        <!--                        <ImageView-->
+                        <!--                            android:id="@+id/imageViewShare"-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:layout_marginBottom="5dp"-->
+                        <!--                            android:src="@drawable/baseline_share_24"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toBottomOf="@+id/tvAboutBmi" />-->
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Your Ideal Weight Result"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/hamwi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+                <TextView
+                    android:id="@+id/devine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hamwi" />
+
+                <TextView
+                    android:id="@+id/miller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/devine" />
+
+                <TextView
+                    android:id="@+id/robinson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/miller" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Hamwi"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Devine"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hamwi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Miller"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/devine" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Robinson"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/miller" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F8F7F7"
+                android:padding="5dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/extremeWeightGain">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"
+                        android:padding="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/imageViewDC"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:cardCornerRadius="15dp"
+                            app:layout_constraintDimensionRatio="3:1"
+                            app:layout_constraintTop_toBottomOf="@+id/tvknowMoreDC">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/dailycalories" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <TextView
+                            android:id="@+id/tvknowMoreDC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="More About Daily Calories"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAboutDailyCalories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="@string/about_daily_calories"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageViewDC" />
+
+                        <!--                        <ImageView-->
+                        <!--                            android:id="@+id/imageViewShare"-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_marginTop="10dp"-->
+                        <!--                            android:layout_marginBottom="5dp"-->
+                        <!--                            android:src="@drawable/baseline_share_24"-->
+                        <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                        <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                        <!--                            app:layout_constraintTop_toBottomOf="@+id/tvAboutBmi" />-->
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Your Daily Calories Result"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bmr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/maintainWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/weightLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/maintainWeight" />
+
+                <TextView
+                    android:id="@+id/mildWeightLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weightLoss" />
+
+                <TextView
+                    android:id="@+id/extremeWeightLoss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mildWeightLoss" />
+
+
+                <TextView
+                    android:id="@+id/weightGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/extremeWeightLoss" />
+
+                <TextView
+                    android:id="@+id/mildWeightGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weightGain" />
+
+                <TextView
+                    android:id="@+id/extremeWeightGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mildWeightGain" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Maintain Weight"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Mild weight loss (0.25 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/maintainWeight" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Weight loss (0.5 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weightLoss" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Extreme weight loss (1 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mildWeightLoss" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Mild weight gain (0.25 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/extremeWeightLoss" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Weight gain (0.5 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weightGain" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Extreme weight gain (1 kg/week)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mildWeightGain" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F8F7F7"
+                android:padding="5dp">
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/leanBodyMass">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/gray"
+                        android:padding="10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            app:cardCornerRadius="15dp"
+                            app:layout_constraintDimensionRatio="3:1"
+                            app:layout_constraintTop_toBottomOf="@+id/tvknowMore">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/body_fat_percentage" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <TextView
+                            android:id="@+id/tvknowMore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="More About Body Fat"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvAboutBmi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="@string/about_body_fat"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                        <ImageView
+                            android:id="@+id/imageViewShare"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/baseline_share_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvAboutBmi" />
+
+                        <TextView
+                            android:id="@+id/moredetails"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/comic_neue_light"
+                            android:text="More Details"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageViewShare" />
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/imageView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:visibility="gone"
+                            app:cardCornerRadius="15dp"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintTop_toBottomOf="@+id/moredetails">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/male_body_fat" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="10dp"
+                            android:visibility="gone"
+                            app:cardCornerRadius="15dp"
+                            app:layout_constraintDimensionRatio="1:1"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView1">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/female_body_fat" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Your Body Fat Result"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bodyFatBMIMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/bodyFatUSNavyMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatBMIMethod" />
+
+                <TextView
+                    android:id="@+id/bodyFatCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatUSNavyMethod" />
+
+                <TextView
+                    android:id="@+id/bodyFatMass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatCategory" />
+
+
+                <TextView
+                    android:id="@+id/leanBodyMass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="marquee"
+
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Bmi Value"
+                    android:textColor="@color/black"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatMass" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Body Fat (BMI Method)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Body Fat (US Navy Method)"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatBMIMethod" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Body Fat Category"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatUSNavyMethod" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Body Fat Mass"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatCategory" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="marquee"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="Lean Body Mass"
+                    android:textColor="@color/gray2"
+                    android:textIsSelectable="true"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bodyFatMass" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_close_24"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nestedScrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

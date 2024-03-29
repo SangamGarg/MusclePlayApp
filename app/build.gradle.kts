@@ -90,4 +90,7 @@ dependencies {
     //Refresh Layout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 
+    //Gemini AI
+    implementation("com.google.ai.client.generativeai:generativeai:0.2.2")
+
 }
