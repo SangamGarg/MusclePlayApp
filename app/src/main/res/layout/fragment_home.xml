@@ -156,7 +156,7 @@
             android:outlineAmbientShadowColor="@color/gray2"
             android:outlineSpotShadowColor="@color/gray2"
             android:paddingHorizontal="15dp"
-            android:paddingVertical="50dp"
+            android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -173,8 +173,8 @@
                     android:id="@+id/ivProfileHome"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:outlineAmbientShadowColor="@color/app_color"
-                    android:outlineSpotShadowColor="@color/app_color"
+                    android:outlineAmbientShadowColor="@color/app_main_color"
+                    android:outlineSpotShadowColor="@color/app_main_color"
                     android:src="@drawable/profile"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="0.3dp" />

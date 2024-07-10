@@ -3,9 +3,7 @@ package com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.repositor
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
-import com.example.muscleplay.Retrofit.RetrofitUtilClass
-import com.sangam.muscleplay.Calculators.caloryinfoodcalculator.model.CaloriesInFoodResponseModel
-import com.sangam.muscleplay.Calculators.caloryinfoodcalculator.network.CaloiresInFoodService
+import com.sangam.muscleplay.retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.model.AiChatBotRequestBodyModel
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.model.AiChatBotResponseModel
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.network.AiChatBotNetworkService

@@ -1,18 +1,12 @@
 package com.sangam.muscleplay.Calculators.fullStatsCalculator.fullstatsrepository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
-import com.example.muscleplay.Retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.Calculators.fullStatsCalculator.network.FullStatsNetworkService
 import com.sangam.muscleplay.botton_nav.home.model.BmiResponseModel
 import com.sangam.muscleplay.botton_nav.home.model.BodyFatPercentageResponseModel
 import com.sangam.muscleplay.botton_nav.home.model.DailyCalorieRequirementsResponseModel
 import com.sangam.muscleplay.botton_nav.home.model.IdealWeightResponseModel
-import com.sangam.muscleplay.botton_nav.home.network.HomeService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

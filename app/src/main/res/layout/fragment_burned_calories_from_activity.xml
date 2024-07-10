@@ -73,7 +73,7 @@
             app:boxStrokeColor="@color/app_main_color"
             app:boxStrokeErrorColor="@color/app_main_color"
             app:boxStrokeWidth="0dp"
-            app:errorTextColor="@color/app_color"
+            app:errorTextColor="@color/app_main_color"
             app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -98,8 +98,8 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/button_background_1"
         android:elevation="10dp"
-        android:outlineAmbientShadowColor="@color/app_color"
-        android:outlineSpotShadowColor="@color/app_color"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">

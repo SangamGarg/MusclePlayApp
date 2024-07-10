@@ -16,8 +16,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:outlineAmbientShadowColor="@color/app_color"
-            android:outlineSpotShadowColor="@color/app_color"
+            android:outlineAmbientShadowColor="@color/app_main_color"
+            android:outlineSpotShadowColor="@color/app_main_color"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp"
             app:cardUseCompatPadding="true">
@@ -37,7 +37,7 @@
                     android:fontFamily="@font/crimson_pro_medium"
                     android:gravity="center"
                     android:text="History"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/app_main_color"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"

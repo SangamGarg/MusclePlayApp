@@ -3,8 +3,7 @@ package com.sangam.muscleplay.botton_nav.home.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
-import com.example.muscleplay.Retrofit.RetrofitUtilClass
-import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.botton_nav.home.model.BmiResponseModel
 import com.sangam.muscleplay.botton_nav.home.model.BodyFatPercentageResponseModel
 import com.sangam.muscleplay.botton_nav.home.model.DailyCalorieRequirementsResponseModel
@@ -26,7 +25,7 @@ class HomeRepository {
     var bodyFatResponse = MutableLiveData<BodyFatPercentageResponseModel>()
 
 
-     fun bmiApiResponse(age: String?, weight: String?, height: String?) {
+    fun bmiApiResponse(age: String?, weight: String?, height: String?) {
         showProgressBmi.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         val call = client.callBmiApi(age, weight, height)
@@ -45,6 +44,8 @@ class HomeRepository {
             }
 
             override fun onFailure(call: Call<BmiResponseModel>, t: Throwable) {
+                Log.d("BMIRESPONSE", t.message.toString())
+
                 showProgressBmi.postValue(false)
                 errorMessage.postValue("Server error please try after sometime")
             }
@@ -54,7 +55,7 @@ class HomeRepository {
     }
 
 
-     fun idealWeightApiResponse(gender: String?, height: String?) {
+    fun idealWeightApiResponse(gender: String?, height: String?) {
         showProgressIdealWeight.value = true
         val client = RetrofitUtilClass.getRetrofit(AppUrls.RAPIDAPI).create(HomeService::class.java)
         val call = client.callIdealWeightApi(gender, height)
@@ -73,6 +74,8 @@ class HomeRepository {
             }
 
             override fun onFailure(call: Call<IdealWeightResponseModel>, t: Throwable) {
+                Log.d("BMIRESPONSE", t.message.toString())
+
                 showProgressIdealWeight.postValue(false)
                 errorMessage.postValue("Server error please try after sometime")
             }
@@ -81,7 +84,7 @@ class HomeRepository {
 
     }
 
-     fun dailyCaloriesApiResponse(
+    fun dailyCaloriesApiResponse(
         age: String?, gender: String?, height: String?, weight: String?, activity_level: String?
     ) {
         showProgressDalyCalories.value = true
@@ -115,7 +118,7 @@ class HomeRepository {
         })
     }
 
-     fun bodyFatApiResponse(
+    fun bodyFatApiResponse(
         age: String?,
         gender: String?,
         weight: String?,
@@ -143,6 +146,8 @@ class HomeRepository {
             }
 
             override fun onFailure(call: Call<BodyFatPercentageResponseModel>, t: Throwable) {
+                Log.d("BMIRESPONSE", t.message.toString())
+
                 showProgressBodyFat.postValue(false)
                 errorMessage.postValue("Server error please try after sometime")
             }

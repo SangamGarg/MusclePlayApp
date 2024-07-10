@@ -42,7 +42,7 @@
     </fragment>
     <activity
         android:id="@+id/signInActivity"
-        android:name="com.sangam.muscleplay.SignInAndSignUpActivities.SignInActivity"
+        android:name="com.sangam.muscleplay.userRegistration.ui.SignInActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in" />
     <activity
@@ -51,7 +51,7 @@
         android:label="MainActivity" />
     <activity
         android:id="@+id/signUpActivity"
-        android:name="com.sangam.muscleplay.SignInAndSignUpActivities.SignUpActivity"
+        android:name="com.sangam.muscleplay.userRegistration.ui.SignUpActivity"
         android:label="activity_sign_up"
         tools:layout="@layout/activity_sign_up" />
 </navigation>

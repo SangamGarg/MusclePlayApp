@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +26,7 @@ import com.codebyashish.autoimageslider.Enums.ImageAnimationTypes
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Interfaces.ItemsListener
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.sangam.muscleplay.AppUtils.ApiCallsConstant
 import com.sangam.muscleplay.AppUtils.IntentUtil
 import com.sangam.muscleplay.AppUtils.ToastUtil
 import com.sangam.muscleplay.Calculators.AllCalculatorsActivity
@@ -48,13 +43,16 @@ import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.ui.AiChatB
 import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.ui.RecipesActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity
 import com.sangam.muscleplay.drawer_nav.drawer_nav_support.SupportActivity
+import com.sangam.muscleplay.userRegistration.model.UserDetailsResponseModel
+import com.sangam.muscleplay.userRegistration.viewModel.UserDetailData
 import de.hdodenhof.circleimageview.CircleImageView
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    lateinit var homeViewModel: HomeViewModel
-
+    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var userData: UserDetailsResponseModel
     private var age: String? = null
     private var gender: String? = null
     private var weight: String? = null
@@ -62,29 +60,14 @@ class HomeFragment : Fragment() {
     private var hip: String? = null
     private var waist: String? = null
     private var neck: String? = null
-    private var activity_level: String? = null
+    private var activityLevel: String? = null
     private var goal: String? = null
-
-    private val database by lazy {
-        Firebase.firestore
-    }
-    private val auth by lazy {
-        FirebaseAuth.getInstance()
-    }
-    private val realTimeDatabase by lazy {
-        FirebaseDatabase.getInstance()
-    }
-    lateinit var databaseReference: DatabaseReference
-    lateinit var headerViewName: TextView
-    lateinit var headerViewEmail: TextView
-    lateinit var headerViewImageProfile: CircleImageView
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var headerViewName: TextView
+    private lateinit var headerViewEmail: TextView
+    private lateinit var headerViewImageProfile: CircleImageView
     private var listener: ItemsListener? = null
-    private val autoImageList by lazy {
-        ArrayList<ImageSlidesModel>()
-    }
+    private lateinit var autoImageList: ArrayList<ImageSlidesModel>
 
-    private var dataFilled: Boolean? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -106,28 +89,24 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-//        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
-//        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", ""))
-//        listener = activity
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        callGetUserData()
-        callGetUserExtraData()
-        observeUserData()
-        observeUserExtraData()
-        initListener()
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        getUserData()
+        autoImageList = ArrayList()
+        if (!ApiCallsConstant.apiCallsOnceHome) {
+            ApiCallsConstant.apiCallsOnceHome = true
+            ApiCallsConstant.apiCallsOnceCalculators = false
+
+        }
         getAutoImageSliderImage()
         getViewFlipperImage()
+        initListener()
         observerErrorMessageApiResponse()
-        observerBmiApiResponse()
-        observerIdealWeightApiResponse()
-        observerDailyCaloriesApiResponse()
-        observerBodyFatApiResponse()
+        observerApiResponses()
         observerProgressResponse()
 
-        return root
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -165,64 +144,40 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun callGetUserData() {
-        userViewModel.getUserData()
-    }
+    private fun getUserData() {
+        userData = UserDetailData.userDetailsResponseModel!!
 
-    fun callGetUserExtraData() {
-        userViewModel.getUserDataExtra()
-    }
+        binding.tvUserName.text = userData.name
 
-    fun observeUserData() {
-        userViewModel.userDataResponse.observe(viewLifecycleOwner, Observer {
-            headerViewName.text = it?.name
-            headerViewEmail.text = it?.email
-            binding.tvUserName.text = it?.name
+        age = userData.age.toString()
+        gender = userData.gender.toString()
+        height = userData.measurements?.height.toString()
+        weight = userData.measurements?.weight.toString()
+        waist = userData.measurements?.waist.toString()
+        neck = userData.measurements?.neck.toString()
+        hip = userData.measurements?.hip.toString()
+        activityLevel = userData.measurements?.activityLevel.toString()
+        goal = userData.measurements?.goal.toString()
 
-            if (it?.profileImageUrl != null) {
-                Glide.with(requireContext()).load(it.profileImageUrl)
-                    .placeholder(R.drawable.baseline_person_24).into(headerViewImageProfile)
-                Glide.with(requireContext()).load(it.profileImageUrl)
-                    .placeholder(R.drawable.baseline_person_24).into(binding.ivProfileHome)
-            }
-        })
-    }
-
-    fun observeUserExtraData() {
-        userViewModel.userDataExtraResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("USEREXTRADETAIL", it.toString())
-            dataFilled = it.datafilled
-            age = it.age.toString()
-            gender = it.gender.toString()
-            height = it.height.toString()
-            weight = it.weight.toString()
-            waist = it.waist.toString()
-            neck = it.neck.toString()
-            hip = it.hip.toString()
-            activity_level = it.activity_level.toString()
-            goal = it.goal.toString()
-
-//            if (gender == "male") {
-//                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.male)
-//            } else if (gender == "female") {
-//                binding.imageViewMAleFemale.setBackgroundResource(R.drawable.female)
-//            }
+        if (userData.profileImageUrl != null) {
+            Glide.with(requireContext()).load(userData.profileImageUrl)
+                .placeholder(R.drawable.baseline_person_24).into(binding.ivProfileHome)
+        }
 
 
-//            if (dataFilled == null) {
-//                IntentUtil.startIntent(requireActivity(), UserDetailsActivity())
-//            }
-            if (dataFilled == true) {
-                @RequiresApi(Build.VERSION_CODES.TIRAMISU) if (!checkPermission()) {
-                    requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-                }
-                callBmiApi()
-                callBodyFatApi()
-                callDailyCaloriesApi()
-                callIdealWeightApi()
-            }
-            binding.swiperefresh.isRefreshing = false
-        })
+        @RequiresApi(Build.VERSION_CODES.TIRAMISU) if (!checkPermission()) {
+            requestForPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        if (!ApiCallsConstant.apiCallsOnceCalculators) {
+            callBmiApi()
+            callBodyFatApi()
+            callDailyCaloriesApi()
+            callIdealWeightApi()
+            ApiCallsConstant.apiCallsOnceCalculators = true
+        }
+
+
     }
 
     private fun initListener() {
@@ -238,7 +193,7 @@ class HomeFragment : Fragment() {
             ), FitnessFactsResponseModel(
                 "Benefits of Regular Exercise",
                 "Regular exercise can improve your mood, boost energy levels, and reduce the risk of chronic diseases.",
-                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fphotos%2Ffitness&psig=AOvVaw3V4Gmyt4Ar2KQL5aoSOLgW&ust=1710486571919000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCIiHlJaZ84QDFQAAAAAdAAAAABAQ"
+                "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg?cs=srgb&dl=pexels-pixabay-414029.jpg&fm=jpg"
             )
         )
 
@@ -251,8 +206,7 @@ class HomeFragment : Fragment() {
         }
         categoryInitListener()
         binding.swiperefresh.setOnRefreshListener {
-            callGetUserData()
-            callGetUserExtraData()
+            swipeRefreshCalls()
         }
 //        binding.includeCaloriesInFood.apply {
 //            tvNameOfCalculator.text = "Calories In Food Calculator"
@@ -322,8 +276,23 @@ class HomeFragment : Fragment() {
         headerViewName = headerView.findViewById(R.id.nav_drawer_tv_name)
         headerViewEmail = headerView.findViewById(R.id.nav_drawer_tv_email_id)
         headerViewImageProfile = headerView.findViewById(R.id.nav_drawer_iv_profile)
+        headerViewName.text = userData.name
+        headerViewEmail.text = userData.email
+        if (userData.profileImageUrl != null) {
+            Glide.with(requireContext()).load(userData.profileImageUrl)
+                .placeholder(R.drawable.baseline_person_24).into(headerViewImageProfile)
+        }
 
 
+    }
+
+    private fun swipeRefreshCalls() {
+        getAutoImageSliderImage()
+        getViewFlipperImage()
+        callBmiApi()
+        callBodyFatApi()
+        callDailyCaloriesApi()
+        callIdealWeightApi()
     }
 
     private fun openPlayStoreForRating() {
@@ -362,10 +331,8 @@ class HomeFragment : Fragment() {
     private fun getAutoImageSliderImage() {
         userViewModel.getImageSliderImages()
         userViewModel.imageSliderResponse.observe(viewLifecycleOwner, Observer {
-            Log.d("AutoImageSlider", it.toString())
             autoImageList.clear()
             for (image in it) {
-                Log.d("AutoImageSlidersss", image)
                 autoImageList.add(ImageSlidesModel(image, ""))
             }
             addImageOnAutoImageSlider()
@@ -402,28 +369,27 @@ class HomeFragment : Fragment() {
     }
 
     private fun callDailyCaloriesApi() {
-        homeViewModel.callDailyCaloriesApi(age, gender, height, weight, activity_level)
+        homeViewModel.callDailyCaloriesApi(age, gender, height, weight, activityLevel)
     }
 
-    private fun observerBmiApiResponse() {
+    private fun observerApiResponses() {
         homeViewModel.bmiResponse.observe(requireActivity(), Observer {
             binding.tvBmi.text = it.data?.bmi.toString()
-        })
-    }
+            binding.swiperefresh.isRefreshing = false
 
-    private fun observerIdealWeightApiResponse() {
+        })
+
         homeViewModel.idealWeightResponse.observe(requireActivity(), Observer {
             binding.tvIdealWeight.text = "${it.data?.hamwi.toString()} kg"
-        })
-    }
+            binding.swiperefresh.isRefreshing = false
 
-    private fun observerBodyFatApiResponse() {
+        })
         homeViewModel.bodyFatResponse.observe(requireActivity(), Observer {
             binding.tvBodyFatPercentage.text = it.data?.bodyFatBMIMethod.toString()
-        })
-    }
+            binding.swiperefresh.isRefreshing = false
 
-    private fun observerDailyCaloriesApiResponse() {
+        })
+
         homeViewModel.dailyCaloriesResponse.observe(requireActivity(), Observer {
             when (goal) {
                 "Extreme WG" -> binding.tvDailyCalories.text =
@@ -445,42 +411,12 @@ class HomeFragment : Fragment() {
                     it.data?.goals?.mildWeightLoss?.calory.toString()
 
             }
+            binding.swiperefresh.isRefreshing = false
+
         })
     }
 
-
     private fun observerProgressResponse() {
-        userViewModel.showProgress.observe(requireActivity(), Observer {
-            if (it) {
-                binding.mainView.visibility = View.GONE
-                binding.constraintLayout.visibility = View.GONE
-                binding.shimmerLayout.visibility = View.VISIBLE
-                binding.shimmerLayout.startShimmer()
-            } else {
-                binding.mainView.visibility = View.VISIBLE
-                binding.constraintLayout.visibility = View.VISIBLE
-                binding.shimmerLayout.visibility = View.GONE
-                binding.shimmerLayout.stopShimmer()
-            }
-        })
-
-        userViewModel.showProgressExtra.observe(requireActivity(), Observer {
-            if (it) {
-                binding.mainView.visibility = View.GONE
-                binding.constraintLayout.visibility = View.GONE
-                binding.shimmerLayout.visibility = View.VISIBLE
-                binding.shimmerLayout.startShimmer()
-
-            } else {
-                binding.mainView.visibility = View.VISIBLE
-                binding.constraintLayout.visibility = View.VISIBLE
-                binding.shimmerLayout.visibility = View.GONE
-                binding.shimmerLayout.stopShimmer()
-
-            }
-        })
-
-
         homeViewModel.showProgressBmi.observe(requireActivity(), Observer {
             if (it) {
                 binding.mainView.visibility = View.GONE

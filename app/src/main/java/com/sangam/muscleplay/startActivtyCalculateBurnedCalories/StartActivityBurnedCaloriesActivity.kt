@@ -45,6 +45,7 @@ class StartActivityBurnedCaloriesActivity : AppCompatActivity() {
         serviceIntent = Intent(applicationContext, TimerService::class.java)
         registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
         observeWeightUnit()
+
     }
 
 

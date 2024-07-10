@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".botton_nav.profile.MyProgress.MyProgressActivity">
+    tools:context=".botton_nav.more.MyProgress.MyProgressActivity">
 
     <TextView
         android:id="@+id/tvMyReport"

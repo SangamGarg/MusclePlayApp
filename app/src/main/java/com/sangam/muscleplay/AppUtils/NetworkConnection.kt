@@ -18,7 +18,7 @@ class NetworkConnection(private val context: Context) : LiveData<Boolean>() {
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
 
-    val connectivityManager =
+    private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {

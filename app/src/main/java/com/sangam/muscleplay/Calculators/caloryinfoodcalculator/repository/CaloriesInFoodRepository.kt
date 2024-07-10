@@ -3,7 +3,7 @@ package com.sangam.muscleplay.Calculators.caloryinfoodcalculator.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
-import com.example.muscleplay.Retrofit.RetrofitUtilClass
+import com.sangam.muscleplay.retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.Calculators.caloryinfoodcalculator.model.CaloriesInFoodResponseModel
 import com.sangam.muscleplay.Calculators.caloryinfoodcalculator.network.CaloiresInFoodService
 import retrofit2.Call

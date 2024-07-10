@@ -3,7 +3,7 @@ package com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.r
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.muscleplay.AppUtils.AppUrls
-import com.example.muscleplay.Retrofit.RetrofitUtilClass
+import com.sangam.muscleplay.retrofit.RetrofitUtilClass
 import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.model.BurnedCaloriesFromActivityResponseModel
 import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.network.BurnedCaloriesFromActivityService
 import retrofit2.Call

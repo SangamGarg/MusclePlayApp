@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingBottom="@dimen/bottom_navigation_margin"
-    tools:context=".botton_nav.profile.ProfileFragment">
+    tools:context=".botton_nav.more.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"

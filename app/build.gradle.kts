@@ -19,7 +19,20 @@ android {
     }
 
     buildTypes {
+
+
         release {
+            buildConfigField("String", "EMAIL_URL", "\"https://send.api.mailtrap.io/\"")
+            buildConfigField("String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\"")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+        debug {
+            buildConfigField("String", "EMAIL_URL", "\"https://send.api.mailtrap.io/\"")
+            buildConfigField("String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\"")
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
@@ -36,6 +49,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 }
 
@@ -93,4 +107,6 @@ dependencies {
     //Gemini AI
     implementation("com.google.ai.client.generativeai:generativeai:0.2.2")
 
+    //OTP VIEW
+    implementation("io.github.chaosleung:pinview:1.4.4")
 }

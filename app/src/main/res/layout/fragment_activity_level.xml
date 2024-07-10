@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:padding="15dp"
-    tools:context=".UserExtraDetailsScreen.screens.ActivityLevelFragment">
+    tools:context=".UserExtraDetailsFill.screens.ActivityLevelFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -162,5 +162,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/blue1" />
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

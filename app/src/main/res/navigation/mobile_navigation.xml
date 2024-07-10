@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.sangam.muscleplay.botton_nav.profile.ProfileFragment"
+        android:name="com.sangam.muscleplay.botton_nav.more.ProfileFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment

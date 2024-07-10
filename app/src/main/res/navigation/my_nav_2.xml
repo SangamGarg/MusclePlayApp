@@ -3,11 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav_2"
-    app:startDestination="@id/genderFragment">
+    app:startDestination="@id/photoFillFragment">
+
+    <fragment
+        android:id="@+id/photoFillFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.PhotoFillFragment"
+        android:label="fragment_photo_fill"
+        tools:layout="@layout/fragment_photo_fill" >
+        <action
+            android:id="@+id/action_photoFillFragment_to_genderFragment"
+            app:destination="@id/genderFragment"
+            app:popUpTo="@id/photoFillFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/genderFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.GenderFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.GenderFragment"
         android:label="fragment_gender"
         tools:layout="@layout/fragment_gender" >
         <action
@@ -15,10 +28,15 @@
             app:destination="@id/ageHeightWeightFragment"
             app:popUpTo="@id/genderFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="photoUrl"
+            app:argType="string" />
+
+
     </fragment>
     <fragment
         android:id="@+id/ageHeightWeightFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.AgeHeightWeightFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.AgeHeightWeightFragment"
         android:label="fragment_age_height_weight"
         tools:layout="@layout/fragment_age_height_weight" >
         <action
@@ -32,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/waistHipNeckFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.WaistHipNeckFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.WaistHipNeckFragment"
         android:label="fragment_waist_hip_neck"
         tools:layout="@layout/fragment_waist_hip_neck" >
         <action
@@ -55,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/activityLevelFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsScreen.screens.ActivityLevelFragment"
+        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.ActivityLevelFragment"
         android:label="fragment_activity_level"
         tools:layout="@layout/fragment_activity_level" >
         <argument
@@ -78,14 +96,6 @@
         <argument
             android:name="gender"
             app:argType="string" />
-        <action
-            android:id="@+id/action_activityLevelFragment_to_mainActivity2"
-            app:destination="@id/mainActivity2"
-            app:popUpTo="@id/activityLevelFragment"
-            app:popUpToInclusive="true" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity2"
-        android:name="com.sangam.muscleplay.MainActivity"
-        android:label="MainActivity" />
+
 </navigation>

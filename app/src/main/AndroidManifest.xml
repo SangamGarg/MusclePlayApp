@@ -31,13 +31,13 @@
             android:name=".startActivtyCalculateBurnedCalories.StartActivityBurnedCaloriesHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".botton_nav.profile.MyProgress.MyProgressActivity"
+            android:name=".botton_nav.more.MyProgress.MyProgressActivity"
             android:exported="false" />
         <activity
             android:name=".startActivtyCalculateBurnedCalories.StartActivityBurnedCaloriesActivity"
             android:exported="false" />
         <activity
-            android:name=".botton_nav.profile.MyReport.ui.MyReportActivity"
+            android:name=".botton_nav.more.MyReport.ui.MyReportActivity"
             android:exported="false" />
         <activity
             android:name=".stepCounter.StepCounterActivity"
@@ -55,14 +55,16 @@
             android:name=".drawer_nav.drawer_nav_feedback.FeedbackActivity"
             android:exported="false" />
         <activity
-            android:name=".UserExtraDetailsScreen.UserDetailsActivity"
-            android:exported="true" />
+            android:name=".UserExtraDetailsFill.UserDetailsActivity"
+            android:exported="true"
+            android:theme="@style/FullScreenTheme" />
         <activity
-            android:name=".botton_nav.profile.EditProfileActivity"
+            android:name=".botton_nav.more.EditProfileActivity"
             android:exported="false" />
         <activity
             android:name=".onBoardingScreen.OnBoardActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,12 +81,14 @@
             android:name=".drawer_nav.drawer_nav_refer_and_earn.ReferAndEarnActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInAndSignUpActivities.SignUpActivity"
+            android:name=".userRegistration.ui.SignUpActivity"
             android:exported="false"
+            android:theme="@style/FullScreenTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".SignInAndSignUpActivities.SignInActivity"
+            android:name=".userRegistration.ui.SignInActivity"
             android:exported="false"
+            android:theme="@style/FullScreenTheme"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".drawer_nav.drawer_nav_about_us.AboutUsActivity"
