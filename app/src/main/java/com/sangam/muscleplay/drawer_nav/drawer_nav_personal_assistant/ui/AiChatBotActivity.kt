@@ -9,8 +9,8 @@ import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.BlockThreshold
 import com.google.ai.client.generativeai.type.HarmCategory
 import com.google.ai.client.generativeai.type.SafetySetting
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.ToastUtil
 import com.sangam.muscleplay.databinding.ActivityAiChatBotBinding
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.model.MessageModel
 import com.sangam.muscleplay.drawer_nav.drawer_nav_personal_assistant.ui.adapter.AiChatBotAdapter

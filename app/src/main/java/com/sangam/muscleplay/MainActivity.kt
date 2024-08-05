@@ -1,26 +1,21 @@
 package com.sangam.muscleplay
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.UserExtraDetailsFill.UserDetailsActivity
-import com.sangam.muscleplay.UserDataUtils.UserViewModel
+import com.google.firebase.messaging.FirebaseMessaging
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.IntentUtil
 import com.sangam.muscleplay.userRegistration.ui.SignInActivity
 import com.sangam.muscleplay.databinding.ActivityMainBinding
 
@@ -37,9 +32,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         HideStatusBarUtil.hideStatusBar(this@MainActivity)
-        window.statusBarColor = Color.WHITE
         if (firebaseAuth.currentUser == null) {
             IntentUtil.startIntent(this@MainActivity, SignInActivity())
+        }
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (it.isSuccessful) {
+                Log.d("TOKENFIREBASE", it.result.toString())
+            }
         }
 
         val navView: BottomNavigationView = binding.navView

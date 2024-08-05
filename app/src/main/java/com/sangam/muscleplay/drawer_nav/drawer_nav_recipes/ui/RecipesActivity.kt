@@ -8,8 +8,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.ToastUtil
 import com.sangam.muscleplay.databinding.ActivityRecepiesBinding
 import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.model.RecipesResponseModelItem
 import com.sangam.muscleplay.drawer_nav.drawer_nav_recipes.ui.adapter.RecipesAdapter

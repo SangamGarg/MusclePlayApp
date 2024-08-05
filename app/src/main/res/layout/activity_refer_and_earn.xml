@@ -14,7 +14,7 @@
         android:fontFamily="@font/crimson_pro_medium"
         android:gravity="center"
         android:text="Refer And Earn"
-        android:textColor="@color/purple_200"
+        android:textColor="@color/app_main_color"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

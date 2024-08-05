@@ -6,30 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="15dp"
-    tools:context=".UserExtraDetailsFill.screens.PhotoFillFragment">
+    tools:context=".userRegistrationExtraDetailsFill.screens.PhotoFillFragment">
 
-
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:rotation="180"
-        android:src="@drawable/baseline_arrow_forward_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins"
         android:text="Choose Profile Photo"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -39,7 +29,7 @@
         android:fontFamily="@font/poppins"
         android:text="Skip"
         android:textColor="@color/gray2"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView" />
@@ -84,8 +74,8 @@
         android:layout_marginHorizontal="25dp"
         android:background="@drawable/button_background_1"
         android:elevation="10dp"
-        android:outlineAmbientShadowColor="@color/purple_200"
-        android:outlineSpotShadowColor="@color/purple_200"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

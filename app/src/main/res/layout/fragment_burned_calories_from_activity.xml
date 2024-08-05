@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".Calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment">
+    tools:context=".calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -54,8 +54,8 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:outlineAmbientShadowColor="@color/purple_200"
-        android:outlineSpotShadowColor="@color/purple_200"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
         app:cardCornerRadius="35dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"

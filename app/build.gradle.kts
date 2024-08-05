@@ -22,16 +22,18 @@ android {
 
 
         release {
-            buildConfigField("String", "EMAIL_URL", "\"https://send.api.mailtrap.io/\"")
-            buildConfigField("String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\"")
+            buildConfigField(
+                "String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\""
+            )
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         debug {
-            buildConfigField("String", "EMAIL_URL", "\"https://send.api.mailtrap.io/\"")
-            buildConfigField("String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\"")
+            buildConfigField(
+                "String", "MAIN_URL", "\"https://muscle-play-spring-boot-1.onrender.com/\""
+            )
 
             isMinifyEnabled = false
             proguardFiles(
@@ -63,16 +65,18 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-    implementation("com.google.firebase:firebase-auth:22.3.0")
-    implementation("com.google.firebase:firebase-bom:32.7.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.google.firebase:firebase-firestore:24.9.1")
-    implementation("com.google.firebase:firebase-database:20.3.0")
-    implementation("com.google.firebase:firebase-storage:20.3.0")
-    implementation("com.google.firebase:firebase-messaging:23.4.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+
+    //Firebase
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.firebase:firebase-bom:32.7.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
+
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
@@ -96,7 +100,7 @@ dependencies {
     implementation("io.github.ShawnLin013:number-picker:2.4.13")
 
     //ImageCrop
-    implementation("com.vanniktech:android-image-cropper:4.5.0")
+    implementation("com.github.yalantis:ucrop:2.2.8")
 
     //ShimmerEffect
     implementation("com.facebook.shimmer:shimmer:0.5.0")

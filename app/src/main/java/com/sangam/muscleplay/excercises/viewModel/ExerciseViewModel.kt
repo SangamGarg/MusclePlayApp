@@ -2,8 +2,6 @@ package com.sangam.muscleplay.excercises.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.model.BurnedCaloriesFromActivityResponseModel
-import com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.repository.BurnedCaloriesFromActivityRepository
 import com.sangam.muscleplay.excercises.model.ExerciseResponseModel
 import com.sangam.muscleplay.excercises.respository.ExerciseRepository
 

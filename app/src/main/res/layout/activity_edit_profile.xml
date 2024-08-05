@@ -64,6 +64,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:elevation="30dp"
+                android:outlineAmbientShadowColor="@color/white"
+                android:outlineSpotShadowColor="@color/white"
+                android:src="@drawable/profile"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="0.1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/tvDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#ECDEFD"
+                app:cardCornerRadius="100dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivProfile"
+                app:layout_constraintTop_toTopOf="@+id/ivProfile"
+                app:strokeColor="@color/app_main_color">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:drawableStart="@drawable/baseline_done_24"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/app_main_color"
+                    android:fontFamily="@font/crimson_pro_medium"
+                    android:text="Set Profile"
+                    android:textColor="@color/app_main_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
+
             <TextView
                 android:id="@+id/tv"
                 android:layout_width="wrap_content"
@@ -74,7 +120,7 @@
                 android:textColor="@color/app_main_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/EtLayoutName"
@@ -358,6 +404,20 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/blue" />
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

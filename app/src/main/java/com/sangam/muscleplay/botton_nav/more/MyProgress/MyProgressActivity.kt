@@ -2,7 +2,7 @@ package com.sangam.muscleplay.botton_nav.more.MyProgress
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
 import com.sangam.muscleplay.databinding.ActivityMyProgressBinding
 
 class MyProgressActivity : AppCompatActivity() {

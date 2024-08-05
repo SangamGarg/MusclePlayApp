@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,17 +21,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.sangam.muscleplay.AppUtils.HideKeyboard
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.IntentUtil
+import com.sangam.muscleplay.appUtils.HideKeyboard
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.IntentUtil
 import com.sangam.muscleplay.MainActivity
-import com.sangam.muscleplay.UserExtraDetailsFill.UserDetailsActivity
+import com.sangam.muscleplay.userRegistrationExtraDetailsFill.UserDetailsActivity
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.databinding.ActivitySignInBinding
 import com.sangam.muscleplay.databinding.ErrorBottomDialogLayoutBinding
 import com.sangam.muscleplay.userRegistration.model.UserDetailsPostRequestBody
 import com.sangam.muscleplay.userRegistration.viewModel.UserDetailsViewModel
-import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding

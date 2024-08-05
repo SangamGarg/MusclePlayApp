@@ -15,11 +15,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.AppUtils.NetworkConnection
+import com.sangam.muscleplay.appUtils.IntentUtil
+import com.sangam.muscleplay.appUtils.NetworkConnection
 import com.sangam.muscleplay.MainActivity
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.UserExtraDetailsFill.UserDetailsActivity
+import com.sangam.muscleplay.userRegistrationExtraDetailsFill.UserDetailsActivity
 import com.sangam.muscleplay.databinding.ErrorBottomDialogLayoutBinding
 import com.sangam.muscleplay.databinding.FragmentSplashScreenBinding
 import com.sangam.muscleplay.userRegistration.viewModel.UserDetailsViewModel

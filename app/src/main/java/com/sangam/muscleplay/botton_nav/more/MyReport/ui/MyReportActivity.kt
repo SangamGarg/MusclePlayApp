@@ -2,7 +2,7 @@ package com.sangam.muscleplay.botton_nav.more.MyReport.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
 import com.sangam.muscleplay.databinding.ActivityMyReportBinding
 
 class MyReportActivity : AppCompatActivity() {

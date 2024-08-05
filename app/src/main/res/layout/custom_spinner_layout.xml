@@ -6,7 +6,7 @@
     android:ellipsize="marquee"
     android:singleLine="true"
     android:textAlignment="inherit"
-    android:textColor="@color/purple_200"
+    android:textColor="@color/app_main_color"
     android:textSize="15sp">
 
 </TextView>

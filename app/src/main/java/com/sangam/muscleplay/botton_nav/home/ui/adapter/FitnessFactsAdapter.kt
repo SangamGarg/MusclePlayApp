@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.botton_nav.home.model.FitnessFactsResponseModel
+import com.sangam.muscleplay.botton_nav.home.model.FitnessFacts
+import com.sangam.muscleplay.calculators.model.FitnessFactsResponseModel
 import com.sangam.muscleplay.databinding.FitnessFactsItemLayoutBinding
 
-class FitnessFactsAdapter(val context: Context, val list: List<FitnessFactsResponseModel>) :
+class FitnessFactsAdapter(val context: Context, val list: List<FitnessFacts>) :
     Adapter<FitnessFactsAdapter.MyViewHolder>() {
     inner class MyViewHolder(val binding: FitnessFactsItemLayoutBinding) :
         ViewHolder(binding.root) {
-        fun bindView(items: FitnessFactsResponseModel, context: Context, position: Int) {
+        fun bindView(items: FitnessFacts, context: Context, position: Int) {
             binding.Headline.text = items.factsHeadline
             binding.summary.text = items.factsSummary
             Glide.with(context).load(items.imageUrl).placeholder(R.drawable.baseline_error_outline_24)

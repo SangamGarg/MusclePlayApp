@@ -170,7 +170,7 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:rippleColor="@color/purple_200" />
+                    app:rippleColor="@color/app_main_color" />
 
                 <View
                     android:layout_width="match_parent"
@@ -204,7 +204,7 @@
                     android:text="Google"
                     android:textAllCaps="false"
                     android:textColor="#2B2A2A"
-                    app:rippleColor="@color/purple_200" />
+                    app:rippleColor="@color/app_main_color" />
 
                 <!--                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
                 <!--                    android:id="@+id/btnFacebookSignIn"-->
@@ -253,7 +253,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/blue1"
+            android:indeterminateTint="@color/app_main_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -23,6 +23,12 @@
         <item>centimeters (cm)</item>
         <item>meters (m)</item>
         <item>feet (ft)</item>
+        <item>inch (in)</item>
+    </string-array>
+    <string-array name="spinner_length_measurements_height">
+        <item>centimeters (cm)</item>
+        <item>meters (m)</item>
+        <item>feet (ft)</item>
     </string-array>
 
     <string-array name="spinner_weight_measurements">

@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/photoFillFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.PhotoFillFragment"
+        android:name="com.sangam.muscleplay.userRegistrationExtraDetailsFill.screens.PhotoFillFragment"
         android:label="fragment_photo_fill"
         tools:layout="@layout/fragment_photo_fill" >
         <action
             android:id="@+id/action_photoFillFragment_to_genderFragment"
             app:destination="@id/genderFragment"
             app:popUpTo="@id/photoFillFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
 
 
     <fragment
         android:id="@+id/genderFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.GenderFragment"
+        android:name="com.sangam.muscleplay.userRegistrationExtraDetailsFill.screens.GenderFragment"
         android:label="fragment_gender"
         tools:layout="@layout/fragment_gender" >
         <action
             android:id="@+id/action_genderFragment_to_ageHeightWeightFragment"
             app:destination="@id/ageHeightWeightFragment"
             app:popUpTo="@id/genderFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <argument
             android:name="photoUrl"
             app:argType="string" />
@@ -36,28 +36,28 @@
     </fragment>
     <fragment
         android:id="@+id/ageHeightWeightFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.AgeHeightWeightFragment"
+        android:name="com.sangam.muscleplay.userRegistrationExtraDetailsFill.screens.AgeHeightWeightFragment"
         android:label="fragment_age_height_weight"
         tools:layout="@layout/fragment_age_height_weight" >
         <action
             android:id="@+id/action_ageHeightWeightFragment_to_waistHipNeckFragment"
             app:destination="@id/waistHipNeckFragment"
             app:popUpTo="@id/ageHeightWeightFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <argument
             android:name="gender"
             app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/waistHipNeckFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.WaistHipNeckFragment"
+        android:name="com.sangam.muscleplay.userRegistrationExtraDetailsFill.screens.WaistHipNeckFragment"
         android:label="fragment_waist_hip_neck"
         tools:layout="@layout/fragment_waist_hip_neck" >
         <action
             android:id="@+id/action_waistHipNeckFragment_to_activityLevelFragment"
             app:destination="@id/activityLevelFragment"
             app:popUpTo="@id/waistHipNeckFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <argument
             android:name="age"
             app:argType="string" />
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/activityLevelFragment"
-        android:name="com.sangam.muscleplay.UserExtraDetailsFill.screens.ActivityLevelFragment"
+        android:name="com.sangam.muscleplay.userRegistrationExtraDetailsFill.screens.ActivityLevelFragment"
         android:label="fragment_activity_level"
         tools:layout="@layout/fragment_activity_level" >
         <argument

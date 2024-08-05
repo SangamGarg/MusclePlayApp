@@ -62,8 +62,8 @@
         android:layout_marginBottom="80dp"
         android:background="@drawable/button_background_1"
         android:elevation="10dp"
-        android:outlineAmbientShadowColor="@color/purple_200"
-        android:outlineSpotShadowColor="@color/purple_200"
+        android:outlineAmbientShadowColor="@color/app_main_color"
+        android:outlineSpotShadowColor="@color/app_main_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

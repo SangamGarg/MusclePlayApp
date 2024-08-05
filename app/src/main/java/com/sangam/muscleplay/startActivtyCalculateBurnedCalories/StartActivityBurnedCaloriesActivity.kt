@@ -13,11 +13,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.sangam.muscleplay.AppUtils.AppArrays
-import com.sangam.muscleplay.AppUtils.AppConvertUnitsUtil
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.IntentUtil
-import com.sangam.muscleplay.Calculators.bmicalculator.BmiViewModel
+import com.sangam.muscleplay.appUtils.AppArrays
+import com.sangam.muscleplay.appUtils.AppConvertUnitsUtil
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.IntentUtil
+import com.sangam.muscleplay.calculators.bmicalculator.BmiViewModel
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.databinding.ActivityStartActivtyBurnedCaloriesBinding
 import kotlin.math.roundToInt

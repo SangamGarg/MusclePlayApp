@@ -9,21 +9,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.sangam.muscleplay.AppUtils.HideKeyboard
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.sangam.muscleplay.appUtils.HideKeyboard
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.ToastUtil
 import com.sangam.muscleplay.R
 import com.sangam.muscleplay.databinding.ActivitySignUpBinding
 import com.sangam.muscleplay.databinding.ErrorBottomDialogLayoutBinding
 import com.sangam.muscleplay.userRegistration.model.UserDetailsPostRequestBody
 import com.sangam.muscleplay.userRegistration.viewModel.UserDetailsViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding

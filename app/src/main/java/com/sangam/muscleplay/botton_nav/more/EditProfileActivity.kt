@@ -1,29 +1,48 @@
 package com.sangam.muscleplay.botton_nav.more
 
+import android.app.ProgressDialog
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.sangam.muscleplay.AppUtils.ApiCallsConstant
-import com.sangam.muscleplay.AppUtils.HideStatusBarUtil
-import com.sangam.muscleplay.AppUtils.ToastUtil
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.sangam.muscleplay.appUtils.HideStatusBarUtil
+import com.sangam.muscleplay.appUtils.ToastUtil
 import com.sangam.muscleplay.R
-import com.sangam.muscleplay.UserDataUtils.UserViewModel
-import com.sangam.muscleplay.UserDataUtils.model.UserDataExtra
+import com.sangam.muscleplay.appUtils.ApiCallsConstant
+import com.sangam.muscleplay.appUtils.CropImage
 import com.sangam.muscleplay.databinding.ActivityEditProfileBinding
+import com.sangam.muscleplay.databinding.ErrorBottomDialogLayoutBinding
+import com.sangam.muscleplay.userRegistration.model.Measurements
+import com.sangam.muscleplay.userRegistration.model.UserDetailsResponseModel
+import com.sangam.muscleplay.userRegistration.viewModel.UserDetailData
+import com.sangam.muscleplay.userRegistration.viewModel.UserDetailsViewModel
+import com.yalantis.ucrop.UCrop
+import java.io.File
 
 class EditProfileActivity : AppCompatActivity() {
-    private val database by lazy {
-        Firebase.firestore
-    }
+    private lateinit var binding: ActivityEditProfileBinding
+
     private var age: String? = null
     private var gender: String? = null
     private var weight: String? = null
@@ -31,33 +50,121 @@ class EditProfileActivity : AppCompatActivity() {
     private var hip: String? = null
     private var waist: String? = null
     private var neck: String? = null
+    private var photoUrl: String? = null
     private var activityLevel: String? = null
     private var goal: String? = null
-    private val userViewModel by lazy {
-        ViewModelProvider(this).get(UserViewModel::class.java)
+    private lateinit var userDetailsViewModel: UserDetailsViewModel
+    private val auth by lazy {
+        FirebaseAuth.getInstance()
     }
-
+    private lateinit var userData: UserDetailsResponseModel
 
     private val emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
+    private var uri: Uri? = null
+    private lateinit var imageUri: Uri
+    private var storageRef = Firebase.storage
 
-    private val binding by lazy {
-        ActivityEditProfileBinding.inflate(layoutInflater)
-    }
+    private val contract =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                binding.tvDone.visibility = View.VISIBLE
+                CropImage.cropImage(cropResultLauncher, this, imageUri)
+
+            } else {
+                binding.tvDone.visibility = View.VISIBLE
+                binding.ivProfile.setImageURI(uri)
+                uri = null
+            }
+        }
+
+    private val requestForPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+                contract.launch(imageUri)
+            } else {
+                if (shouldShowRequestPermissionRationale(android.Manifest.permission.CAMERA)) {
+                    showRationaleDialog()
+                } else {
+                    val message =
+                        "You've denied camera permission twice. To enable it, open app settings."
+                    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+    private val cropResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == UCrop.RESULT_ERROR) {
+                val cropError = result.data?.let { UCrop.getError(it) }
+                Toast.makeText(
+                    this, "Crop error: ${cropError?.localizedMessage}", Toast.LENGTH_SHORT
+                ).show()
+            } else if (result.data != null) {
+                val croppedUri = UCrop.getOutput(result.data!!)
+                if (croppedUri != null) {
+                    binding.ivProfile.setImageDrawable(null)
+                    binding.ivProfile.visibility = View.VISIBLE
+                    binding.ivProfile.setImageURI(croppedUri)
+                    uri = croppedUri
+                } else {
+                    Toast.makeText(this, "Crop failed", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+            }
+        }
+
+    private lateinit var pickMedia: ActivityResultLauncher<PickVisualMediaRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userDetailsViewModel = ViewModelProvider(this)[UserDetailsViewModel::class.java]
+
+        binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         HideStatusBarUtil.hideStatusBar(this@EditProfileActivity)
-        callGetUserData()
-        callGetUserExtraData()
-        observeUserData()
-        observeUserExtraData()
-        observerProgressResponse()
+        window.statusBarColor = Color.WHITE
+
+
+        storageRef = FirebaseStorage.getInstance()
+        pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                binding.tvDone.visibility = View.VISIBLE
+                CropImage.cropImage(cropResultLauncher, this, uri)
+
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
+        }
+        imageUri = createImageUri()!!
+
+        val receivedIntent = intent
+
+        if (receivedIntent.hasExtra("UserData")) {
+            val userDetails: UserDetailsResponseModel? =
+                receivedIntent.getParcelableExtra("UserData")
+            userDetails?.let {
+                userData = it
+                initListener()
+                1
+            }
+        } else {
+            ToastUtil.makeToast(this, "User details not found")
+            finish()
+        }
+        observersForApiCalls()
         initListener2()
     }
 
     private fun initListener2() {
+        binding.tvDone.setOnClickListener {
+            uploadImage()
+        }
+        binding.ivProfile.setOnClickListener {
+            chooseImage()
+        }
+
 
         binding.tvEditProfileConfirm.setOnClickListener {
             val name = binding.EtName.text.toString()
@@ -94,11 +201,11 @@ class EditProfileActivity : AppCompatActivity() {
 //            else if (!name.matches(namePattern.toRegex())) {
 //                binding.EtName.error = "Enter Valid Name (Only Alphabets)"
 //            }
-            else if (name.trim().length < 6) {
-                binding.EtName.error = "Enter Minimum 6 Characters"
+            else if (name.trim().length < 2) {
+                binding.EtName.error = "Enter Minimum 2 Characters"
 
-            } else if (name.trim().length > 20) {
-                binding.EtName.error = "Please Enter Less Than 20 Characters"
+            } else if (name.trim().length > 30) {
+                binding.EtName.error = "Please Enter Less Than 30 Characters"
             } else if (age.toInt() < 1 || age.toInt() > 80) {
                 binding.includeAge.EtValue.error = "Please Enter In Given Range"
             } else if (height.toInt() < 130 || height.toInt() > 230) {
@@ -118,142 +225,53 @@ class EditProfileActivity : AppCompatActivity() {
 
             } else {
                 val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-                if (userId != null) {
-                    val userDataExtra = UserDataExtra(
-                        datafilled = true,
-                        age,
+                callPutUserDetailsApi(
+                    userId, UserDetailsResponseModel(
+                        userId,
+                        name,
+                        UserDetailData.userDetailsResponseModel?.email,
+                        phone,
+                        photoUrl ?: UserDetailData.userDetailsResponseModel?.profileImageUrl,
                         gender,
-                        height,
-                        weight,
-                        hip,
-                        neck,
-                        waist,
-                        activityLevel,
-                        goal
+                        age.toInt(),
+                        Measurements(
+                            height.toFloatOrNull(),
+                            weight.toFloatOrNull(),
+                            activityLevel,
+                            goal,
+                            hip.toFloatOrNull(),
+                            neck.toFloatOrNull(),
+                            waist.toFloatOrNull()
+                        )
                     )
-                    storeUserExtraDetails(userId, userDataExtra)
-
-                    val userDocumentReference = database.collection("users").document(userId)
-
-                    val userUpdates = hashMapOf<String, Any>(
-                        "name" to name, "phone" to phone
-                    )
-
-                    // Update the document.
-                    userDocumentReference.update(userUpdates).addOnCompleteListener { updateTask ->
-                        if (updateTask.isSuccessful) {
-                            Toast.makeText(
-                                this@EditProfileActivity,
-                                "Details updated successfully!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            finish()
-                            ApiCallsConstant.apiCallsOnceHome = false
-                        } else {
-                            Toast.makeText(
-                                this@EditProfileActivity,
-                                "Failed to update details: ${updateTask.exception?.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-
-
-                }
+                )
 
             }
-
         }
-    }
-
-    private fun storeUserExtraDetails(userId: String, userDataExtra: UserDataExtra) {
-        database.collection("users").document(userId).update(userDataExtra.toMap())
-            .addOnSuccessListener {
-                Toast.makeText(this, "Details updated successfully!", Toast.LENGTH_SHORT).show()
-                finish()
-            }.addOnFailureListener {
-                Toast.makeText(
-                    this, "Failed to update details: ${it.message}", Toast.LENGTH_SHORT
-                ).show()
-            }
-    }
-
-    private fun UserDataExtra.toMap(): Map<String, Any?> {
-        return mapOf(
-            "age" to age,
-            "gender" to gender,
-            "height" to height,
-            "weight" to weight,
-            "hip" to hip,
-            "neck" to neck,
-            "waist" to waist,
-            "activity_level" to activity_level,
-            "goal" to goal
-        )
-    }
-
-    fun callGetUserData() {
-        userViewModel.getUserData()
-    }
-
-    fun callGetUserExtraData() {
-        userViewModel.getUserDataExtra()
-    }
-
-    fun observeUserData() {
-        userViewModel.userDataResponse.observe(this, Observer {
-
-            binding.EtName.setText(it?.name ?: "")
-            binding.EtPhone.setText(it?.phone ?: "")
-            if (it?.phone.isNullOrEmpty()) {
-                binding.EtLayoutPhone.isHelperTextEnabled = true
-                binding.EtLayoutPhone.helperText = "Required*"
-            }
-        })
-    }
-
-    fun observeUserExtraData() {
-        userViewModel.userDataExtraResponse.observe(this, Observer {
-            Log.d("USEREXTRADETAIL", it.toString())
-            age = it.age.toString()
-            gender = it.gender.toString()
-            height = it.height.toString()
-            weight = it.weight.toString()
-            waist = it.waist.toString()
-            neck = it.neck.toString()
-            hip = it.hip.toString()
-            activityLevel = it.activity_level.toString()
-            goal = it.goal.toString()
-            initListener()
-
-        })
-    }
-
-    private fun observerProgressResponse() {
-        userViewModel.showProgress.observe(this, Observer {
-            if (it) {
-                binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
-            } else {
-                binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
-            }
-        })
-
-        userViewModel.showProgressExtra.observe(this, Observer {
-            if (it) {
-                binding.mainView.visibility = View.GONE
-                binding.progreessBar.visibility = View.VISIBLE
-            } else {
-                binding.mainView.visibility = View.VISIBLE
-                binding.progreessBar.visibility = View.GONE
-            }
-        })
     }
 
     private fun initListener() {
 
+        if (!userData.profileImageUrl.isNullOrEmpty()) {
+            Glide.with(this).load(userData.profileImageUrl).placeholder(R.drawable.profile)
+                .into(binding.ivProfile)
+        }
+        age = userData.age.toString()
+        gender = userData.gender.toString()
+        height = userData.measurements?.height.toString()
+        weight = userData.measurements?.weight?.toInt().toString()
+        waist = userData.measurements?.waist.toString()
+        neck = userData.measurements?.neck.toString()
+        hip = userData.measurements?.hip.toString()
+        activityLevel = userData.measurements?.activityLevel.toString()
+        goal = userData.measurements?.goal.toString()
+
+        binding.EtName.setText(userData.name ?: "")
+        binding.EtPhone.setText(userData.phone ?: "")
+        if (userData.phone.isNullOrEmpty()) {
+            binding.EtLayoutPhone.isHelperTextEnabled = true
+            binding.EtLayoutPhone.helperText = "Required*"
+        }
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radioButtonMale -> gender = "male"
@@ -274,8 +292,7 @@ class EditProfileActivity : AppCompatActivity() {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                when (selectedItem) {
+                when (parent?.getItemAtPosition(position).toString()) {
                     "Sedentary: little or no exercise" -> activityLevel = "level_1"
                     "Exercise 1–3 times/week" -> activityLevel = "level_2"
                     "Exercise 4–5 times/week" -> activityLevel = "level_3"
@@ -314,8 +331,7 @@ class EditProfileActivity : AppCompatActivity() {
             override fun onItemSelected(
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                when (selectedItem) {
+                when (parent?.getItemAtPosition(position).toString()) {
                     "Extreme Weight Gain (1 kg)" -> goal = "Extreme WG"
                     "Normal Weight Gain (0.50 kg)" -> goal = "Normal WG"
                     "Mild Weight Gain (0.25 kg)" -> goal = "Mild WG"
@@ -383,7 +399,136 @@ class EditProfileActivity : AppCompatActivity() {
         } else if (gender == "female") {
             binding.radioButtonFemale.isChecked = true
         }
-
-
     }
+
+
+    private fun uploadImage() {
+        if (uri == null) {
+            Toast.makeText(this, "Please choose an image first", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage("Uploading")
+        progressDialog.show()
+
+        val imageRef = storageRef.reference.child("profile_images")
+            .child("${System.currentTimeMillis()} ${auth.currentUser!!.uid}")
+        imageRef.putFile(uri!!).addOnSuccessListener { task ->
+            task.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
+                photoUrl = uri.toString()
+                progressDialog.dismiss()
+                ToastUtil.makeToast(this, "Image Updated")
+            }?.addOnFailureListener {
+                Toast.makeText(
+                    this, "Error: ${it.message}", Toast.LENGTH_SHORT
+                ).show()
+                progressDialog.dismiss()
+            }
+        }.addOnFailureListener {
+            Toast.makeText(
+                this, "Error: ${it.message}", Toast.LENGTH_SHORT
+            ).show()
+            progressDialog.dismiss()
+        }
+    }
+
+
+    private fun chooseImage() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.dialog_choose_profile_image, null)
+        dialog.setContentView(view)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+        val gallery = view.findViewById<TextView>(R.id.chooseGallery)
+        gallery.setOnClickListener {
+            dialog.dismiss()
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
+        }
+        val camera = view.findViewById<TextView>(R.id.chooseCamera)
+        camera.setOnClickListener {
+            dialog.dismiss()
+            if (checkPermission()) {
+                contract.launch(imageUri)
+            } else {
+                requestForPermission.launch(android.Manifest.permission.CAMERA)
+            }
+
+        }
+    }
+
+
+    private fun callPutUserDetailsApi(
+        userId: String?, userDetailsResponseModel: UserDetailsResponseModel?
+    ) {
+        Log.d("ImageUploadError", userDetailsResponseModel.toString())
+
+        userDetailsViewModel.callPutUserDetails(userId, userDetailsResponseModel)
+    }
+
+
+    private fun observersForApiCalls() {
+
+        userDetailsViewModel.errorMessage.observe(this, Observer {
+            showErrorBottomDialog(
+                it
+            )
+        })
+        userDetailsViewModel.showProgress.observe(this, Observer {
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        })
+
+        userDetailsViewModel.userDetailsResponse.observe(this, Observer {
+            userDetailsViewModel.setUserDetailsResponse(it)
+            ApiCallsConstant.apiCallsOnceHome = false
+
+            ToastUtil.makeToast(this, "Details Updated")
+            setResult(RESULT_OK)
+            finish()
+        })
+    }
+
+    private fun showErrorBottomDialog(message: String) {
+        val bottomDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val dialogBinding = ErrorBottomDialogLayoutBinding.inflate(layoutInflater)
+        bottomDialog.setContentView(dialogBinding.root)
+        bottomDialog.setCancelable(false)
+        bottomDialog.show()
+        dialogBinding.messageTv.text = message
+        dialogBinding.continueButton.setOnClickListener {
+            bottomDialog.dismiss()
+            finish()
+        }
+    }
+
+    private fun showRationaleDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("Camera Permission")
+            .setMessage("This app requires camera permission to take profile photos. If you deny this time you have to manually go to app setting to allow permission.")
+            .setPositiveButton("Ok") { _, _ ->
+                requestForPermission.launch(android.Manifest.permission.CAMERA)
+            }
+        builder.create().show()
+    }
+
+    private fun checkPermission(): Boolean {
+        val permission = android.Manifest.permission.CAMERA
+        return ContextCompat.checkSelfPermission(
+            this, permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun createImageUri(): Uri? {
+        val image = File(this.filesDir, "profile_photos.png")
+        return FileProvider.getUriForFile(
+            this, "com.sangam.muscleplay.fileProvider", image
+        )
+    }
+
 }

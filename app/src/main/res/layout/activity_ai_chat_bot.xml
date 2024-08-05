@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSubmit"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/purple_200"
+        app:strokeColor="@color/app_main_color"
         app:strokeWidth="0.5dp">
 
         <EditText

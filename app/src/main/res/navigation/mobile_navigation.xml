@@ -37,22 +37,22 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/bmiCalculatorFragment2"
-        android:name="com.sangam.muscleplay.Calculators.bmicalculator.BmiCalculatorFragment"
+        android:name="com.sangam.muscleplay.calculators.bmicalculator.BmiCalculatorFragment"
         android:label="fragment_bmi"
         tools:layout="@layout/fragment_bmi" />
     <fragment
         android:id="@+id/caloriesInFoodCalculatorFragment2"
-        android:name="com.sangam.muscleplay.Calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment"
+        android:name="com.sangam.muscleplay.calculators.caloryinfoodcalculator.ui.CaloriesInFoodCalculatorFragment"
         android:label="fragment_calories_in_food_calculator"
         tools:layout="@layout/fragment_calories_in_food_calculator" />
     <fragment
         android:id="@+id/burnedCaloriesFromActivityFragment2"
-        android:name="com.sangam.muscleplay.Calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment"
+        android:name="com.sangam.muscleplay.calculators.burnedcaloriesfromactivitycalculator.ui.BurnedCaloriesFromActivityFragment"
         android:label="fragment_burned_calories_from_activity"
         tools:layout="@layout/fragment_burned_calories_from_activity" />
     <fragment
         android:id="@+id/dailyCaloriesCalculatorFragment2"
-        android:name="com.sangam.muscleplay.Calculators.dailycaloriescalculator.DailyCaloriesCalculatorFragment"
+        android:name="com.sangam.muscleplay.calculators.dailycaloriescalculator.DailyCaloriesCalculatorFragment"
         android:label="fragment_dailycalories_calculator"
         tools:layout="@layout/fragment_dailycalories_calculator" />
 </navigation>

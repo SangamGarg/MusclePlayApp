@@ -4,18 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserExtraDetailsFill.screens.AgeHeightWeightFragment">
+    tools:context=".userRegistrationExtraDetailsFill.screens.AgeHeightWeightFragment">
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray"
+        android:background="@color/white"
         android:padding="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray">
+            android:background="@color/white"
+            >
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:rotation="180"
+                android:src="@drawable/baseline_arrow_forward_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/tvPage"
@@ -34,7 +46,6 @@
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="35dp"
                 android:src="@drawable/thinking"
                 app:layout_constraintDimensionRatio="4:2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
@@ -113,7 +124,7 @@
                         app:np_dividerThickness="0.8dp"
                         app:np_formatter="@string/number_picker_formatter"
                         app:np_orientation="vertical"
-                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextColor="@color/app_main_color"
                         app:np_selectedTextSize="30dp"
                         app:np_textColor="@color/gray2"
                         app:np_textSize="18dp"
@@ -152,8 +163,8 @@
                 android:id="@+id/cardView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
@@ -218,7 +229,7 @@
                         app:np_dividerThickness="0.8dp"
                         app:np_formatter="@string/number_picker_formatter"
                         app:np_orientation="vertical"
-                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextColor="@color/app_main_color"
                         app:np_selectedTextSize="30dp"
                         app:np_textColor="@color/gray2"
                         app:np_textSize="18dp"
@@ -259,8 +270,8 @@
                 android:id="@+id/cardView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
@@ -283,7 +294,7 @@
                         android:outlineAmbientShadowColor="#00BB86FC"
                         android:outlineSpotShadowColor="#00BB86FC"
                         android:src="@drawable/baseline_add_24"
-                        app:backgroundTint="@color/purple_200"
+                        app:backgroundTint="@color/app_main_color"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -299,7 +310,7 @@
                         android:outlineAmbientShadowColor="#00BB86FC"
                         android:outlineSpotShadowColor="#00BB86FC"
                         android:src="@drawable/baseline_remove_24"
-                        app:backgroundTint="@color/purple_200"
+                        app:backgroundTint="@color/app_main_color"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -348,8 +359,8 @@
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/button_background_1"
                 android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

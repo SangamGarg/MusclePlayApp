@@ -46,8 +46,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:rotation="180"
                         android:layout_margin="5dp"
-                        android:src="@drawable/ic_arrow_back_24"
+                        android:src="@drawable/baseline_arrow_forward_24"
                         app:tint="@color/app_main_color" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -91,8 +92,8 @@
                 android:id="@+id/cardView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
@@ -142,7 +143,7 @@
                         app:np_dividerThickness="0.8dp"
                         app:np_formatter="@string/number_picker_formatter"
                         app:np_orientation="vertical"
-                        app:np_selectedTextColor="@color/purple_200"
+                        app:np_selectedTextColor="@color/app_main_color"
                         app:np_selectedTextSize="30dp"
                         app:np_textColor="@color/gray2"
                         app:np_textSize="18dp"
@@ -235,8 +236,8 @@
                 android:layout_marginStart="10dp"
                 android:background="@drawable/button_background_1"
                 android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 android:paddingEnd="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timer">
@@ -268,8 +269,8 @@
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/button_background_1"
                 android:elevation="10dp"
-                android:outlineAmbientShadowColor="@color/purple_200"
-                android:outlineSpotShadowColor="@color/purple_200"
+                android:outlineAmbientShadowColor="@color/app_main_color"
+                android:outlineSpotShadowColor="@color/app_main_color"
                 android:paddingHorizontal="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timer">
